@@ -5,10 +5,10 @@
 To provide real examples of what ShipStation API tracking
 endpoint returns for USPS shipments during its lifecycle.
 
-USPS tracking is the flow that sandbox does not reliably reproduce so there is no
-practical way to see these shapes without shipping a real parcel. The
-fixtures here stand in for that, one file per scenario, so a receiver can be
-built and tested against every status without waiting on a live shipment.
+USPS tracking statuses come from real parcel movement, so seeing each one
+normally means shipping something and waiting for it to happen. The fixtures
+here stand in for that, one file per scenario, so a receiver can be built
+and tested against every status without waiting on a live shipment.
 
 All fixtures in this folder were captured with `carrier_code`
 `stamps_com`, the carrier code USPS shipments report under.
