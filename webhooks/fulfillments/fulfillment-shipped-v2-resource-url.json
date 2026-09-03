@@ -1,0 +1,57 @@
+{
+  "_captured_at": "2026-09-01",
+  "fulfillments": [
+    {
+      "fulfillment_id": "se-16731019",
+      "shipment_id": "se-412669417",
+      "shipment_number": "100044",
+      "user_id": "f775ecfc-6c38-46a1-804d-8538b3963172",
+      "tracking_number": "3831466XXXX3",
+      "created_at": "2026-09-03T14:50:25.067Z",
+      "ship_date": "2026-09-03T07:00:00Z",
+      "voided_at": null,
+      "delivered_at": null,
+      "fulfillment_carrier_friendly_name": "FedEx",
+      "fulfillment_provider_id": "se-16846",
+      "fulfillment_provider_friendly_name": "External",
+      "fulfillment_provider_code": "external",
+      "fulfillment_service_code": "ext",
+      "fulfillment_fee": {
+        "currency": "usd",
+        "amount": 0.0
+      },
+      "void_requested": false,
+      "voided": false,
+      "order_source_notified": false,
+      "notification_error_message": null,
+      "ship_to": {
+        "instructions": null,
+        "name": "Test Tester",
+        "phone": "REDACTED",
+        "email": "REDACTED",
+        "company_name": null,
+        "address_line1": "REDACTED",
+        "address_line2": "",
+        "address_line3": null,
+        "city_locality": "LOS ANGELES",
+        "state_province": "CA",
+        "postal_code": "00000-0000",
+        "country_code": "US",
+        "address_residential_indicator": "unknown"
+      }
+    }
+  ],
+  "total": 1,
+  "page": 1,
+  "pages": 1,
+  "links": {
+    "first": {
+      "href": "https://api.shipstation.com/v2/fulfillments?fulfillment_id=se-16731019&shipment_id=se-412669417&page=1&page_size=25"
+    },
+    "last": {
+      "href": "https://api.shipstation.com/v2/fulfillments?fulfillment_id=se-16731019&shipment_id=se-412669417&page=1&page_size=25"
+    },
+    "prev": {},
+    "next": {}
+  }
+}

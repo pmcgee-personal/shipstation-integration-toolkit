@@ -1,0 +1,217 @@
+{
+  "_captured_at": "2026-09-01",
+  "shipments": [
+    {
+      "shipment_id": "se-394477XXX",
+      "carrier_id": "se-2077XXX",
+      "service_code": "fedex_ground",
+      "requested_shipment_service": null,
+      "external_shipment_id": null,
+      "shipment_number": "LW-TEST1",
+      "hold_until_date": null,
+      "ship_date": "2026-08-12T00:00:00Z",
+      "ship_datetime": null,
+      "ship_by_date": "2026-08-12T00:00:00Z",
+      "deliver_by_date": "2026-08-31T00:00:00Z",
+      "created_at": "2026-08-12T19:44:39.447Z",
+      "modified_at": "2026-08-12T19:46:30.433Z",
+      "shipment_status": "pending",
+      "ship_to": {
+        "geolocation": null,
+        "instructions": null,
+        "name": "The President",
+        "phone": "555-555-5555",
+        "email": "headhoncho@whitehouse.gov",
+        "company_name": "",
+        "address_line1": "REDACTED",
+        "address_line2": "",
+        "address_line3": null,
+        "city_locality": "LOS ANGELES",
+        "state_province": "CA",
+        "postal_code": "00000-0000",
+        "country_code": "US",
+        "address_residential_indicator": "yes"
+      },
+      "ship_from": {
+        "geolocation": null,
+        "instructions": null,
+        "name": "Peter McGee",
+        "phone": "REDACTED",
+        "email": "test@test.com",
+        "company_name": "SHIP FROM COMPANY",
+        "address_line1": "SHIP FROM ADDR 1",
+        "address_line2": "SHIP FROM ADDR 2",
+        "address_line3": null,
+        "city_locality": "SHIP FROM CITY",
+        "state_province": "CA",
+        "postal_code": "00000",
+        "country_code": "US",
+        "address_residential_indicator": "no"
+      },
+      "warehouse_id": "se-524XXX",
+      "return_to": {
+        "instructions": null,
+        "name": "Peter McGee",
+        "phone": "REDACTED",
+        "email": null,
+        "company_name": "McGee Enterprises",
+        "address_line1": "REDACTED",
+        "address_line2": "REDACTED",
+        "address_line3": null,
+        "city_locality": "Los Angeles",
+        "state_province": "CA",
+        "postal_code": "00000",
+        "country_code": "US",
+        "address_residential_indicator": "unknown"
+      },
+      "is_return": false,
+      "confirmation": "none",
+      "customs": null,
+      "external_order_id": null,
+      "order_source_code": null,
+      "advanced_options": {
+        "bill_to_account": null,
+        "bill_to_country_code": null,
+        "bill_to_party": null,
+        "bill_to_postal_code": null,
+        "bill_to_name": null,
+        "bill_to_address_line1": null,
+        "contains_alcohol": false,
+        "delivered_duty_paid": false,
+        "non_machinable": false,
+        "saturday_delivery": false,
+        "dry_ice": false,
+        "dry_ice_weight": null,
+        "fedex_freight": null,
+        "third_party_consignee": false,
+        "guaranteed_duties_and_taxes": false,
+        "prepaid_duties_taxes": false,
+        "ancillary_endorsements_option": null,
+        "freight_class": null,
+        "custom_field1": null,
+        "custom_field2": null,
+        "custom_field3": null,
+        "collect_on_delivery": null,
+        "return_pickup_attempts": null,
+        "additional_handling": false,
+        "own_document_upload": false,
+        "limited_quantity": false,
+        "event_notification": false,
+        "import_services": false,
+        "override_holiday": false,
+        "fragile": false,
+        "delivery_as_addressed": false,
+        "return_after_first_attempt": false
+      },
+      "comparison_rate_type": null,
+      "retail_rate": null,
+      "shipping_rule_id": null,
+      "insurance_provider": "none",
+      "tags": [],
+      "store_id": "se-2481946",
+      "packages": [
+        {
+          "shipment_package_id": "se-399661316",
+          "package_id": "se-3",
+          "package_code": "package",
+          "package_name": "Package",
+          "weight": {
+            "value": 18.0,
+            "unit": "ounce"
+          },
+          "dimensions": {
+            "unit": "inch",
+            "length": 10.0,
+            "width": 10.0,
+            "height": 10.0
+          },
+          "insured_value": {
+            "currency": "usd",
+            "amount": 0.0
+          },
+          "label_messages": {
+            "reference1": null,
+            "reference2": null,
+            "reference3": null
+          },
+          "external_package_id": null,
+          "content_description": null,
+          "products": null,
+          "dangerous_goods_package_info": null
+        }
+      ],
+      "total_weight": {
+        "value": 18.0,
+        "unit": "ounce"
+      },
+      "items": [
+        {
+          "sales_order_id": null,
+          "sales_order_item_id": null,
+          "quantity": 1,
+          "name": "Blue Silk Tuxedo",
+          "sku": "TEST-BST",
+          "bundle_sku": null,
+          "external_order_id": null,
+          "external_order_item_id": null,
+          "asin": null,
+          "order_source_code": null,
+          "item_id": "1402729900510",
+          "allocation_status": null,
+          "image_url": null,
+          "weight": {
+            "value": 2.0,
+            "unit": "ounce"
+          },
+          "unit_price": 99.99,
+          "tax_amount": 2.5,
+          "shipping_amount": 5.0,
+          "inventory_location": "Aisle 1, Bin 7",
+          "options": [
+            {
+              "name": "Size",
+              "value": "Large"
+            }
+          ],
+          "product_id": "6815803",
+          "fullfilment_sku": null,
+          "upc": null
+        }
+      ],
+      "notes_from_buyer": "Please ship as soon as possible!",
+      "internal_notes": null,
+      "notes_for_gift": "Thank you!",
+      "is_gift": true,
+      "assigned_user": null,
+      "amount_paid": {
+        "currency": "usd",
+        "amount": 218.73
+      },
+      "shipping_paid": {
+        "currency": "usd",
+        "amount": 10.0
+      },
+      "tax_paid": {
+        "currency": "usd",
+        "amount": 5.0
+      },
+      "zone": 1,
+      "dangerous_goods_declaration": null,
+      "sender_info": null,
+      "notes_to_buyer": null
+    }
+  ],
+  "total": 1,
+  "page": 1,
+  "pages": 1,
+  "links": {
+    "first": {
+      "href": "https://api.shipstation.com/v2/shipments?import_batch_id=b6ba2537-aef1-44b3-a219-34edc165c442&page=1&page_size=25"
+    },
+    "last": {
+      "href": "https://api.shipstation.com/v2/shipments?import_batch_id=b6ba2537-aef1-44b3-a219-34edc165c442&page=1&page_size=25"
+    },
+    "prev": {},
+    "next": {}
+  }
+}

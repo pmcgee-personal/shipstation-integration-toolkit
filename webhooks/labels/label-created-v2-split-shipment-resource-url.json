@@ -1,0 +1,316 @@
+{
+  "_captured_at": "2026-09-01",
+  "labels": [
+    {
+      "label_id": "se-184986954",
+      "status": "completed",
+      "shipment_id": "se-394496923",
+      "external_shipment_id": "SEAuto-A9QmfQO4D0CEBEm3Q8Otvg",
+      "external_order_id": null,
+      "ship_date": "2026-08-12T07:00:00Z",
+      "created_at": "2026-08-12T20:05:20.44Z",
+      "shipment_cost": {
+        "currency": "usd",
+        "amount": 21.96
+      },
+      "insurance_cost": {
+        "currency": "usd",
+        "amount": 0.0
+      },
+      "requested_comparison_amount": null,
+      "rate_details": [
+        {
+          "rate_detail_type": "fuel_charge",
+          "carrier_description": "FedEx Ground Fuel",
+          "carrier_billing_code": null,
+          "carrier_memo": null,
+          "amount": {
+            "currency": "usd",
+            "amount": 3.72
+          },
+          "billing_source": "carrier"
+        },
+        {
+          "rate_detail_type": "shipping",
+          "carrier_description": "Total Net Freight",
+          "carrier_billing_code": null,
+          "carrier_memo": null,
+          "amount": {
+            "currency": "usd",
+            "amount": 14.17
+          },
+          "billing_source": "carrier"
+        },
+        {
+          "rate_detail_type": "shipping",
+          "carrier_description": "Additional Fee",
+          "carrier_billing_code": null,
+          "carrier_memo": null,
+          "amount": {
+            "currency": "usd",
+            "amount": 4.07
+          },
+          "billing_source": "product"
+        }
+      ],
+      "tracking_number": "383144914556",
+      "is_return_label": false,
+      "rma_number": null,
+      "is_international": false,
+      "batch_id": "se-64620276",
+      "carrier_id": "se-2077423",
+      "service_code": "fedex_ground",
+      "package_code": "package",
+      "voided": false,
+      "voided_at": null,
+      "void_type": null,
+      "refund_details": null,
+      "label_format": "pdf",
+      "display_scheme": "label",
+      "label_layout": "4x6",
+      "trackable": true,
+      "label_image_id": null,
+      "carrier_code": "fedex",
+      "carrier_weight": {
+        "value": 7.2,
+        "unit": "pound"
+      },
+      "confirmation": "none",
+      "tracking_status": "in_transit",
+      "label_download": {
+        "pdf": "https://api.shipstation.com/v2/downloads/14/ZKTUOjrctUqiUeA00hdt4g/label-184986954.pdf",
+        "png": "https://api.shipstation.com/v2/downloads/14/ZKTUOjrctUqiUeA00hdt4g/label-184986954.png",
+        "zpl": "https://api.shipstation.com/v2/downloads/14/ZKTUOjrctUqiUeA00hdt4g/label-184986954.zpl",
+        "href": "https://api.shipstation.com/v2/downloads/14/ZKTUOjrctUqiUeA00hdt4g/label-184986954.pdf"
+      },
+      "form_download": null,
+      "qr_code_download": null,
+      "insurance_claim": null,
+      "paperless_download": null,
+      "packages": [
+        {
+          "package_id": 147982585,
+          "package_code": "package",
+          "weight": {
+            "value": 2.0,
+            "unit": "ounce"
+          },
+          "dimensions": {
+            "unit": "inch",
+            "length": 10.0,
+            "width": 10.0,
+            "height": 10.0
+          },
+          "insured_value": {
+            "currency": "usd",
+            "amount": 0.0
+          },
+          "tracking_number": "383144914556",
+          "label_download": {
+            "pdf": "https://api.shipstation.com/v2/downloads/14/9SqR99sDLEyD0C29Iwopow/labelpackage-147982585.pdf",
+            "png": "https://api.shipstation.com/v2/downloads/14/9SqR99sDLEyD0C29Iwopow/labelpackage-147982585.png",
+            "zpl": "https://api.shipstation.com/v2/downloads/14/9SqR99sDLEyD0C29Iwopow/labelpackage-147982585.zpl"
+          },
+          "qr_code_download": null,
+          "paperless_download": null,
+          "label_messages": {
+            "reference1": null,
+            "reference2": null,
+            "reference3": null
+          },
+          "external_package_id": null,
+          "content_description": null,
+          "sequence": 1,
+          "alternative_identifiers": [],
+          "has_label_documents": false,
+          "has_form_documents": false,
+          "has_qr_code_documents": false,
+          "has_paperless_label_documents": false
+        }
+      ],
+      "charge_event": "carrier_default",
+      "alternative_identifiers": [],
+      "shipping_rule_id": null,
+      "tracking_url": "https://www.fedex.com/fedextrack/?action=track&trackingnumber=383144914556",
+      "pickup_windows": [],
+      "ship_to": {
+        "geolocation": [],
+        "instructions": null,
+        "name": "The President",
+        "phone": "555-555-5555",
+        "email": "headhoncho@whitehouse.gov",
+        "company_name": "",
+        "address_line1": "REDACTED",
+        "address_line2": "",
+        "address_line3": null,
+        "city_locality": "LOS ANGELES",
+        "state_province": "CA",
+        "postal_code": "00000-0000",
+        "country_code": "US",
+        "address_residential_indicator": "yes"
+      }
+    },
+    {
+      "label_id": "se-184986950",
+      "status": "completed",
+      "shipment_id": "se-394496920",
+      "external_shipment_id": "SEAuto-A9QmfQO4D0CEBEm3Q8Otvg",
+      "external_order_id": null,
+      "ship_date": "2026-08-12T07:00:00Z",
+      "created_at": "2026-08-12T20:05:20.44Z",
+      "shipment_cost": {
+        "currency": "usd",
+        "amount": 21.96
+      },
+      "insurance_cost": {
+        "currency": "usd",
+        "amount": 0.0
+      },
+      "requested_comparison_amount": null,
+      "rate_details": [
+        {
+          "rate_detail_type": "fuel_charge",
+          "carrier_description": "FedEx Ground Fuel",
+          "carrier_billing_code": null,
+          "carrier_memo": null,
+          "amount": {
+            "currency": "usd",
+            "amount": 3.72
+          },
+          "billing_source": "carrier"
+        },
+        {
+          "rate_detail_type": "shipping",
+          "carrier_description": "Total Net Freight",
+          "carrier_billing_code": null,
+          "carrier_memo": null,
+          "amount": {
+            "currency": "usd",
+            "amount": 14.17
+          },
+          "billing_source": "carrier"
+        },
+        {
+          "rate_detail_type": "shipping",
+          "carrier_description": "Additional Fee",
+          "carrier_billing_code": null,
+          "carrier_memo": null,
+          "amount": {
+            "currency": "usd",
+            "amount": 4.07
+          },
+          "billing_source": "product"
+        }
+      ],
+      "tracking_number": "383144913218",
+      "is_return_label": false,
+      "rma_number": null,
+      "is_international": false,
+      "batch_id": "se-64620276",
+      "carrier_id": "se-2077423",
+      "service_code": "fedex_ground",
+      "package_code": "package",
+      "voided": false,
+      "voided_at": null,
+      "void_type": null,
+      "refund_details": null,
+      "label_format": "pdf",
+      "display_scheme": "label",
+      "label_layout": "4x6",
+      "trackable": true,
+      "label_image_id": null,
+      "carrier_code": "fedex",
+      "carrier_weight": {
+        "value": 7.2,
+        "unit": "pound"
+      },
+      "confirmation": "none",
+      "tracking_status": "in_transit",
+      "label_download": {
+        "pdf": "https://api.shipstation.com/v2/downloads/14/EWKUmJNdZUSH2XbNmGQI2g/label-184986950.pdf",
+        "png": "https://api.shipstation.com/v2/downloads/14/EWKUmJNdZUSH2XbNmGQI2g/label-184986950.png",
+        "zpl": "https://api.shipstation.com/v2/downloads/14/EWKUmJNdZUSH2XbNmGQI2g/label-184986950.zpl",
+        "href": "https://api.shipstation.com/v2/downloads/14/EWKUmJNdZUSH2XbNmGQI2g/label-184986950.pdf"
+      },
+      "form_download": null,
+      "qr_code_download": null,
+      "insurance_claim": null,
+      "paperless_download": null,
+      "packages": [
+        {
+          "package_id": 147982583,
+          "package_code": "package",
+          "weight": {
+            "value": 2.0,
+            "unit": "ounce"
+          },
+          "dimensions": {
+            "unit": "inch",
+            "length": 10.0,
+            "width": 10.0,
+            "height": 10.0
+          },
+          "insured_value": {
+            "currency": "usd",
+            "amount": 0.0
+          },
+          "tracking_number": "383144913218",
+          "label_download": {
+            "pdf": "https://api.shipstation.com/v2/downloads/14/hzgpbOcWpEmmjbvgWXRyGg/labelpackage-147982583.pdf",
+            "png": "https://api.shipstation.com/v2/downloads/14/hzgpbOcWpEmmjbvgWXRyGg/labelpackage-147982583.png",
+            "zpl": "https://api.shipstation.com/v2/downloads/14/hzgpbOcWpEmmjbvgWXRyGg/labelpackage-147982583.zpl"
+          },
+          "qr_code_download": null,
+          "paperless_download": null,
+          "label_messages": {
+            "reference1": null,
+            "reference2": null,
+            "reference3": null
+          },
+          "external_package_id": null,
+          "content_description": null,
+          "sequence": 1,
+          "alternative_identifiers": [],
+          "has_label_documents": false,
+          "has_form_documents": false,
+          "has_qr_code_documents": false,
+          "has_paperless_label_documents": false
+        }
+      ],
+      "charge_event": "carrier_default",
+      "alternative_identifiers": [],
+      "shipping_rule_id": null,
+      "tracking_url": "https://www.fedex.com/fedextrack/?action=track&trackingnumber=383144913218",
+      "pickup_windows": [],
+      "ship_to": {
+        "geolocation": [],
+        "instructions": null,
+        "name": "The President",
+        "phone": "555-555-5555",
+        "email": null,
+        "company_name": "",
+        "address_line1": "REDACTED",
+        "address_line2": "",
+        "address_line3": null,
+        "city_locality": "LOS ANGELES",
+        "state_province": "CA",
+        "postal_code": "00000-0000",
+        "country_code": "US",
+        "address_residential_indicator": "unknown"
+      }
+    }
+  ],
+  "total": 2,
+  "page": 1,
+  "pages": 1,
+  "links": {
+    "first": {
+      "href": "https://api.shipstation.com/v2/labels?batch_id=se-64620276&page=1&page_size=25"
+    },
+    "last": {
+      "href": "https://api.shipstation.com/v2/labels?batch_id=se-64620276&page=1&page_size=25"
+    },
+    "prev": {},
+    "next": {}
+  }
+}
