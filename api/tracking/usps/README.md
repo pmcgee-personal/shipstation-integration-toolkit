@@ -18,21 +18,22 @@ All fixtures in this folder were captured with `carrier_code`
 **Endpoint**
 
 ```
-GET /v1/tracking
+GET /v2/labels/:label_id/track
 ```
 
-**Query parameters**
+**Path parameters**
 
-| Parameter         | Type   | Description                                                                  | Example                  |
-| ----------------- | ------ | ---------------------------------------------------------------------------- | ------------------------ |
-| `carrier_code`    | string | The carrier the tracking number belongs to. USPS shipments use `stamps_com`. | `stamps_com`             |
-| `tracking_number` | string | The tracking number to look up.                                              | `9300110XXXXX3550425334` |
+| Parameter  | Type   | Description                                                               | Example       |
+| ---------- | ------ | ------------------------------------------------------------------------- | ------------- |
+| `label_id` | string | The ShipStation generated id for the label the tracking number belongs to | `se-12345678` |
+
+The label_id is returned when creating the label via API or by the LABEL_CREATED_V2 webhook
 
 **Example request**
 
 ```bash
 curl --request GET \
-  --url 'https://api.shipengine.com/v1/tracking?carrier_code=stamps_com&tracking_number=9300110XXXXX3550425334' \
+  --url 'https://api.shipstation.com/v2/labels/:label_id/track' \
   --header 'API-Key: YOUR_API_KEY'
 ```
 

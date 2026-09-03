@@ -19,7 +19,7 @@ webhooks/           Real webhook payloads, by resource
   orders/           On New Order Created (V2)
   labels/           On Labels Created (V2)
   fulfillments/     On Fulfillment Shipped (V2)
-  tracking/
+  tracking/         On New Track Event (V2)
 api/                Real API request/response examples, by resource
   adjustments/      USPS shipping adjustment reports
   shipments/
@@ -34,14 +34,12 @@ patterns/           Short, diagram-first explanations of common flows
   without needing to trigger the real event in sandbox. Most webhook bodies
   are pointers, not data: you get a `resource_url` and a `resource_type`,
   and you call that URL with your API key to retrieve the actual record —
-  so those folders hold the webhook body *and* the `resource_url` response.
+  so those folders hold the webhook body _and_ the `resource_url` response.
   **Tracking is the exception**: its body carries the tracking data inline,
   with no follow-up call. See
   [`webhooks/README.md`](./webhooks/README.md).
 - **`api/`** — what ShipStation actually returns when you call an endpoint
-  directly. Useful for building/testing request handling without a live
-  sandbox call, and for scenarios sandbox doesn't cover (e.g. USPS
-  tracking today).
+  directly. Useful for building/testing request handling due to lack of sandbox
 - **`patterns/`** — a diagram (Mermaid) for a
   commonly-requested flow, plus links to the official docs and any relevant
   fixture in this repo. No duplicated payloads or long prose — see
