@@ -1,4 +1,47 @@
 {
-  "_fixture_notes": "To be used by integrators utilizing USPS single payor. You must use v1/labels and include sender_info object, along with the regular shipment payload. The sender_info represents a users account information on the marketplace. The sender_platform_id is the unique identifier for the user on the marketplace.",
-  "_note": "{\"shipment\":{\"ship_to\":{\"name\":\"REDACTED\",\"address_line1\":\"REDACTED\",\"city_locality\":\"Beeville\",\"state_province\":\"TX\",\"postal_code\":\"78102-8095\",\"country_code\":\"US\"},\"ship_from\":{\"name\":\"REDACTED\",\"address_line1\":\"REDACTED\",\"city_locality\":\"Cherry Valley\",\"state_province\":\"CA\",\"postal_code\":\"92223-6292\",\"country_code\":\"US\",\"phone\":\"REDACTED\"},\"packages\":[{\"weight\":{\"value\":0.9375,\"unit\":\"pound\"}}],\"service_code\":\"usps_ground_advantage\",\"carrier_id\":\"se-xxxxxxx\"},\"label_layout\":\"letter\",\"label_format\":\"pdf\",\"sender_info\":{\"sender_address\":{\"name\":\"REDACTED\",\"address_line1\":\"REDACTED\",\"city_locality\":\"Beaumont \",\"state_province\":\"CA\",\"postal_code\":\"92223\",\"country_code\":\"US\",\"phone\":\"REDACTED\",\"email\":\"REDACTED\"},\"sender_platform_user_id\":\"REDACTED\"}}"
+  "_fixture_notes": "Sample request body for integrators using USPS single payor. Use POST v1/labels and include the sender_info object alongside the regular shipment payload. sender_info represents the user's account information on the marketplace, and sender_platform_user_id is that user's unique identifier on the marketplace.",
+  "shipment": {
+    "ship_to": {
+      "name": "REDACTED",
+      "address_line1": "REDACTED",
+      "city_locality": "Beeville",
+      "state_province": "TX",
+      "postal_code": "78102-8095",
+      "country_code": "US"
+    },
+    "ship_from": {
+      "name": "REDACTED",
+      "address_line1": "REDACTED",
+      "city_locality": "Cherry Valley",
+      "state_province": "CA",
+      "postal_code": "92223-6292",
+      "country_code": "US",
+      "phone": "REDACTED"
+    },
+    "packages": [
+      {
+        "weight": {
+          "value": 0.9375,
+          "unit": "pound"
+        }
+      }
+    ],
+    "service_code": "usps_ground_advantage",
+    "carrier_id": "se-xxxxxxx"
+  },
+  "label_layout": "letter",
+  "label_format": "pdf",
+  "sender_info": {
+    "sender_address": {
+      "name": "REDACTED",
+      "address_line1": "REDACTED",
+      "city_locality": "Beaumont",
+      "state_province": "CA",
+      "postal_code": "92223",
+      "country_code": "US",
+      "phone": "REDACTED",
+      "email": "REDACTED"
+    },
+    "sender_platform_user_id": "REDACTED"
+  }
 }

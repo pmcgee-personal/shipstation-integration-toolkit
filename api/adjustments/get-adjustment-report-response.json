@@ -1,7 +1,10 @@
 {
   "_fixture_notes": "This is a sample response for the Get Adjustment Report endpoint. It contains a CSV report of adjustments made to shipments, including details such as carrier ID, label ID, adjustment type, adjustment amount, and other relevant information.",
-  "_note": "CarrierID,LabelID,AdjustmentType,AdjustmentID,TransactionID,ExternalShipmentID,TrackingNumber,ReasonCode,AdjustmentAmount,AdjustmentDate,DisputeStatus,DisputeCreatedAt,DisputeUpdatedAt,ActualTrackingNumber,ActualService,ActualPackage,ActualWeight,ActualLength,ActualWidth,ActualHeight,ActualOriginZip,ActualToZip,ActualCountry,ActualZone,ActualInternationalZone
-se-127618,se-767719093,USPS,000010649283251,c3fbc544-51a5-4ff7-a04d-ea3c5b6b6949,SEAuto-iosLcyj11Uaj9cy_l6vaHg,9434650108X14000594500,Weight,16.14,2026-04-01T22:38:15.1600000,,,,,Ground Advantage (TM),Package,21.11,7.00,5.00,1.75,64628,894453824,US,6,
-se-127618,se-770267553,USPS,000010648364558,97e40aeb-d89a-4c8e-9f02-e93736af812f,SEAuto-npC-yTAQik6CVHR9mWalVg,94346501080X4000596153,Weight,-2.35,2026-04-01T22:38:14.5630000,,,,,Ground Advantage (TM),Package,6.55,12.50,9.90,1.75,15601,350776452,US,4,
-se-127618,se-768711109,USPS,000010647351095,95ea9276-7000-49bd-ba61-082e7f80f573,SEAuto-71AfZ7xLr0Cu_nau15itAQ,9400150108X14001762432,Package,5.71,2026-04-01T22:38:14.6400000,,,,,Ground Advantage (TM),Package,1.03,7.00,5.00,1.75,32905,018451139,US,6,"
+  "_response_format": "This endpoint returns raw CSV, not JSON. Each string in _csv_rows is one line of the response body, in order; join them with newlines to reconstruct the payload. The first row is the header.",
+  "_csv_rows": [
+    "CarrierID,LabelID,AdjustmentType,AdjustmentID,TransactionID,ExternalShipmentID,TrackingNumber,ReasonCode,AdjustmentAmount,AdjustmentDate,DisputeStatus,DisputeCreatedAt,DisputeUpdatedAt,ActualTrackingNumber,ActualService,ActualPackage,ActualWeight,ActualLength,ActualWidth,ActualHeight,ActualOriginZip,ActualToZip,ActualCountry,ActualZone,ActualInternationalZone",
+    "se-127618,se-767719093,USPS,000010649283251,c3fbc544-51a5-4ff7-a04d-ea3c5b6b6949,SEAuto-iosLcyj11Uaj9cy_l6vaHg,9434650108X14000594500,Weight,16.14,2026-04-01T22:38:15.1600000,,,,,Ground Advantage (TM),Package,21.11,7.00,5.00,1.75,64628,894453824,US,6,",
+    "se-127618,se-770267553,USPS,000010648364558,97e40aeb-d89a-4c8e-9f02-e93736af812f,SEAuto-npC-yTAQik6CVHR9mWalVg,94346501080X4000596153,Weight,-2.35,2026-04-01T22:38:14.5630000,,,,,Ground Advantage (TM),Package,6.55,12.50,9.90,1.75,15601,350776452,US,4,",
+    "se-127618,se-768711109,USPS,000010647351095,95ea9276-7000-49bd-ba61-082e7f80f573,SEAuto-71AfZ7xLr0Cu_nau15itAQ,9400150108X14001762432,Package,5.71,2026-04-01T22:38:14.6400000,,,,,Ground Advantage (TM),Package,1.03,7.00,5.00,1.75,32905,018451139,US,6,"
+  ]
 }
