@@ -2,7 +2,12 @@
 
 For each fixture: pull the real payload/response from production, sanitize
 it (fake tracking/order numbers, fake names/addresses), paste it in over the
-placeholder, and delete the `_fixture_notes` key.
+placeholder, delete the `_fixture_notes` key, and add a `_captured_at` key
+with the capture date (`YYYY-MM-DD`).
+
+`_fixture_notes` marks a fixture as a placeholder still awaiting real data —
+if a file has it, it's unfinished. Descriptions of what an endpoint does
+belong in the folder's `README.md`, not in the fixture.
 
 ## api/tracking/usps/
 - [ ] no-scans-yet.json
@@ -14,15 +19,6 @@ placeholder, and delete the `_fixture_notes` key.
 - [ ] delivery-exception.json
 - [ ] delivery-attempt-failed.json
 - [ ] returned-to-sender.json
-
-## api/orders/
-- [ ] get-order-response.json
-- [ ] list-orders-response.json
-
-## api/shipments/
-- [ ] create-shipment-response.json
-- [ ] get-shipment-response.json
-- [ ] create-label-response.json
 
 ## webhooks/orders/
 - [ ] order-created.json
@@ -37,8 +33,7 @@ placeholder, and delete the `_fixture_notes` key.
 - [ ] tracking-status-updated.json
 
 ## Once a section is filled in
-- [ ] Fill in the capture date for that fixture (add a `_captured_at` note or
-      track in the README — pick one convention and stay consistent)
+- [ ] Confirm `_fixture_notes` is gone and `_captured_at` is set
 - [ ] Double-check no real tracking numbers, order IDs, names, or addresses
       remain
 - [ ] Confirm field names match exactly what the API/webhook actually sends

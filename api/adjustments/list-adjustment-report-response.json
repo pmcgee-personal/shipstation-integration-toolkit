@@ -1,5 +1,5 @@
 {
-  "_fixture_notes": "This is a sample response for the List Adjustment Reports endpoint. It contains a list of adjustment reports, each with a unique report ID, creation timestamp, and a download link for the report.",
+  "_captured_at": "2026-09-02",
   "reports": [
     {
       "report_id": "rpt_W1XzSLtRMJzMBLmJK2vGr6",

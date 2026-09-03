@@ -1,5 +1,5 @@
 {
-  "_fixture_notes": "This is a sample response for the Get Adjustment Report endpoint. It contains a CSV report of adjustments made to shipments, including details such as carrier ID, label ID, adjustment type, adjustment amount, and other relevant information.",
+  "_captured_at": "2026-09-02",
   "_response_format": "This endpoint returns raw CSV, not JSON. Each string in _csv_rows is one line of the response body, in order; join them with newlines to reconstruct the payload. The first row is the header.",
   "_csv_rows": [
     "CarrierID,LabelID,AdjustmentType,AdjustmentID,TransactionID,ExternalShipmentID,TrackingNumber,ReasonCode,AdjustmentAmount,AdjustmentDate,DisputeStatus,DisputeCreatedAt,DisputeUpdatedAt,ActualTrackingNumber,ActualService,ActualPackage,ActualWeight,ActualLength,ActualWidth,ActualHeight,ActualOriginZip,ActualToZip,ActualCountry,ActualZone,ActualInternationalZone",

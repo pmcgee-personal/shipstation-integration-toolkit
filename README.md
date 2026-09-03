@@ -20,13 +20,14 @@ integrators have something concrete to link to instead.
 ## Structure
 
 ```
-webhooks/          Real webhook payloads, by resource
+webhooks/           Real webhook payloads, by resource
   orders/
   shipments/
   tracking/
 api/                Real API request/response examples, by resource
-  orders/
+  adjustments/      USPS shipping adjustment reports
   shipments/
+    usps-single-payor/   USPS single payor labels (PCID compliance)
   tracking/
     usps/
 patterns/           Short, diagram-first explanations of common flows
@@ -65,7 +66,11 @@ the live endpoint or to replay a webhook delivery.
    values.
 3. Save it under the right resource folder with a self-explanatory filename
    (see existing files for the naming pattern).
-4. Note the capture date in that fixture or in this README.
+4. Add a `_captured_at` key to the fixture with the capture date
+   (`YYYY-MM-DD`), and remove the `_fixture_notes` key if one is present.
+   `_fixture_notes` means "still a placeholder, real data needed" — a
+   description of what the endpoint does belongs in the folder's
+   `README.md` instead.
 
 See [`TODO.md`](./TODO.md) for the current list of placeholders that still
 need real data.
@@ -73,8 +78,10 @@ need real data.
 ## Freshness
 
 Fixtures are snapshots, not a guaranteed-current contract — ShipStation and
-carrier schemas both change over time. Each fixture should note its capture
-date once filled in. If something looks stale or wrong, open an issue.
+carrier schemas both change over time. Each filled-in fixture carries a
+`_captured_at` date; fixtures still showing `_fixture_notes` are
+placeholders awaiting real data. If something looks stale or wrong, open an
+issue.
 
 ## Status
 

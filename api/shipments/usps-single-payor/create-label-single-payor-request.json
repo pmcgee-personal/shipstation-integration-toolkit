@@ -1,5 +1,5 @@
 {
-  "_fixture_notes": "Sample request body for integrators using USPS single payor. Use POST v1/labels and include the sender_info object alongside the regular shipment payload. sender_info represents the user's account information on the marketplace, and sender_platform_user_id is that user's unique identifier on the marketplace.",
+  "_captured_at": "2026-09-02",
   "shipment": {
     "ship_to": {
       "name": "REDACTED",
@@ -23,6 +23,12 @@
         "weight": {
           "value": 0.9375,
           "unit": "pound"
+        },
+        "dimensions": {
+          "unit": "inch",
+          "length": 2,
+          "width": 2,
+          "height": 1
         }
       }
     ],
