@@ -1,0 +1,46 @@
+{
+  "_captured_at": "2026-09-01",
+  "resource_url": "https://api.shipstation.com/v2/labels/se-975100XXX/track",
+  "resource_type": "TRACK_EVENT_V2",
+  "data": {
+    "tracking_number": "1ZXXXG2702XXXXX019",
+    "tracking_url": "http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=1ZXXXG2702XXXXX019",
+    "status_code": "NY",
+    "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
+    "status_detail_description": "Your shipment is now in the carrier's system.",
+    "carrier_code": "ups",
+    "carrier_id": 3,
+    "carrier_detail_code": "MP",
+    "status_description": "Accepted",
+    "carrier_status_code": "M",
+    "carrier_status_description": "Shipper created a label, UPS has not received the package yet.",
+    "ship_date": null,
+    "estimated_delivery_date": "2026-09-08T00:00:00",
+    "actual_delivery_date": null,
+    "exception_description": null,
+    "events": [
+      {
+        "occurred_at": "2026-09-03T16:19:14Z",
+        "carrier_occurred_at": "2026-09-03T11:19:14",
+        "description": "Shipper created a label, UPS has not received the package yet.",
+        "city_locality": "",
+        "state_province": "",
+        "postal_code": "",
+        "country_code": "US",
+        "company_name": null,
+        "signer": "",
+        "event_code": "M",
+        "carrier_detail_code": "MP",
+        "status_code": "NY",
+        "status_description": "Not Yet In System",
+        "carrier_status_code": "M",
+        "carrier_status_description": "Shipper created a label, UPS has not received the package yet.",
+        "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
+        "status_detail_description": "Your shipment is now in the carrier's system.",
+        "proof_of_delivery_url": null,
+        "latitude": null,
+        "longitude": null
+      }
+    ]
+  }
+}

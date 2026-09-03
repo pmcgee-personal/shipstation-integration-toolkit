@@ -13,13 +13,57 @@ belong in the folder's `README.md`, not in the fixture.
 - [ ] out-for-delivery.json
 
 ## webhooks/tracking/
-- [ ] tracking-status-updated.json — unlike the other webhooks this one
-      delivers its data inline, so the capture is the whole POST body and
-      there is no `resource_url` response to pair with it
-- [ ] Confirm the `resource_type` value and whether this event is versioned
-      (`_V2`) like the others
-- [ ] Confirm whether the body reports a single scan or the full
-      accumulated `events` history
+Real captures now exist for FedEx, UPS and USPS. The three open questions
+from the placeholder era are answered: `resource_type` is `TRACK_EVENT_V2`,
+it *is* versioned, and the body carries the **full accumulated** `events`
+history, newest first, on every delivery.
+
+Missing fixtures:
+- [ ] `fedex/track-event-v2-delivery-exception.json` — placeholder
+- [ ] `ups/track-event-v2-delivery-exception.json` — placeholder
+- [ ] `usps/track-event-v2-delivery-exception.json` — placeholder
+- [ ] No carrier has a capture where `EX` is the **top-level** status. The
+      existing `EX` occurrences are historical scans on parcels that
+      recovered — capture a genuinely stuck parcel
+- [ ] FedEx has no standalone pre-transit fixture (the `NY` scan only
+      appears at the tail of longer histories)
+
+**Confirmed production behaviour — do not "fix" these in the fixtures.**
+They are documented in the carrier READMEs. Listed here so a future capture
+that reproduces them isn't mistaken for a bad sanitize:
+- `carrier_occurred_at` is encoded four different ways across the tree and
+  is **not** UTC on UPS/USPS despite the `Z` suffix
+- USPS `In Transit to Next Facility` scans (`TL`/`NT`) convert with a fixed
+  7-hour offset regardless of the parcel's location, leaving
+  `usps/track-event-v2-out-for-delivery.json` (events 14/15) and
+  `usps/track-event-v2-delivered.json` (events 7/8) out of `occurred_at`
+  order — the arrays sort by `carrier_occurred_at`
+- USPS mixes two event formats within one `events` array — ALL-CAPS
+  descriptions with the facility in `city_locality` and a populated
+  `postal_code`, versus Title-Case ones with the facility in `company_name`
+  and `postal_code` `null`
+- `usps/track-event-v2-delivered.json` carries two identical
+  `DELIVERED IN/AT MAILBOX` scans a minute apart
+- FedEx `actual_delivery_date` and the `Delivered` scan's `occurred_at`
+  disagree by 14 hours in `fedex/track-event-v2-delivered.json`
+- UPS reports detail in `carrier_detail_code` and leaves `status_detail_code`
+  `null` (except pre-transit); FedEx and USPS do the opposite
+- UPS uses `""` rather than `null` for absent `postal_code`
+
+Sanitization decisions still open for this folder — see
+[`webhooks/tracking/README.md`](webhooks/tracking/README.md):
+- [ ] `latitude`/`longitude` are unmasked at ~11 m precision, including on
+      the `Delivered` scan where they locate the delivery point. Decide
+      whether to round or null them on final-delivery events
+- [ ] `ups/track-event-v2-delivered.json` carries the recipient ZIP
+      (`48067`) on the `Delivered` scan — every other UPS event has
+      `postal_code` `""`. `usps/track-event-v2-delivered.json` likewise
+      carries `07405` plus `DELIVERED IN/AT MAILBOX`
+- [ ] `usps/track-event-v2-pre-transit.json` masks its label ID as
+      `se-97410XXXX` (5 X's) where the rest of the repo uses 3 — the
+      original length isn't recoverable, so re-mask on next capture
+- [ ] `usps/track-event-v2-multi-scan.json` has one coordinate with 5
+      decimal places (`35.22286`) where everything else has 4
 
 ## Sanitization gaps in existing fixtures
 These are already filled in with real data, but the sanitization is

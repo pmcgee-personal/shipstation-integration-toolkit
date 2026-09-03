@@ -12,15 +12,16 @@ are therefore a pair: the webhook body, and the response from calling the
 `resource_url` it points at.
 
 **Tracking is the exception.** The tracking webhook delivers the tracking
-data inline in the POST body — there is no `resource_url` to call and no
-second request to make. See [`tracking/`](./tracking/).
+data inline in the POST body, so there is no second request to make. It does
+still carry a `resource_url`, but that URL is not how you read the event —
+everything is already in `data`. See [`tracking/`](./tracking/).
 
 | Event                        | Body contains                    | Follow-up call needed |
 | ---------------------------- | -------------------------------- | --------------------- |
 | On New Order Created (V2)    | `resource_url` + `resource_type` | Yes                   |
 | On Labels Created (V2)       | `resource_url` + `resource_type` | Yes                   |
 | On Fulfillment Shipped (V2)  | `resource_url` + `resource_type` | Yes                   |
-| Tracking status updated      | The tracking data itself         | **No**                |
+| Tracking status updated (V2) | The tracking data itself         | **No**                |
 
 Everything below describes the pointer pattern — i.e. all of the above
 except tracking.
@@ -84,14 +85,22 @@ Always iterate the array and honour `links.next` rather than reading
 | [`orders/`](./orders/)              | On New Order Created (V2) — `SHIPMENT_CREATED_V2`        | `/v2/shipments`                 |
 | [`labels/`](./labels/)              | On Labels Created (V2) — `LABEL_CREATED_V2`              | `/v2/labels`                    |
 | [`fulfillments/`](./fulfillments/)  | On Fulfillment Shipped (V2) — `FULFILLMENT_SHIPPED_V2`   | `/v2/fulfillments`              |
-| [`tracking/`](./tracking/)          | Tracking status updated — placeholder, awaiting capture  | n/a — data is inline            |
+| [`tracking/`](./tracking/)          | Tracking status updated — `TRACK_EVENT_V2`               | n/a — data is inline            |
+
+`tracking/` is split by carrier ([`fedex/`](./tracking/fedex/),
+[`ups/`](./tracking/ups/), [`usps/`](./tracking/usps/)) because the envelope
+is identical across the three but the values are not — see
+[`tracking/README.md`](./tracking/README.md).
 
 ## Notes
 
-Don't write a receiver that assumes a `resource_url` is always present. The
-tracking event has none, and reaching for one there will hand you
-`undefined` rather than an error. Switch on `resource_type` first, then
-decide whether to read the body or go fetch.
+Don't write a receiver that assumes a `resource_url` always means "go
+fetch". The tracking event carries one
+(`https://api.shipstation.com/v2/labels/se-454868XXX/track`) but has already
+given you the data, so a receiver that pattern-matches on `resource_url` and
+fetches will make a pointless extra call — and, because that endpoint reads
+live, may get a *different* state back than the event described. Switch on
+`resource_type` first, then decide whether to read the body or go fetch.
 
 The UI name and the `resource_type` are not the same string, and in the
 orders case they don't even use the same noun — see

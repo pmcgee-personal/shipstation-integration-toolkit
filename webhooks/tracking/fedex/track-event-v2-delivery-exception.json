@@ -1,0 +1,46 @@
+{
+  "_fixture_notes": "PLACEHOLDER — replace with a sanitized real TRACK_EVENT_V2 webhook body for a FedEx delivery exception. Mask the tracking number and the se- label ID, keep tracking_url in step with tracking_number, delete this _fixture_notes key, and add _captured_at (YYYY-MM-DD). Field names and key order below match the captured FedEx fixtures in this folder; carrier_code, carrier_id and the tracking_url template are already correct. status_code EX is the coarse status — capture status_detail_code too, it is what distinguishes one exception from another.",
+  "resource_url": "https://api.shipstation.com/v2/labels/se-REPLACEXXX/track",
+  "resource_type": "TRACK_EVENT_V2",
+  "data": {
+    "tracking_number": "REPLACE_WITH_MASKED_TRACKING_NUMBER",
+    "tracking_url": "https://www.fedex.com/fedextrack/?action=track&trackingnumber=REPLACE_WITH_MASKED_TRACKING_NUMBER",
+    "status_code": "EX",
+    "status_detail_code": "REPLACE_WITH_STATUS_DETAIL_CODE",
+    "status_detail_description": "REPLACE_WITH_STATUS_DETAIL_DESCRIPTION",
+    "carrier_code": "fedex_walleted",
+    "carrier_id": 194,
+    "carrier_detail_code": null,
+    "status_description": "Exception",
+    "carrier_status_code": "REPLACE_WITH_CARRIER_STATUS_CODE",
+    "carrier_status_description": "REPLACE_WITH_CARRIER_STATUS_DESCRIPTION",
+    "ship_date": "REPLACE_WITH_SHIP_DATE_OR_NULL",
+    "estimated_delivery_date": "REPLACE_WITH_ESTIMATED_DELIVERY_DATE_OR_NULL",
+    "actual_delivery_date": null,
+    "exception_description": "REPLACE_WITH_EXCEPTION_DESCRIPTION_OR_NULL",
+    "events": [
+      {
+        "occurred_at": "REPLACE_WITH_ISO_TIMESTAMP",
+        "carrier_occurred_at": "REPLACE_WITH_CARRIER_TIMESTAMP",
+        "description": "REPLACE_WITH_EVENT_DESCRIPTION",
+        "city_locality": "REPLACE_WITH_CITY_OR_NULL",
+        "state_province": "REPLACE_WITH_STATE_OR_NULL",
+        "postal_code": null,
+        "country_code": "US",
+        "company_name": null,
+        "signer": null,
+        "event_code": "REPLACE_WITH_EVENT_CODE",
+        "carrier_detail_code": null,
+        "status_code": "EX",
+        "status_description": "Exception",
+        "carrier_status_code": "REPLACE_WITH_CARRIER_STATUS_CODE",
+        "carrier_status_description": "REPLACE_WITH_CARRIER_STATUS_DESCRIPTION",
+        "status_detail_code": "REPLACE_WITH_STATUS_DETAIL_CODE",
+        "status_detail_description": "REPLACE_WITH_STATUS_DETAIL_DESCRIPTION",
+        "proof_of_delivery_url": null,
+        "latitude": null,
+        "longitude": null
+      }
+    ]
+  }
+}

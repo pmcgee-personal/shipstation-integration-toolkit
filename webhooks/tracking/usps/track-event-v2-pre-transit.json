@@ -1,0 +1,46 @@
+{
+  "_captured_at": "2026-09-03",
+  "resource_url": "https://api.shipstation.com/v2/labels/se-97410XXXX/track",
+  "resource_type": "TRACK_EVENT_V2",
+  "data": {
+    "tracking_number": "94346362083XXXXX009034",
+    "tracking_url": "https://tools.usps.com/go/TrackConfirmAction.action?tLabels=94346362083XXXXX009034",
+    "status_code": "AC",
+    "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
+    "status_detail_description": "Your shipment is now in the carrier's system.",
+    "carrier_code": "stamps_com",
+    "carrier_id": 1,
+    "carrier_detail_code": null,
+    "status_description": "Accepted",
+    "carrier_status_code": "GX",
+    "carrier_status_description": "A shipping label has been prepared for your item. A delivery date will be provided when USPS receives the package; contact the shipper or shipping partner with any inquiries.",
+    "ship_date": null,
+    "estimated_delivery_date": null,
+    "actual_delivery_date": null,
+    "exception_description": null,
+    "events": [
+      {
+        "occurred_at": "2026-08-19T22:44:46Z",
+        "carrier_occurred_at": "2026-08-19T15:44:46-07:00",
+        "description": "Shipping Label Created",
+        "city_locality": "PINE GROVE",
+        "state_province": "PA",
+        "postal_code": "17963",
+        "country_code": "US",
+        "company_name": null,
+        "signer": null,
+        "event_code": "GX",
+        "carrier_detail_code": null,
+        "status_code": "AC",
+        "status_description": "Accepted",
+        "carrier_status_code": "GX",
+        "carrier_status_description": "Shipping Label Created, USPS Awaiting Item",
+        "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
+        "status_detail_description": "Your shipment is now in the carrier's system.",
+        "proof_of_delivery_url": null,
+        "latitude": 40.5612,
+        "longitude": -76.3832
+      }
+    ]
+  }
+}

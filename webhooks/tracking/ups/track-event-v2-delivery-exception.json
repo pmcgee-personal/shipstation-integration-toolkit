@@ -1,0 +1,46 @@
+{
+  "_fixture_notes": "PLACEHOLDER — replace with a sanitized real TRACK_EVENT_V2 webhook body for a UPS delivery exception. Mask the tracking number and the se- label ID, keep tracking_url in step with tracking_number, delete this _fixture_notes key, and add _captured_at (YYYY-MM-DD). Field names and key order below match the captured UPS fixtures in this folder; carrier_code, carrier_id and the tracking_url template are already correct. The captured UPS fixtures all leave status_detail_code null and carry the finer-grained value in carrier_detail_code instead — confirm which UPS populates on an exception rather than assuming.",
+  "resource_url": "https://api.shipstation.com/v2/labels/se-REPLACEXXX/track",
+  "resource_type": "TRACK_EVENT_V2",
+  "data": {
+    "tracking_number": "REPLACE_WITH_MASKED_TRACKING_NUMBER",
+    "tracking_url": "http://wwwapps.ups.com/WebTracking/processRequest?HTMLVersion=5.0&Requester=NES&AgreeToTermsAndConditions=yes&loc=en_US&tracknum=REPLACE_WITH_MASKED_TRACKING_NUMBER",
+    "status_code": "EX",
+    "status_detail_code": null,
+    "status_detail_description": null,
+    "carrier_code": "ups",
+    "carrier_id": 3,
+    "carrier_detail_code": "REPLACE_WITH_CARRIER_DETAIL_CODE",
+    "status_description": "Exception",
+    "carrier_status_code": "REPLACE_WITH_CARRIER_STATUS_CODE",
+    "carrier_status_description": "REPLACE_WITH_CARRIER_STATUS_DESCRIPTION",
+    "ship_date": "REPLACE_WITH_SHIP_DATE_OR_NULL",
+    "estimated_delivery_date": "REPLACE_WITH_ESTIMATED_DELIVERY_DATE_OR_NULL",
+    "actual_delivery_date": null,
+    "exception_description": "REPLACE_WITH_EXCEPTION_DESCRIPTION_OR_NULL",
+    "events": [
+      {
+        "occurred_at": "REPLACE_WITH_ISO_TIMESTAMP",
+        "carrier_occurred_at": "REPLACE_WITH_CARRIER_TIMESTAMP",
+        "description": "REPLACE_WITH_EVENT_DESCRIPTION",
+        "city_locality": "REPLACE_WITH_CITY_OR_NULL",
+        "state_province": "REPLACE_WITH_STATE_OR_NULL",
+        "postal_code": "REPLACE_WITH_POSTAL_CODE_OR_EMPTY_STRING",
+        "country_code": "US",
+        "company_name": null,
+        "signer": null,
+        "event_code": "REPLACE_WITH_EVENT_CODE",
+        "carrier_detail_code": "REPLACE_WITH_CARRIER_DETAIL_CODE",
+        "status_code": "EX",
+        "status_description": "Exception",
+        "carrier_status_code": "REPLACE_WITH_CARRIER_STATUS_CODE",
+        "carrier_status_description": "REPLACE_WITH_CARRIER_STATUS_DESCRIPTION",
+        "status_detail_code": null,
+        "status_detail_description": null,
+        "proof_of_delivery_url": null,
+        "latitude": null,
+        "longitude": null
+      }
+    ]
+  }
+}
