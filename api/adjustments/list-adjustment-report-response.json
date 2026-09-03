@@ -1,0 +1,18 @@
+{
+  "_fixture_notes": "This is a sample response for the List Adjustment Reports endpoint. It contains a list of adjustment reports, each with a unique report ID, creation timestamp, and a download link for the report.",
+  "_note": "{
+  "reports": [
+    {
+      "report_id": "rpt_W1XzSLtRMJzMBLmJK2vGr6",
+      "created_at": "2026-03-17T06:10:58.195933+00:00",
+      "report_download": {
+        "href": "https://api.shipengine.com/v1/incubator/adjustments/reports/rpt_W1XzSLtRMJzMBLmJK2vGr6"
+      }
+    }
+  ],
+  "total": 1,
+  "page": 1,
+  "pages": 1
+}
+"
+}
