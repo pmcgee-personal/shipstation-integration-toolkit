@@ -10,15 +10,7 @@ if a file has it, it's unfinished. Descriptions of what an endpoint does
 belong in the folder's `README.md`, not in the fixture.
 
 ## api/tracking/usps/
-- [ ] no-scans-yet.json
-- [ ] pre-transit.json
-- [ ] in-transit-single-scan.json
-- [ ] in-transit-multi-scan.json
 - [ ] out-for-delivery.json
-- [ ] delivered.json
-- [ ] delivery-exception.json
-- [ ] delivery-attempt-failed.json
-- [ ] returned-to-sender.json
 
 ## webhooks/orders/
 - [ ] order-created.json

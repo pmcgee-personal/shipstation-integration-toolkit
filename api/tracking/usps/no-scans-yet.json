@@ -1,19 +1,19 @@
 {
-  "_fixture_notes": "PLACEHOLDER — replace this entire object with a sanitized real production response for this scenario. Delete this _fixture_notes key once filled in; it is not part of the real API schema.",
-  "carrierCode": "usps",
-  "trackingNumber": "REPLACE_WITH_FAKE_BUT_VALID_USPS_TRACKING_NUMBER",
-  "status": "REPLACE_WITH_STATUS_VALUE",
-  "statusDescription": "REPLACE_WITH_HUMAN_READABLE_STATUS",
-  "estimatedDeliveryDate": null,
-  "shipDate": null,
-  "events": [
-    {
-      "occurredAt": "REPLACE_WITH_ISO_TIMESTAMP",
-      "description": "REPLACE_WITH_EVENT_DESCRIPTION",
-      "city": null,
-      "state": null,
-      "postalCode": null,
-      "eventCode": null
-    }
-  ]
+  "_captured_at": "2026-09-02",
+  "tracking_number": "943465010579XXXXX59863",
+  "tracking_url": "https://tools.usps.com/go/TrackConfirmAction.action?tLabels=943465010579XXXXX59863",
+  "status_code": "NY",
+  "status_detail_code": null,
+  "status_detail_description": null,
+  "carrier_code": "stamps_com",
+  "carrier_id": 1,
+  "carrier_detail_code": null,
+  "status_description": "Not Yet In System",
+  "carrier_status_code": "150006",
+  "carrier_status_description": "Tracking is not available for this item. This may be because the tracking number is invalid; USPS has not yet received payment; USPS has not yet received the item; the item does not include tracking; or other reasons.",
+  "ship_date": null,
+  "estimated_delivery_date": null,
+  "actual_delivery_date": null,
+  "exception_description": null,
+  "events": []
 }
