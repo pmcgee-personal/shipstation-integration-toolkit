@@ -1,4 +1,4 @@
-# ShipStation API USPS Single Payor Labels
+# ShipStation USPS Single Payor Labels
 
 ## Objective
 
@@ -7,28 +7,28 @@ labels via ShipStation API, so the resulting labels are PCID compliant.
 
 From an integration perspective this is like rating, labelling, or tracking
 any other carrier in ShipStation API, with one key exception: when the
-vendor generates the USPS label they must use `POST /v1/labels` and include
+vendor generates the USPS label they must use `POST /v2/labels` and include
 the `sender_info` object. Please note this is not documented publicly.
 
 This solution will **not** work if the caller uses `POST /v1/rates` and then
-`POST /v1/labels/rates/:rate_id`.
+`POST /v2/labels/rates/:rate_id`.
 
 ## Step 1: Create the label with `sender_info`
 
 **Endpoint**
 
 ```
-POST /v1/labels
+POST /v2/labels
 ```
 
 **Body parameters**
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| `shipment` | object | The regular shipment payload (`ship_to`, `ship_from`, `packages`, `service_code`, `carrier_id`). |
-| `sender_info` | object | The marketplace account details for the seller. Required for PCID compliance. |
-| `sender_info.sender_address` | object | The seller's account address and contact details on the marketplace. |
-| `sender_info.sender_platform_user_id` | string | The seller's unique identifier on the marketplace. |
+| Parameter                             | Type   | Description                                                                                      |
+| ------------------------------------- | ------ | ------------------------------------------------------------------------------------------------ |
+| `shipment`                            | object | The regular shipment payload (`ship_to`, `ship_from`, `packages`, `service_code`, `carrier_id`). |
+| `sender_info`                         | object | The marketplace account details for the seller. Required for PCID compliance.                    |
+| `sender_info.sender_address`          | object | The seller's account address and contact details on the marketplace.                             |
+| `sender_info.sender_platform_user_id` | string | The seller's unique identifier on the marketplace.                                               |
 
 **Example request**
 
@@ -39,7 +39,7 @@ for the full body.
 
 ```bash
 curl --request POST \
-  --url https://api.shipengine.com/v1/labels \
+  --url https://api.shipstation.com/v2/labels \
   --header 'API-Key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data @create-label-single-payor-request.json
