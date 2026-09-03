@@ -20,7 +20,7 @@ is needed to read it.
 | Second request needed  | Yes                              | **No**                   |
 | API key needed to read | Yes, for the follow-up call      | No                       |
 
-A tracking body *does* still carry a `resource_url`
+A tracking body _does_ still carry a `resource_url`
 (`https://api.shipstation.com/v2/labels/se-454868XXX/track`), which makes
 this easy to get wrong — it points at the label's tracking endpoint, not at
 a resource you need to fetch to understand the event. Everything is already
@@ -39,12 +39,12 @@ the other events use.
     "tracking_number": "383369XXX473",
     "status_code": "DE",
     "status_description": "Delivered",
-    "events": [ "…newest first" ]
+    "events": ["…newest first"]
   }
 }
 ```
 
-`resource_type` is `TRACK_EVENT_V2` for all three carriers. `data` holds the
+`resource_type` is `TRACK_EVENT_V2` for all carriers. `data` holds the
 current status at the top level plus an `events` array of every scan so far.
 `_captured_at` is a repo convention, not something ShipStation sends — see
 the [root README](../../README.md).
@@ -62,11 +62,11 @@ rather than on the arrival of an event row.
 
 ## Carriers
 
-| Folder                | Carrier | `carrier_code`   | `carrier_id` | Fixtures |
-| --------------------- | ------- | ---------------- | ------------ | -------- |
-| [`fedex/`](./fedex/)  | FedEx   | `fedex_walleted` | `194`        | 4 real, 1 placeholder |
-| [`ups/`](./ups/)      | UPS     | `ups`            | `3`          | 4 real, 1 placeholder |
-| [`usps/`](./usps/)    | USPS    | `stamps_com`     | `1`          | 4 real, 1 placeholder |
+| Folder               | Carrier | `carrier_code`   | `carrier_id` | Fixtures              |
+| -------------------- | ------- | ---------------- | ------------ | --------------------- |
+| [`fedex/`](./fedex/) | FedEx   | `fedex_walleted` | `194`        | 4 real, 1 placeholder |
+| [`ups/`](./ups/)     | UPS     | `ups`            | `3`          | 4 real, 1 placeholder |
+| [`usps/`](./usps/)   | USPS    | `stamps_com`     | `1`          | 4 real, 1 placeholder |
 
 Each folder has its own README covering that carrier's quirks. Read them
 before writing carrier-specific logic — the differences below are real and
@@ -74,22 +74,22 @@ none of them are documented by ShipStation.
 
 ## Coverage
 
-| Scenario           | FedEx | UPS | USPS |
-| ------------------ | ----- | --- | ---- |
-| Pre-transit        | —     | ✅  | ✅   |
-| In transit         | ✅    | ✅  | ✅   |
-| Out for delivery   | ✅    | ✅  | ✅   |
-| Delivered          | ✅    | ✅  | ✅   |
+| Scenario           | FedEx          | UPS            | USPS           |
+| ------------------ | -------------- | -------------- | -------------- |
+| Pre-transit        | —              | ✅             | ✅             |
+| In transit         | ✅             | ✅             | ✅             |
+| Out for delivery   | ✅             | ✅             | ✅             |
+| Delivered          | ✅             | ✅             | ✅             |
 | Delivery exception | 🚧 placeholder | 🚧 placeholder | 🚧 placeholder |
 
-FedEx has no dedicated pre-transit fixture, but its in-transit and delivered
+FedEx has no dedicated pre-transit fixture but its in-transit and delivered
 fixtures both include the `Shipment information sent to FedEx` scan (`NY`)
 at the tail of `events`, which is the same moment.
 
 No carrier has a fixture where `EX` is the **top-level** status. FedEx's
 multi-scan and USPS's out-for-delivery both contain `EX` scans in their
 history on parcels that recovered — useful, but not the same thing as a
-parcel that is actually stuck.
+parcel that is actually stuck. These will be added at a later date.
 
 ## Carrier differences that will break shared code
 
@@ -97,18 +97,18 @@ The envelope is identical across carriers — same 16 `data` keys in the same
 order, same 20 event keys in the same order, in every one of the 12 real
 fixtures. The **values** are not consistent:
 
-| Behaviour                          | FedEx                        | UPS                                | USPS                             |
-| ---------------------------------- | ---------------------------- | ---------------------------------- | -------------------------------- |
-| `status_detail_code`               | Populated                    | `null` (except pre-transit)        | Populated                        |
-| `carrier_detail_code`              | `null`                       | Populated (`FS`, `OD`, `OT`, …)    | `null`                           |
-| `postal_code` when absent          | `null`                       | `""` empty string                  | `null`                           |
-| `country_code`                     | Always `US`                  | Always `US`                        | Often `null`                     |
-| `ship_date` / delivery dates       | Naive, no suffix             | `Z`-suffixed                       | `Z`-suffixed                     |
-| `actual_delivery_date` vs scan     | **Disagree by 14h**          | Match exactly                      | Match exactly                    |
-| Events sorted by `occurred_at`     | Yes                          | Yes                                | **No** — see below               |
+| Behaviour                      | FedEx               | UPS                             | USPS               |
+| ------------------------------ | ------------------- | ------------------------------- | ------------------ |
+| `status_detail_code`           | Populated           | `null` (except pre-transit)     | Populated          |
+| `carrier_detail_code`          | `null`              | Populated (`FS`, `OD`, `OT`, …) | `null`             |
+| `postal_code` when absent      | `null`              | `""` empty string               | `null`             |
+| `country_code`                 | Always `US`         | Always `US`                     | Often `null`       |
+| `ship_date` / delivery dates   | Naive, no suffix    | `Z`-suffixed                    | `Z`-suffixed       |
+| `actual_delivery_date` vs scan | **Disagree by 14h** | Match exactly                   | Match exactly      |
+| Events sorted by `occurred_at` | Yes                 | Yes                             | **No** — see below |
 
-The first two rows are the ones that bite: telling *out for delivery* from
-*in transit* works off `status_detail_code` on FedEx and USPS, and off
+The first two rows are the ones that bite: telling _out for delivery_ from
+_in transit_ works off `status_detail_code` on FedEx and USPS, and off
 `carrier_detail_code` on UPS. There is no single field that does it for all
 three.
 
@@ -118,12 +118,12 @@ Every event carries two timestamps. `occurred_at` is trustworthy UTC.
 `carrier_occurred_at` is not, and it is encoded three different ways across
 this tree:
 
-| Encoding                          | Where                                              | Actually UTC? |
-| --------------------------------- | -------------------------------------------------- | ------------- |
-| `2026-08-28T19:24:32Z`            | All FedEx fixtures                                 | Yes — identical to `occurred_at` |
-| `2026-09-03T12:18:41Z`            | UPS and USPS in-transit / delivered fixtures       | **No** — carrier-local time with a `Z` glued on |
-| `2026-08-19T15:44:46-07:00`       | `usps/track-event-v2-pre-transit.json`             | Yes — a real offset, the only correct one here |
-| `2026-09-03T11:19:14`             | `ups/track-event-v2-pre-transit.json`              | Unspecified — no suffix at all |
+| Encoding                    | Where                                        | Actually UTC?                                   |
+| --------------------------- | -------------------------------------------- | ----------------------------------------------- |
+| `2026-08-28T19:24:32Z`      | All FedEx fixtures                           | Yes — identical to `occurred_at`                |
+| `2026-09-03T12:18:41Z`      | UPS and USPS in-transit / delivered fixtures | **No** — carrier-local time with a `Z` glued on |
+| `2026-08-19T15:44:46-07:00` | `usps/track-event-v2-pre-transit.json`       | Yes — a real offset, the only correct one here  |
+| `2026-09-03T11:19:14`       | `ups/track-event-v2-pre-transit.json`        | Unspecified — no suffix at all                  |
 
 In the `Z`-but-local case the implied offset varies **per event within one
 file** — `usps/track-event-v2-out-for-delivery.json` mixes 5, 6 and 7 hours
@@ -145,7 +145,7 @@ by `occurred_at` rather than trusting array position.**
 
 Tracking bodies are lower-risk than order or label payloads — no names,
 addresses, emails or phone numbers appear in any fixture here. But they are
-not free of identifying data, and two fields deserve attention before you
+not free of identifying data and two fields deserve attention before you
 publish a capture or hand a body to a third party:
 
 **`latitude` / `longitude`.** Present on nearly every event at 4-decimal
@@ -192,7 +192,7 @@ identical, so don't copy one into the other.
 
 ## Filling in the gaps
 
-Capture the real POST body — the whole thing, since here the body *is* the
+Capture the real POST body — the whole thing, since here the body _is_ the
 payload. See the root [README](../../README.md) for the sanitize-and-date
 steps, and [`../../TODO.md`](../../TODO.md) for the current checklist.
 Tracking numbers, the `se-` label ID in `resource_url`, and `tracking_url`

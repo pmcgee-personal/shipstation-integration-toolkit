@@ -16,13 +16,13 @@ All fixtures here were captured with `carrier_code` `ups` and `carrier_id`
 
 ## Scenarios
 
-| Fixture                                                                            | `status_code` | `carrier_detail_code` | Events | What it shows                                                                                        |
-| ------------------------------------------------------------------------------------ | ------------- | --------------------- | ------ | ------------------------------------------------------------------------------------------------------ |
-| [`track-event-v2-pre-transit.json`](./track-event-v2-pre-transit.json)             | `NY`          | `MP`                  | 1      | Label created, UPS has not taken possession. `ship_date` is `null` but an `estimated_delivery_date` exists. |
-| [`track-event-v2-multi-scan.json`](./track-event-v2-multi-scan.json)               | `IT`          | `OD`                  | 10     | Mid-transit, loaded on the delivery vehicle. Ten scans accumulated.                                  |
-| [`track-event-v2-out-for-delivery.json`](./track-event-v2-out-for-delivery.json)   | `IT`          | `OT`                  | 13     | Out for delivery. Note four near-identical `Preparing for Delivery` scans in a row.                  |
-| [`track-event-v2-delivered.json`](./track-event-v2-delivered.json)                 | `DE`          | `FS`                  | 16     | Full lifecycle to delivery. `actual_delivery_date` matches the `Delivered` scan exactly.             |
-| [`track-event-v2-delivery-exception.json`](./track-event-v2-delivery-exception.json) | —             | —                     | —      | **Placeholder** — awaiting a real capture.                                                           |
+| Fixture                                                                              | `status_code` | `carrier_detail_code` | Events | What it shows                                                                                               |
+| ------------------------------------------------------------------------------------ | ------------- | --------------------- | ------ | ----------------------------------------------------------------------------------------------------------- |
+| [`track-event-v2-pre-transit.json`](./track-event-v2-pre-transit.json)               | `NY`          | `MP`                  | 1      | Label created, UPS has not taken possession. `ship_date` is `null` but an `estimated_delivery_date` exists. |
+| [`track-event-v2-multi-scan.json`](./track-event-v2-multi-scan.json)                 | `IT`          | `OD`                  | 10     | Mid-transit, loaded on the delivery vehicle. Ten scans accumulated.                                         |
+| [`track-event-v2-out-for-delivery.json`](./track-event-v2-out-for-delivery.json)     | `IT`          | `OT`                  | 13     | Out for delivery. Note four near-identical `Preparing for Delivery` scans in a row.                         |
+| [`track-event-v2-delivered.json`](./track-event-v2-delivered.json)                   | `DE`          | `FS`                  | 16     | Full lifecycle to delivery. `actual_delivery_date` matches the `Delivered` scan exactly.                    |
+| [`track-event-v2-delivery-exception.json`](./track-event-v2-delivery-exception.json) | —             | —                     | —      | **Placeholder** — awaiting a real capture.                                                                  |
 
 Each fixture is a different parcel (unlike the FedEx folder, where two
 shipments are captured twice each). The `events` array is **cumulative** —
@@ -33,14 +33,14 @@ every delivery re-sends the full accumulated history, newest first.
 This is the biggest difference from the other two carriers, and the one most
 likely to break shared code:
 
-| Field                       | UPS                                   | FedEx / USPS                        |
-| --------------------------- | ------------------------------------- | ----------------------------------- |
+| Field                       | UPS                                   | FedEx / USPS                             |
+| --------------------------- | ------------------------------------- | ---------------------------------------- |
 | `status_detail_code`        | `null` — except on pre-transit        | Populated (`IN_TRANSIT`, `DELIVERED`, …) |
-| `status_detail_description` | `null` — except on pre-transit        | Populated                           |
-| `carrier_detail_code`       | Populated (`FS`, `OD`, `OT`, `MP`, …) | `null` everywhere                   |
+| `status_detail_description` | `null` — except on pre-transit        | Populated                                |
+| `carrier_detail_code`       | Populated (`FS`, `OD`, `OT`, `MP`, …) | `null` everywhere                        |
 
-So a receiver that branches on `status_detail_code` to tell *out for
-delivery* from *in transit* — which works fine for FedEx and USPS — gets
+So a receiver that branches on `status_detail_code` to tell _out for
+delivery_ from _in transit_ — which works fine for FedEx and USPS — gets
 `null` on UPS for both, and has to fall back to `carrier_detail_code` (`OT`
 vs `OD`) or to `carrier_status_description`.
 
@@ -74,8 +74,8 @@ case explicitly.
 
 **`carrier_occurred_at` is `Z`-suffixed but is not UTC.** It is UPS's local
 scan time with a UTC marker glued on. Comparing it against `occurred_at`
-across these fixtures yields offsets of 4, 5 **and** 7 hours *within a
-single file* — the parcel is crossing time zones and each scan carries its
+across these fixtures yields offsets of 4, 5 **and** 7 hours _within a
+single file_ — the parcel is crossing time zones and each scan carries its
 own local clock. Parse `occurred_at` and ignore `carrier_occurred_at` for
 anything but display. See
 [`../README.md`](../README.md#carrier_occurred_at-is-not-utc).

@@ -3,12 +3,12 @@
 **Unofficial.** ShipStation payloads,
 request/response examples and short diagram-first explainers for common
 integration flows — a working companion to the
-[official documentation](https://docs.shipstation.com/). Think of this as covering the situations not in the public documentation.
+[official documentation](https://docs.shipstation.com/).
 
 ## Why this exists
 
 Some scenarios are easier to understand from a concrete example
-than from a schema and a common integration flows get re-explained every time
+than from a schema and common integration flows get re-explained every time
 they come up. This repo collects real examples and short reference docs so
 integrators have something specific to link to and test against.
 

@@ -16,22 +16,22 @@ All fixtures here were captured with `carrier_code` `fedex_walleted` and
 
 ## Scenarios
 
-| Fixture                                                                            | `status_code` | `status_detail_code` | Events | What it shows                                                                                             |
-| ------------------------------------------------------------------------------------ | ------------- | -------------------- | ------ | ----------------------------------------------------------------------------------------------------------- |
+| Fixture                                                                                      | `status_code` | `status_detail_code` | Events | What it shows                                                                                               |
+| -------------------------------------------------------------------------------------------- | ------------- | -------------------- | ------ | ----------------------------------------------------------------------------------------------------------- |
 | [`track-event-v2-in-transit-single-scan.json`](./track-event-v2-in-transit-single-scan.json) | `IT`          | `IN_TRANSIT`         | 3      | Early movement — label created, picked up, arrived at the origin hub. Carries an `estimated_delivery_date`. |
-| [`track-event-v2-multi-scan.json`](./track-event-v2-multi-scan.json)               | `IT`          | `IN_TRANSIT`         | 13     | Mid-transit with a `EX` **delivery exception** already in the history. Top-level status is still `IT`.      |
-| [`track-event-v2-out-for-delivery.json`](./track-event-v2-out-for-delivery.json)   | `IT`          | `OUT_FOR_DELIVERY`   | 15     | On the vehicle. Same parcel as the multi-scan fixture, two scans later.                                     |
-| [`track-event-v2-delivered.json`](./track-event-v2-delivered.json)                 | `DE`          | `DELIVERED`          | 8      | Full lifecycle to delivery. `actual_delivery_date` is set.                                                  |
-| [`track-event-v2-delivery-exception.json`](./track-event-v2-delivery-exception.json) | —             | —                    | —      | **Placeholder** — awaiting a capture where `EX` is the *top-level* status, not just a historical scan.      |
+| [`track-event-v2-multi-scan.json`](./track-event-v2-multi-scan.json)                         | `IT`          | `IN_TRANSIT`         | 13     | Mid-transit with a `EX` **delivery exception** already in the history. Top-level status is still `IT`.      |
+| [`track-event-v2-out-for-delivery.json`](./track-event-v2-out-for-delivery.json)             | `IT`          | `OUT_FOR_DELIVERY`   | 15     | On the vehicle. Same parcel as the multi-scan fixture, two scans later.                                     |
+| [`track-event-v2-delivered.json`](./track-event-v2-delivered.json)                           | `DE`          | `DELIVERED`          | 8      | Full lifecycle to delivery. `actual_delivery_date` is set.                                                  |
+| [`track-event-v2-delivery-exception.json`](./track-event-v2-delivery-exception.json)         | —             | —                    | —      | **Placeholder** — awaiting a capture where `EX` is the _top-level_ status, not just a historical scan.      |
 
 ## Two parcels, four captures
 
 These five files cover **two** shipments, not five:
 
-| Parcel           | Label           | Fixtures                                    |
-| ---------------- | --------------- | ------------------------------------------- |
-| `383369XXX473`   | `se-454868XXX`  | in-transit-single-scan → delivered          |
-| `383144XXX630`   | `se-452094XXX`  | multi-scan → out-for-delivery               |
+| Parcel         | Label          | Fixtures                           |
+| -------------- | -------------- | ---------------------------------- |
+| `383369XXX473` | `se-454868XXX` | in-transit-single-scan → delivered |
+| `383144XXX630` | `se-452094XXX` | multi-scan → out-for-delivery      |
 
 Each pair is the same tracking number captured at two points in time, so
 diffing them shows exactly what a receiver sees between two deliveries of
@@ -67,7 +67,7 @@ so it is not a reliable exception signal for FedEx.
 
 **`carrier_occurred_at` equals `occurred_at`.** In all four FedEx captures
 the two timestamps are byte-identical and both `Z`-suffixed. FedEx is the
-only carrier here where that holds — UPS and USPS put carrier-*local* time
+only carrier here where that holds — UPS and USPS put carrier-_local_ time
 in that field. Don't write shared parsing logic that infers a rule from the
 FedEx fixtures; see [`../README.md`](../README.md#carrier_occurred_at-is-not-utc).
 
@@ -79,10 +79,10 @@ strict ISO-8601 parser configured to require an offset will reject these.
 **`actual_delivery_date` disagrees with the Delivered scan.** In
 [`track-event-v2-delivered.json`](./track-event-v2-delivered.json):
 
-| Field                                  | Value                  |
-| -------------------------------------- | ---------------------- |
-| `data.actual_delivery_date`            | `2026-08-28T05:24:32`  |
-| `events[0].occurred_at` (`Delivered`)  | `2026-08-28T19:24:32Z` |
+| Field                                 | Value                  |
+| ------------------------------------- | ---------------------- |
+| `data.actual_delivery_date`           | `2026-08-28T05:24:32`  |
+| `events[0].occurred_at` (`Delivered`) | `2026-08-28T19:24:32Z` |
 
 Same seconds, 14 hours apart. Whatever the cause, the two are not
 interchangeable — if you display a delivery time, take it from the
