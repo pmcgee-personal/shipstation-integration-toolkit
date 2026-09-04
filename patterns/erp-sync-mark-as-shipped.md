@@ -2,7 +2,7 @@
 
 ## Short answer
 
-Orders are imported from a connected store (e.g. Shopify) into ShipStation. ShipStation sends a `"shipment_created_v2"` webhook to your ERP. Your ERP calls the `"resource_url"` to retrieve shipment details and creates an order record. When a user marks the order as shipped, ShipStation creates a fulfillment and sends a `"fulfillment_shipped_v2"` webhook to your ERP. Your ERP calls the `"resource_url"` to fetch fulfillment details (`"tracking_number"`, `"carrier"`, `"service_code"`, `"shipment_cost"`) and updates the order.
+Orders are imported from a connected store (e.g. Shopify) into ShipStation. ShipStation sends a `"shipment_created_v2"` webhook to your ERP. Your ERP calls the `"resource_url"` to retrieve shipment details and creates an order record. When a user marks the order as shipped, ShipStation creates a fulfillment and sends a `"fulfillment_shipped_v2"` webhook to your ERP. Your ERP calls the `"resource_url"` to fetch fulfillment details (`"tracking_number"`, `"carrier"`, `"service_code"`) and updates the order.
 
 ## Flow
 
@@ -25,7 +25,7 @@ sequenceDiagram
     SS->>ERP: "fulfillment_shipped_v2" webhook<br/>("resource_url")
 
     ERP->>SS: GET "resource_url"
-    SS-->>ERP: {"tracking_number",<br/>"carrier", "service_code",<br/>"shipment_cost", ...}
+    SS-->>ERP: {"tracking_number",<br/>"carrier", "service_code",<br/>, ...}
     ERP->>ERP: Update order with fulfillment details
 ```
 
