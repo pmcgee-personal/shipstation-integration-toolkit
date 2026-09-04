@@ -38,8 +38,8 @@
         "status_detail_code": "DELIVERED",
         "status_detail_description": "Your parcel has been successfully delivered.",
         "proof_of_delivery_url": null,
-        "latitude": 28.6622,
-        "longitude": -81.4895
+        "latitude": 28.66,
+        "longitude": -81.49
       },
       {
         "occurred_at": "2026-08-28T09:38:00Z",
@@ -60,8 +60,8 @@
         "status_detail_code": "OUT_FOR_DELIVERY",
         "status_detail_description": "Your parcel is on its way and will be delivered today.",
         "proof_of_delivery_url": null,
-        "latitude": 28.5754,
-        "longitude": -81.532
+        "latitude": 28.58,
+        "longitude": -81.53
       },
       {
         "occurred_at": "2026-08-28T07:58:00Z",
@@ -82,8 +82,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 28.5754,
-        "longitude": -81.532
+        "latitude": 28.58,
+        "longitude": -81.53
       },
       {
         "occurred_at": "2026-08-28T04:47:32Z",
@@ -104,8 +104,8 @@
         "status_detail_code": "HUB_SCAN_OUT",
         "status_detail_description": "Your parcel has left the carrier's hub.",
         "proof_of_delivery_url": null,
-        "latitude": 28.3727,
-        "longitude": -81.5459
+        "latitude": 28.37,
+        "longitude": -81.55
       },
       {
         "occurred_at": "2026-08-27T22:49:00Z",
@@ -126,8 +126,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 28.3727,
-        "longitude": -81.5459
+        "latitude": 28.37,
+        "longitude": -81.55
       },
       {
         "occurred_at": "2026-08-25T23:22:00Z",
@@ -148,8 +148,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 40.6341,
-        "longitude": -74.2544
+        "latitude": 40.63,
+        "longitude": -74.25
       },
       {
         "occurred_at": "2026-08-25T19:15:00Z",
@@ -170,8 +170,8 @@
         "status_detail_code": "PICKED_UP",
         "status_detail_description": "Your parcel has been picked up by the carrier.",
         "proof_of_delivery_url": null,
-        "latitude": 40.6341,
-        "longitude": -74.2544
+        "latitude": 40.63,
+        "longitude": -74.25
       },
       {
         "occurred_at": "2026-08-25T17:14:00Z",

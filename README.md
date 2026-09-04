@@ -31,7 +31,7 @@ patterns/           Short, diagram-first explanations of common flows
 
 - **`webhooks/`** — what ShipStation actually sends to a webhook subscriber
   for a given event. Useful for building/testing your webhook receiver
-  without needing to trigger the real event in sandbox. Most webhook bodies
+  without needing to trigger the real event. Most webhook bodies
   are pointers, not data: you get a `resource_url` and a `resource_type`,
   and you call that URL with your API key to retrieve the actual record —
   so those folders hold the webhook body _and_ the `resource_url` response.
@@ -39,7 +39,7 @@ patterns/           Short, diagram-first explanations of common flows
   with no follow-up call. See
   [`webhooks/README.md`](./webhooks/README.md).
 - **`api/`** — what ShipStation actually returns when you call an endpoint
-  directly. Useful for building/testing request handling due to lack of sandbox
+  directly.
 - **`patterns/`** — a diagram (Mermaid) for a
   commonly-requested flow, plus links to the official docs and any relevant
   fixture in this repo. No duplicated payloads or long prose — see
@@ -49,7 +49,7 @@ Webhooks and API responses for the same resource are _similar but not
 identical_ — don't assume a webhook payload and an API response for the same
 object share an exact schema. They're kept in separate trees on purpose.
 
-Webhook folders are named after the **ShipStation UI event name**, which
+Webhook folders are named after the **ShipStation event name**, which
 does not always match the `resource_type` in the payload. `webhooks/orders/`
 holds the event the UI calls "On New Order Created (V2)" even though the
 payload says `SHIPMENT_CREATED_V2`. Branch your code on `resource_type`.
@@ -82,7 +82,7 @@ need real data.
 
 ## Freshness
 
-Fixtures are snapshots, not a guaranteed-current contract — ShipStation and
+Fixtures are snapshots, not a guaranteed-current contract. ShipStation and
 carrier schemas both change over time. Each filled-in fixture carries a
 `_captured_at` date; fixtures still showing `_fixture_notes` are
 placeholders awaiting real data. If something looks stale or wrong, open an

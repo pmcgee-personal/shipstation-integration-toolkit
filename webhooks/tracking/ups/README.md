@@ -95,16 +95,7 @@ UPS `1Z` length (`1ZXXXG2702XXXXX791`), and the long `wwwapps.ups.com`
 `tracking_url` is kept in step. The `se-` label ID in `resource_url` is
 masked the same way.
 
-Two things are **not** masked and are worth a look before publishing:
-
-- `latitude` / `longitude` are present on every event in the three
-  in-transit and delivered fixtures, at ~11 m precision. On the `Delivered`
-  scan that is the delivery point (`42.4905, -83.1379`).
-- `postal_code` on that same `Delivered` scan is the recipient ZIP
-  (`48067`) — the only event in the folder that carries one.
-
-Together those two fields pin the destination fairly tightly. No names,
-signers, addresses or phone numbers appear (`signer` is `null`/`""`
+No names,signers, addresses or phone numbers appear (`signer` is `null`/`""`
 throughout, `proof_of_delivery_url` is `null` throughout). See
 [`../README.md`](../README.md#pii-in-tracking-payloads).
 

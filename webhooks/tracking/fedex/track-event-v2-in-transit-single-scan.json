@@ -38,8 +38,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 40.6341,
-        "longitude": -74.2544
+        "latitude": 40.63,
+        "longitude": -74.25
       },
       {
         "occurred_at": "2026-08-25T19:15:00Z",
@@ -60,8 +60,8 @@
         "status_detail_code": "PICKED_UP",
         "status_detail_description": "Your parcel has been picked up by the carrier.",
         "proof_of_delivery_url": null,
-        "latitude": 40.6341,
-        "longitude": -74.2544
+        "latitude": 40.63,
+        "longitude": -74.25
       },
       {
         "occurred_at": "2026-08-25T17:14:00Z",

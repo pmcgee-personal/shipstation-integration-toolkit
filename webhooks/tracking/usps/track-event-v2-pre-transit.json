@@ -38,8 +38,8 @@
         "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
         "status_detail_description": "Your shipment is now in the carrier's system.",
         "proof_of_delivery_url": null,
-        "latitude": 40.5612,
-        "longitude": -76.3832
+        "latitude": 40.56,
+        "longitude": -76.38
       }
     ]
   }

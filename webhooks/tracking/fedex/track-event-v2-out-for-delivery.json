@@ -38,8 +38,8 @@
         "status_detail_code": "OUT_FOR_DELIVERY",
         "status_detail_description": "Your parcel is on its way and will be delivered today.",
         "proof_of_delivery_url": null,
-        "latitude": 44.2516,
-        "longitude": -85.4288
+        "latitude": 44.25,
+        "longitude": -85.43
       },
       {
         "occurred_at": "2026-08-20T08:01:00Z",
@@ -60,8 +60,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 44.2516,
-        "longitude": -85.4288
+        "latitude": 44.25,
+        "longitude": -85.43
       },
       {
         "occurred_at": "2026-08-19T21:44:00Z",
@@ -82,8 +82,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 44.2516,
-        "longitude": -85.4288
+        "latitude": 44.25,
+        "longitude": -85.43
       },
       {
         "occurred_at": "2026-08-17T09:00:23Z",
@@ -104,8 +104,8 @@
         "status_detail_code": "UNSPECIFIED_EXCEPTION",
         "status_detail_description": "The carrier has reported an issue with your parcel, but details are unavailable.",
         "proof_of_delivery_url": null,
-        "latitude": 44.2516,
-        "longitude": -85.4288
+        "latitude": 44.25,
+        "longitude": -85.43
       },
       {
         "occurred_at": "2026-08-17T08:37:00Z",
@@ -126,8 +126,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 44.2516,
-        "longitude": -85.4288
+        "latitude": 44.25,
+        "longitude": -85.43
       },
       {
         "occurred_at": "2026-08-17T08:06:09Z",
@@ -148,8 +148,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 44.2516,
-        "longitude": -85.4288
+        "latitude": 44.25,
+        "longitude": -85.43
       },
       {
         "occurred_at": "2026-08-16T13:24:52Z",
@@ -170,8 +170,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 44.2516,
-        "longitude": -85.4288
+        "latitude": 44.25,
+        "longitude": -85.43
       },
       {
         "occurred_at": "2026-08-16T01:24:29Z",
@@ -192,8 +192,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 44.2516,
-        "longitude": -85.4288
+        "latitude": 44.25,
+        "longitude": -85.43
       },
       {
         "occurred_at": "2026-08-15T05:55:07Z",
@@ -214,8 +214,8 @@
         "status_detail_code": "HUB_SCAN_OUT",
         "status_detail_description": "Your parcel has left the carrier's hub.",
         "proof_of_delivery_url": null,
-        "latitude": 41.5425,
-        "longitude": -83.6181
+        "latitude": 41.54,
+        "longitude": -83.62
       },
       {
         "occurred_at": "2026-08-15T02:16:00Z",
@@ -236,8 +236,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 41.5425,
-        "longitude": -83.6181
+        "latitude": 41.54,
+        "longitude": -83.62
       },
       {
         "occurred_at": "2026-08-14T16:11:03Z",
@@ -258,8 +258,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 41.0131,
-        "longitude": -76.4349
+        "latitude": 41.01,
+        "longitude": -76.43
       },
       {
         "occurred_at": "2026-08-14T04:09:07Z",
@@ -280,8 +280,8 @@
         "status_detail_code": "HUB_SCAN_OUT",
         "status_detail_description": "Your parcel has left the carrier's hub.",
         "proof_of_delivery_url": null,
-        "latitude": 40.6341,
-        "longitude": -74.2544
+        "latitude": 40.63,
+        "longitude": -74.25
       },
       {
         "occurred_at": "2026-08-13T23:01:00Z",
@@ -302,8 +302,8 @@
         "status_detail_code": "IN_TRANSIT",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 40.6341,
-        "longitude": -74.2544
+        "latitude": 40.63,
+        "longitude": -74.25
       },
       {
         "occurred_at": "2026-08-13T19:05:00Z",
@@ -324,8 +324,8 @@
         "status_detail_code": "PICKED_UP",
         "status_detail_description": "Your parcel has been picked up by the carrier.",
         "proof_of_delivery_url": null,
-        "latitude": 40.6341,
-        "longitude": -74.2544
+        "latitude": 40.63,
+        "longitude": -74.25
       },
       {
         "occurred_at": "2026-08-12T18:49:00Z",

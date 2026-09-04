@@ -16,13 +16,13 @@ carrier code USPS shipments report under — and `carrier_id` `1`.
 
 ## Scenarios
 
-| Fixture                                                                            | `status_code` | `status_detail_code`         | Events | What it shows                                                                                  |
-| ------------------------------------------------------------------------------------ | ------------- | ---------------------------- | ------ | -------------------------------------------------------------------------------------------------- |
-| [`track-event-v2-pre-transit.json`](./track-event-v2-pre-transit.json)             | `AC`          | `ELEC_ADVICE_RECD_BY_CARRIER` | 1      | Label created, USPS awaiting the item. Every date field is `null`.                             |
-| [`track-event-v2-multi-scan.json`](./track-event-v2-multi-scan.json)               | `IT`          | `IN_TRANSIT`                 | 12     | Mid-transit across facilities. No `estimated_delivery_date` even this far along.               |
-| [`track-event-v2-out-for-delivery.json`](./track-event-v2-out-for-delivery.json)   | `IT`          | `OUT_FOR_DELIVERY`           | 25     | Out for delivery. The richest fixture here, and the one with the format quirks described below. |
-| [`track-event-v2-delivered.json`](./track-event-v2-delivered.json)                 | `DE`          | `DELIVERED`                  | 17     | Full lifecycle to delivery (`DELIVERED IN/AT MAILBOX`). Carries a **duplicate** delivery scan.  |
-| [`track-event-v2-delivery-exception.json`](./track-event-v2-delivery-exception.json) | —             | —                            | —      | **Placeholder** — awaiting a real capture.                                                     |
+| Fixture                                                                              | `status_code` | `status_detail_code`          | Events | What it shows                                                                                   |
+| ------------------------------------------------------------------------------------ | ------------- | ----------------------------- | ------ | ----------------------------------------------------------------------------------------------- |
+| [`track-event-v2-pre-transit.json`](./track-event-v2-pre-transit.json)               | `AC`          | `ELEC_ADVICE_RECD_BY_CARRIER` | 1      | Label created, USPS awaiting the item. Every date field is `null`.                              |
+| [`track-event-v2-multi-scan.json`](./track-event-v2-multi-scan.json)                 | `IT`          | `IN_TRANSIT`                  | 12     | Mid-transit across facilities. No `estimated_delivery_date` even this far along.                |
+| [`track-event-v2-out-for-delivery.json`](./track-event-v2-out-for-delivery.json)     | `IT`          | `OUT_FOR_DELIVERY`            | 25     | Out for delivery. The richest fixture here, and the one with the format quirks described below. |
+| [`track-event-v2-delivered.json`](./track-event-v2-delivered.json)                   | `DE`          | `DELIVERED`                   | 17     | Full lifecycle to delivery (`DELIVERED IN/AT MAILBOX`). Carries a **duplicate** delivery scan.  |
+| [`track-event-v2-delivery-exception.json`](./track-event-v2-delivery-exception.json) | —             | —                             | —      | **Placeholder** — awaiting a real capture.                                                      |
 
 Each fixture is a different parcel. The `events` array is **cumulative** —
 every delivery re-sends the full accumulated history, newest first.
@@ -30,7 +30,7 @@ every delivery re-sends the full accumulated history, newest first.
 ## The delivered fixture repeats itself
 
 [`track-event-v2-delivered.json`](./track-event-v2-delivered.json) opens with
-*two* delivery scans one minute apart, identical in every other field:
+_two_ delivery scans one minute apart, identical in every other field:
 
 | Index | `occurred_at`          | `event_code` | Description               |
 | ----- | ---------------------- | ------------ | ------------------------- |
@@ -54,12 +54,12 @@ This is the thing to know about USPS here, and
 shows it plainly. Its 25 events split cleanly into two groups with different
 conventions:
 
-| | Events 0–13 (newer) | Events 14–24 (older) |
-| ------------------- | ----------------------------------- | ----------------------------------- |
-| `description` | `ALL CAPS` — `PROCESSED THROUGH USPS FACILITY` | `Title Case` — `Arrived at USPS Regional Facility` |
+|                  | Events 0–13 (newer)                                   | Events 14–24 (older)                                   |
+| ---------------- | ----------------------------------------------------- | ------------------------------------------------------ |
+| `description`    | `ALL CAPS` — `PROCESSED THROUGH USPS FACILITY`        | `Title Case` — `Arrived at USPS Regional Facility`     |
 | Facility name in | `city_locality` — `"BILLINGS MT DISTRIBUTION CENTER"` | `company_name`, with `city_locality` just `"BILLINGS"` |
-| `postal_code` | Populated | `null` |
-| `country_code` | `null` | `US` |
+| `postal_code`    | Populated                                             | `null`                                                 |
+| `country_code`   | `null`                                                | `US`                                                   |
 
 So the same logical scan type appears twice in one array under two different
 shapes. Anything that groups by `description`, or that reads the facility
@@ -84,17 +84,17 @@ The array is descending by `carrier_occurred_at`, **not** by `occurred_at`.
 Because different events are converted to UTC with different offsets, the
 two orderings disagree — in two of the three multi-event fixtures here:
 
-| Fixture             | Index | `occurred_at`          | `carrier_occurred_at`  | Description                                   |
-| ------------------- | ----- | ---------------------- | ---------------------- | --------------------------------------------- |
-| out-for-delivery    | 14    | `2026-08-31T06:39:00Z` | `2026-08-31T00:39:00Z` | Arrived at USPS Regional Facility             |
-| out-for-delivery    | 15    | `2026-08-31T07:00:00Z` | `2026-08-31T00:00:00Z` | In Transit to Next Facility, Arriving On Time |
-| delivered           | 7     | `2026-09-02T01:41:00Z` | `2026-09-01T21:41:00Z` | Arrived at USPS Regional Facility             |
-| delivered           | 8     | `2026-09-02T01:46:00Z` | `2026-09-01T18:46:00Z` | In Transit to Next Facility                   |
+| Fixture          | Index | `occurred_at`          | `carrier_occurred_at`  | Description                                   |
+| ---------------- | ----- | ---------------------- | ---------------------- | --------------------------------------------- |
+| out-for-delivery | 14    | `2026-08-31T06:39:00Z` | `2026-08-31T00:39:00Z` | Arrived at USPS Regional Facility             |
+| out-for-delivery | 15    | `2026-08-31T07:00:00Z` | `2026-08-31T00:00:00Z` | In Transit to Next Facility, Arriving On Time |
+| delivered        | 7     | `2026-09-02T01:41:00Z` | `2026-09-01T21:41:00Z` | Arrived at USPS Regional Facility             |
+| delivered        | 8     | `2026-09-02T01:46:00Z` | `2026-09-01T18:46:00Z` | In Transit to Next Facility                   |
 
 In both cases the offending row is an **`In Transit to Next Facility`** scan
 (`event_code` `TL` or `NT`). Grouping every USPS event in this folder by its
-implied offset makes the pattern exact: the 7-hour group contains *nothing
-but* `TL` and `NT` scans, while every other scan type in the same file
+implied offset makes the pattern exact: the 7-hour group contains _nothing
+but_ `TL` and `NT` scans, while every other scan type in the same file
 converts at 4, 5 or 6 hours. In the delivered fixture — a Texas-to-New-Jersey
 parcel that never went near the Pacific — a 7-hour offset is not a plausible
 local time at all.
@@ -108,7 +108,7 @@ hours on `TL`/`NT` rows specifically.
 ## `EX` appears on a parcel that is on time
 
 The out-for-delivery event 15 above has `status_code` `EX` while its own
-description reads *"Arriving On Time"*, and the parcel went out for
+description reads _"Arriving On Time"_, and the parcel went out for
 delivery normally. The
 polled API shows the same pairing — see
 [`api/tracking/usps/delivery-exception.json`](../../../api/tracking/usps/README.md).
@@ -145,17 +145,6 @@ USPS length (`94346362083XXXXX009034`), and `tracking_url` is kept in step.
 The `se-` label ID in `resource_url` is masked the same way — though
 `se-97410XXXX` in the pre-transit fixture uses a 5-character mask where the
 rest of the tree uses 3, so its original length is not recoverable.
-
-`latitude` / `longitude` are **not** masked and are present on most events
-(4 of 25 are `null` in out-for-delivery, 3 of 17 in delivered). One value,
-`35.22286` in `track-event-v2-multi-scan.json`, carries 5 decimal places
-where every other coordinate in the repo has 4.
-
-The delivered fixture is the one to look at before publishing. Its two
-`DELIVERED IN/AT MAILBOX` scans carry the destination three ways at once —
-`city_locality` `BUTLER`, `postal_code` `07405`, and coordinates
-`40.9865, -74.3831` at ~11 m. `DELIVERED IN/AT MAILBOX` also states the
-delivery method, which the FedEx and UPS delivered fixtures do not.
 
 `company_name` is populated in out-for-delivery and delivered, but only ever
 with USPS facility names (`TETERBORO NJ DISTRIBUTION CENTER`) — no customer

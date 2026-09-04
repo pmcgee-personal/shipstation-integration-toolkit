@@ -104,9 +104,7 @@ Tracking numbers are masked mid-string with `XXX`, preserving the 12-digit
 FedEx length (`383369XXX473`), and `tracking_url` is kept in step. The `se-`
 label ID in `resource_url` is masked the same way.
 
-`latitude` / `longitude` are **not** masked and are present on most events,
-including the `Delivered` scan (`28.6622, -81.4895`, Apopka FL) — roughly
-11 m precision on the delivery point. No names, signers, addresses, phone
+No names, signers, addresses, phone
 numbers or `proof_of_delivery_url` values appear in any fixture here
 (`signer` and `proof_of_delivery_url` are `null` throughout). See
 [`../README.md`](../README.md#pii-in-tracking-payloads) before adding a

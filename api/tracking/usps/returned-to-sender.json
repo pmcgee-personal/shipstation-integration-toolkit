@@ -35,8 +35,8 @@
       "status_detail_code": "RETURN_TO_SENDER",
       "status_detail_description": "Your parcel is being returned to the sender due to delivery issues.",
       "proof_of_delivery_url": null,
-      "latitude": 39.9068,
-      "longitude": -86.1237
+      "latitude": 39.91,
+      "longitude": -86.12
     },
     {
       "occurred_at": "2026-06-24T18:20:00Z",
@@ -57,8 +57,8 @@
       "status_detail_code": "OUT_FOR_DELIVERY",
       "status_detail_description": "Your parcel is on its way and will be delivered today.",
       "proof_of_delivery_url": null,
-      "latitude": 39.8978,
-      "longitude": -86.1797
+      "latitude": 39.9,
+      "longitude": -86.18
     },
     {
       "occurred_at": "2026-06-24T18:09:00Z",
@@ -79,8 +79,8 @@
       "status_detail_code": "RECEIVED_LOCAL_DELIVERY_DEPOT",
       "status_detail_description": "Your parcel has arrived at the local delivery depot and is almost ready for delivery.",
       "proof_of_delivery_url": null,
-      "latitude": 39.9068,
-      "longitude": -86.1237
+      "latitude": 39.91,
+      "longitude": -86.12
     },
     {
       "occurred_at": "2026-06-24T16:54:00Z",
@@ -101,8 +101,8 @@
       "status_detail_code": "RECEIVED_LOCAL_DELIVERY_DEPOT",
       "status_detail_description": "Your parcel has arrived at the local delivery depot and is almost ready for delivery.",
       "proof_of_delivery_url": null,
-      "latitude": 39.9068,
-      "longitude": -86.1237
+      "latitude": 39.91,
+      "longitude": -86.12
     },
     {
       "occurred_at": "2026-06-23T11:51:00Z",
@@ -123,8 +123,8 @@
       "status_detail_code": "HUB_SCAN_OUT",
       "status_detail_description": "Your parcel has left the carrier's hub.",
       "proof_of_delivery_url": null,
-      "latitude": 41.605,
-      "longitude": -81.4995
+      "latitude": 41.6,
+      "longitude": -81.5
     },
     {
       "occurred_at": "2026-06-23T04:21:00Z",
@@ -143,10 +143,10 @@
       "carrier_status_code": "80",
       "carrier_status_description": "Picked Up By Shipping Partner, USPS Awaiting Item",
       "status_detail_code": "SUB_CONTRACTOR_RECEIVED",
-      "status_detail_description": "Your parcel has been received by the carrier’s local delivery partner.",
+      "status_detail_description": "Your parcel has been received by the carrier\u2019s local delivery partner.",
       "proof_of_delivery_url": null,
-      "latitude": 41.605,
-      "longitude": -81.4995
+      "latitude": 41.6,
+      "longitude": -81.5
     }
   ]
 }

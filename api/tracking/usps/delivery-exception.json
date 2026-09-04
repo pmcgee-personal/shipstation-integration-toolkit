@@ -57,8 +57,8 @@
       "status_detail_code": "HUB_SCAN_IN",
       "status_detail_description": "Your parcel has arrived at the carrier's hub for processing.",
       "proof_of_delivery_url": null,
-      "latitude": 39.8664,
-      "longitude": -75.2748
+      "latitude": 39.87,
+      "longitude": -75.27
     },
     {
       "occurred_at": "2026-09-02T03:08:00Z",
@@ -79,8 +79,8 @@
       "status_detail_code": "RECEIVED_BY_CARRIER",
       "status_detail_description": "Your parcel has been received by the carrier and is beginning its journey.",
       "proof_of_delivery_url": null,
-      "latitude": 39.8912,
-      "longitude": -75.2795
+      "latitude": 39.89,
+      "longitude": -75.28
     },
     {
       "occurred_at": "2026-08-31T23:02:00Z",
@@ -101,8 +101,8 @@
       "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
       "status_detail_description": "Your shipment is now in the carrier's system.",
       "proof_of_delivery_url": null,
-      "latitude": 39.8912,
-      "longitude": -75.2795
+      "latitude": 39.89,
+      "longitude": -75.28
     }
   ]
 }

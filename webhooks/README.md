@@ -6,7 +6,7 @@ To document what ShipStation actually POSTs to a webhook subscriber, and
 what you get back when you follow the payload up with an API call.
 
 Most ShipStation webhooks are **notifications, not data**. The POST body
-tells you *something happened* and *where to go and read about it* — it does
+tells you _something happened_ and _where to go and read about it_ — it does
 not contain the order, label, or fulfillment itself. Those fixture folders
 are therefore a pair: the webhook body, and the response from calling the
 `resource_url` it points at.
@@ -37,10 +37,10 @@ For the pointer events, the body is the same two keys:
 }
 ```
 
-| Field           | Description                                                                                     |
-| --------------- | ----------------------------------------------------------------------------------------------- |
-| `resource_type` | Which event fired. Note this does **not** always match the name shown in the ShipStation UI.    |
-| `resource_url`  | A fully-formed, pre-filtered `GET` URL for the resource(s) the event covers. Call it as-is.     |
+| Field           | Description                                                                                  |
+| --------------- | -------------------------------------------------------------------------------------------- |
+| `resource_type` | Which event fired. Note this does **not** always match the name shown in the ShipStation UI. |
+| `resource_url`  | A fully-formed, pre-filtered `GET` URL for the resource(s) the event covers. Call it as-is.  |
 
 `_captured_at` in the fixtures is a repo convention, not something
 ShipStation sends — see the [root README](../README.md).
@@ -80,12 +80,12 @@ Always iterate the array and honour `links.next` rather than reading
 
 ## Folders
 
-| Folder                              | Event                                                    | `resource_url` points at        |
-| ----------------------------------- | -------------------------------------------------------- | ------------------------------- |
-| [`orders/`](./orders/)              | On New Order Created (V2) — `SHIPMENT_CREATED_V2`        | `/v2/shipments`                 |
-| [`labels/`](./labels/)              | On Labels Created (V2) — `LABEL_CREATED_V2`              | `/v2/labels`                    |
-| [`fulfillments/`](./fulfillments/)  | On Fulfillment Shipped (V2) — `FULFILLMENT_SHIPPED_V2`   | `/v2/fulfillments`              |
-| [`tracking/`](./tracking/)          | Tracking status updated — `TRACK_EVENT_V2`               | n/a — data is inline            |
+| Folder                             | Event                                                  | `resource_url` points at |
+| ---------------------------------- | ------------------------------------------------------ | ------------------------ |
+| [`orders/`](./orders/)             | On New Order Created (V2) — `SHIPMENT_CREATED_V2`      | `/v2/shipments`          |
+| [`labels/`](./labels/)             | On Labels Created (V2) — `LABEL_CREATED_V2`            | `/v2/labels`             |
+| [`fulfillments/`](./fulfillments/) | On Fulfillment Shipped (V2) — `FULFILLMENT_SHIPPED_V2` | `/v2/fulfillments`       |
+| [`tracking/`](./tracking/)         | Tracking status updated — `TRACK_EVENT_V2`             | n/a — data is inline     |
 
 `tracking/` is split by carrier ([`fedex/`](./tracking/fedex/),
 [`ups/`](./tracking/ups/), [`usps/`](./tracking/usps/)) because the envelope
@@ -99,7 +99,7 @@ fetch". The tracking event carries one
 (`https://api.shipstation.com/v2/labels/se-454868XXX/track`) but has already
 given you the data, so a receiver that pattern-matches on `resource_url` and
 fetches will make a pointless extra call — and, because that endpoint reads
-live, may get a *different* state back than the event described. Switch on
+live, may get a _different_ state back than the event described. Switch on
 `resource_type` first, then decide whether to read the body or go fetch.
 
 The UI name and the `resource_type` are not the same string, and in the
@@ -111,7 +111,7 @@ Webhook delivery is at-least-once. For the pointer events the body carries
 no state of its own, so a duplicate delivery just means a duplicate fetch —
 de-duplicate on the IDs in the `resource_url` response (`shipment_id`,
 `label_id`, `fulfillment_id`), not on the webhook body. For tracking, the
-body *is* the state, so de-duplicate on the tracking number plus the event
+body _is_ the state, so de-duplicate on the tracking number plus the event
 that moved it.
 
 The `resource_url` reads live data at the time you call it, not a snapshot

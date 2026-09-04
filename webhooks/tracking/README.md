@@ -3,8 +3,7 @@
 ## Objective
 
 To hold real examples of the ShipStation tracking webhook — the event that
-fires as a parcel moves, rather than at order or label time — across the
-three carriers it has been captured from.
+fires as a parcel moves, rather than at order or label time — across USPS, UPS and FedEx.
 
 ## Tracking is the exception
 
@@ -68,9 +67,7 @@ rather than on the arrival of an event row.
 | [`ups/`](./ups/)     | UPS     | `ups`            | `3`          | 4 real, 1 placeholder |
 | [`usps/`](./usps/)   | USPS    | `stamps_com`     | `1`          | 4 real, 1 placeholder |
 
-Each folder has its own README covering that carrier's quirks. Read them
-before writing carrier-specific logic — the differences below are real and
-none of them are documented by ShipStation.
+Each folder has its own README covering that carrier's quirks.
 
 ## Coverage
 
@@ -81,15 +78,6 @@ none of them are documented by ShipStation.
 | Out for delivery   | ✅             | ✅             | ✅             |
 | Delivered          | ✅             | ✅             | ✅             |
 | Delivery exception | 🚧 placeholder | 🚧 placeholder | 🚧 placeholder |
-
-FedEx has no dedicated pre-transit fixture but its in-transit and delivered
-fixtures both include the `Shipment information sent to FedEx` scan (`NY`)
-at the tail of `events`, which is the same moment.
-
-No carrier has a fixture where `EX` is the **top-level** status. FedEx's
-multi-scan and USPS's out-for-delivery both contain `EX` scans in their
-history on parcels that recovered — useful, but not the same thing as a
-parcel that is actually stuck. These will be added at a later date.
 
 ## Carrier differences that will break shared code
 
@@ -144,42 +132,7 @@ by `occurred_at` rather than trusting array position.**
 ## PII in tracking payloads
 
 Tracking bodies are lower-risk than order or label payloads — no names,
-addresses, emails or phone numbers appear in any fixture here. But they are
-not free of identifying data and two fields deserve attention before you
-publish a capture or hand a body to a third party:
-
-**`latitude` / `longitude`.** Present on nearly every event at 4-decimal
-(~11 m) precision, and **not masked in any fixture**. On an in-transit scan
-that is a carrier facility and harmless. On the `Delivered` scan it is the
-delivery point:
-
-| Fixture                               | `Delivered` coordinates | Locality      | ZIP on that scan |
-| ------------------------------------- | ----------------------- | ------------- | ---------------- |
-| `fedex/track-event-v2-delivered.json` | `28.6622, -81.4895`     | Apopka, FL    | `null`           |
-| `ups/track-event-v2-delivered.json`   | `42.4905, -83.1379`     | Royal Oak, MI | `48067`          |
-| `usps/track-event-v2-delivered.json`  | `40.9865, -74.3831`     | Butler, NJ    | `07405`          |
-
-**`postal_code` on the delivery scan.** UPS leaves this `""` on every event
-except `Delivered`, where it carries the recipient ZIP. USPS carries the
-destination ZIP on its delivery scans too. Paired with the coordinates
-above, that locates a destination fairly precisely.
-
-USPS additionally states the **delivery method** in the description
-(`DELIVERED IN/AT MAILBOX`), which the other two carriers do not.
-
-Neither is a name, and for a fixture repo of self-shipped test parcels this
-may well be acceptable — but decide it deliberately rather than by omission,
-and round or null the coordinates on the final scan if these were real
-customer deliveries.
-
-Two more fields are `null` in every fixture captured so far and would need
-handling if they ever populate:
-
-- `signer` — a recipient's name, on signature-required deliveries.
-- `proof_of_delivery_url` — typically a signature image, and
-  credential-bearing. Treat like the `label_download` URLs in
-  [`../labels/`](../labels/README.md): don't log it, don't hand it to a
-  browser you don't control.
+addresses, emails or phone numbers appear in any fixture here.
 
 ## Related
 
@@ -189,15 +142,3 @@ fixture per lifecycle status including the two exception cases (carrier
 delay and return-to-sender) that the webhook folders are still missing.
 Webhook and API shapes for the same resource are similar but not guaranteed
 identical, so don't copy one into the other.
-
-## Filling in the gaps
-
-Capture the real POST body — the whole thing, since here the body _is_ the
-payload. See the root [README](../../README.md) for the sanitize-and-date
-steps, and [`../../TODO.md`](../../TODO.md) for the current checklist.
-Tracking numbers, the `se-` label ID in `resource_url`, and `tracking_url`
-all need masking together.
-
-Add a sibling fixture per distinct status rather than overloading one file,
-matching how [`api/tracking/usps/`](../../api/tracking/usps/README.md) is
-organised, and add a row to the carrier folder's Scenarios table.
