@@ -24,7 +24,7 @@ sequenceDiagram
     SS-->>Int: {"shipment_id": X,<br/>"shipment_number": order_number,<br/>"carrier", "service_code",<br/>"tracking_number", "shipment_cost", ...}
 
     Int->>Int: Match via shipment_id +<br/>shipment_number
-    Int->>OrderSrc: Sync label details to order
+    Int->>OrderSrc: Update order with tracking number
 ```
 
 ## References

@@ -12,7 +12,7 @@ sequenceDiagram
     participant WMS as WMS
     participant SS as ShipStation
 
-    Src->>WMS: New order
+    Src->>WMS: Order imported
     WMS->>WMS: Create order record
 
     WMS->>SS: POST /v2/rates

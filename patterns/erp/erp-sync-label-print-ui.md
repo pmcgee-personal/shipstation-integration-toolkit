@@ -12,7 +12,7 @@ sequenceDiagram
     participant SS as ShipStation
     participant ERP as ERP
 
-    Store->>SS: New order
+    Store->>SS: Order imported
     SS->>SS: Import & create shipment
 
     SS->>ERP: "shipment_created_v2" webhook<br/>("resource_url")
@@ -21,7 +21,7 @@ sequenceDiagram
     ERP->>ERP: Store shipment_number +<br/>shipment_id, create order record
 
     Note over SS,Store: User prints label in ShipStation UI
-    SS->>Store: Update order with label/tracking
+    SS->>Store: Update order with tracking number
     SS->>ERP: "label_created_v2" webhook<br/>("resource_url")
 
     ERP->>SS: GET "resource_url"

@@ -12,7 +12,7 @@ sequenceDiagram
     participant SS as ShipStation
     participant WMS as WMS
 
-    Store->>SS: New order
+    Store->>SS: Order imported
     SS->>SS: Import & create shipment
 
     SS->>WMS: "shipment_created_v2" webhook<br/>("resource_url")

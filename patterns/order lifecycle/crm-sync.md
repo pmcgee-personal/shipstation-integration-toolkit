@@ -12,7 +12,7 @@ sequenceDiagram
     participant SS as ShipStation
     participant CRM as CRM
 
-    Store->>SS: New order / Order imported
+    Store->>SS: Order imported
     SS->>CRM: "shipment_created_v2" webhook<br/>("resource_url")
     CRM->>SS: GET "resource_url"
     SS-->>CRM: {"shipment_id", "shipment_number",<br/>order details}
@@ -23,6 +23,7 @@ sequenceDiagram
     CRM->>SS: GET "resource_url"
     SS-->>CRM: {"shipment_id", "carrier_code",<br/>"service_code", "tracking_number"}
     CRM->>CRM: Update order<br/>(join on shipment_id, add tracking)
+    SS->>Store: Update order with tracking number
 
     loop Tracking updates (while in transit)
         SS->>CRM: "track_event_v2" webhook
