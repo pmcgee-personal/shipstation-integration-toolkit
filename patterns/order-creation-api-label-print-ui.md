@@ -35,9 +35,9 @@ sequenceDiagram
 
 ## Notes
 
-- **This is the core pattern for custom store integrations** where ShipStation does not have a pre-built connector. The majority of integrations follow this same flow: order push → shipment creation → label notification via webhook → label sync back to source.
-- The webhook body is a **pointer only** (`"resource_url"`) — it does not include `"shipment_id"` or `"external_shipment_id"`. Always call `GET "resource_url"` to retrieve the full label details.
+- **This is the core pattern for store integrations** where ShipStation does not have a pre-built connector. The majority of ShipStation pre-built integrations follow this same flow: order push from source → shipment creation → label created → label sync back to source.
+- The webhook body is a **pointer only** (`"resource_url"`). Always call `GET "resource_url"` to retrieve the full label details.
 - Match incoming labels to orders using **both** `"shipment_id"` and `"external_shipment_id"` from the `GET "resource_url"` response. A single order can spawn multiple shipments (split shipments, backorders, cancellations).
-- UI event name is "On Labels Created (V2)" but the webhook `"resource_type"` field will say `"LABEL_CREATED_V2"` — branch your code on `"resource_type"`.
+- UI webhook event name is "On Labels Created (V2)" but the webhook `"resource_type"` field will say `"LABEL_CREATED_V2"` — branch your code on `"resource_type"`.
 - The label print is **user-initiated in the UI**, not API-driven. Integrator has no control over _when_ it's printed.
 - Useful for syncing tracking numbers and label costs back to the order source in near-real-time.
