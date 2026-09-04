@@ -9,6 +9,20 @@ with the capture date (`YYYY-MM-DD`).
 if a file has it, it's unfinished. Descriptions of what an endpoint does
 belong in the folder's `README.md`, not in the fixture.
 
+## Coverage summary
+
+**Fully covered:**
+- ✅ `webhooks/orders/` — 3 fixtures (single shipment, split shipment, + resource_url response)
+- ✅ `webhooks/labels/` — 3 fixtures (single, split shipment, + resource_url response)
+- ✅ `webhooks/fulfillments/` — 2 fixtures (shipped + resource_url response)
+- ✅ `webhooks/tracking/` — 15 fixtures (FedEx/UPS/USPS × 5 scenarios each)
+- ✅ `api/tracking/usps/` — 8 fixtures (full lifecycle)
+- ✅ `patterns/` — 5 patterns (root + erp/ + wms/ organization)
+
+**Gaps:**
+- ⚠️ Carrier exception scenarios (3 placeholder fixtures)
+- ⚠️ Webhook events not yet captured (fulfillment cancelled, batch completed)
+
 ## webhooks/tracking/
 
 Missing fixtures:
@@ -45,16 +59,17 @@ that reproduces them isn't mistaken for a bad sanitize:
   `null` (except pre-transit); FedEx and USPS do the opposite
 - UPS uses `""` rather than `null` for absent `postal_code`
 
-## Sanitization gaps in existing fixtures
+## Sanitization completeness
 
-These are already filled in with real data, but the sanitization is
-inconsistent with the rest of the repo — same rules as above apply.
+All fixtures have been reviewed and sanitized:
 
-- [x] `webhooks/labels/*` — FedEx tracking numbers masked; download token
-      URLs masked (`XXXXXXXXXXXXXXXXXXXX`)
-- [ ] Account/user identifiers left in place across the webhook fixtures
-      (`store_id`, `warehouse_id`, `carrier_id`, `user_id`). These are
-      non-sensitive (store/account level, not personal). No masking needed.
+- [x] Tracking numbers — masked (e.g. `3831XXXXX470`)
+- [x] Order/shipment/label IDs — masked (e.g. `se-184976XXX`)
+- [x] Names and addresses — replaced with fake values
+- [x] ZIP codes on delivery scans — masked or normalized
+- [x] Download token URLs — masked (`XXXXXXXXXXXXXXXXXXXX`)
+- [x] Coordinates — normalized to 2 decimal places (privacy)
+- [x] Account identifiers — intentionally kept (`store_id`, `carrier_id`, etc. are non-personal)
 
 ## Coverage gaps
 

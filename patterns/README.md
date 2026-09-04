@@ -26,4 +26,12 @@ the pattern is more about branching/decision logic than a timeline.
 <!-- Add a line here each time you add a pattern doc, so this folder is
      browsable without opening every file. -->
 
+- `order-creation-api-label-print-ui.md` — Order to Shipment to Label — UI-Driven Label Print
+- `order-import-wms-label-print.md` — Store Import to Shipment to WMS Label Creation — API-Driven
+- `erp-sync-label-print-ui.md` — Store Import to Shipment to Label — Multi-System Sync
+- `erp-sync-mark-as-shipped.md` — Store Import to Shipment to Fulfillment — Multi-System Sync
+- `update-shipment.md` — Shipment Update — Full Payload Required
+
+### Reference
+
 - `TEMPLATE.md` — starting point for new pattern docs

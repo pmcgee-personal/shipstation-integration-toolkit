@@ -20,13 +20,18 @@ webhooks/           Real webhook payloads, by resource
   labels/           On Labels Created (V2)
   fulfillments/     On Fulfillment Shipped (V2)
   tracking/         On New Track Event (V2)
+    fedex/          FedEx tracking events
+    ups/            UPS tracking events
+    usps/           USPS tracking events
 api/                Real API request/response examples, by resource
   adjustments/      USPS shipping adjustment reports
   shipments/
     usps-single-payor/   USPS single payor labels (PCID compliance)
   tracking/
-    usps/
+    usps/           USPS tracking API responses
 patterns/           Short, diagram-first explanations of common flows
+  erp/              ERP/store sync patterns
+  wms/              WMS integration patterns
 ```
 
 - **`webhooks/`** — what ShipStation actually sends to a webhook subscriber
