@@ -16,7 +16,7 @@ flow as it normally goes, not every branch. Edge cases go in the `Notes`
 section at the bottom, kept brief.
 
 Diagrams use [Mermaid](https://mermaid.js.org/), which GitHub renders
-natively in markdown — no image export needed. A `sequenceDiagram` usually
+natively in markdown. A `sequenceDiagram` usually
 fits request/response and webhook flows best; use a `flowchart` instead when
 the pattern is more about branching/decision logic than a timeline.
 
