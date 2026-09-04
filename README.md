@@ -89,6 +89,15 @@ carrier schemas both change over time. Each filled-in fixture carries a
 placeholders awaiting real data. If something looks stale or wrong, open an
 issue.
 
+## Contributions
+
+Found a fixture that's stale or a carrier/event type we're missing? See
+[`CONTRIBUTING.md`](./CONTRIBUTING.md) for how to submit new or updated
+fixtures. Check [`TODO.md`](./TODO.md) first to see what's on the roadmap.
+
+**Report real data in a fixture?** See [`SECURITY.md`](./SECURITY.md) for how
+to report it privately.
+
 ## Status
 
 Unofficial, community-maintained. A practical supplement to
