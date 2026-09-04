@@ -1,6 +1,6 @@
 # WMS-Driven Rate Shop and Label Creation
 
-## Short answer
+## Overview
 
 Orders originate in a system (e.g. ERP) and are sent to your WMS. Your WMS calls `POST /v2/rates` to rate shop across carriers. Based on the rates returned, your WMS selects a preferred carrier and calls `POST /v2/labels/rates/{rate_id}` to create a label using the selected rate. ShipStation returns the label details including `"label_download"` URL and `"tracking_number"`. Your WMS updates the order source with the carrier and tracking information. Alternatively, your WMS can combine rate shopping and label creation in a single request using `POST /v2/labels/rate_shopper_id/:rate_shopper_id`.
 

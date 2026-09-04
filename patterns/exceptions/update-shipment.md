@@ -1,6 +1,6 @@
 # Shipment Update — Full Payload Required
 
-## Short answer
+## Overview
 
 To update an existing shipment, first retrieve the current shipment record using `GET /v2/shipments/{shipment_id}`. This ensures you have the latest version. Modify the fields you need to change, then send the complete shipment payload to `PUT /v2/shipments/{shipment_id}`. ShipStation requires the full object in updates — partial payloads will fail. **Shipments can only be updated if `shipment_status` is `"pending"`**.
 

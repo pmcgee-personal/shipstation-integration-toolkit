@@ -1,6 +1,6 @@
 # Store Import to Shipment to WMS Label Creation — API-Driven
 
-## Short answer
+## Overview
 
 Orders are imported from a connected store (e.g. Shopify) into ShipStation. ShipStation sends a `"shipment_created_v2"` webhook to your WMS. Your WMS calls the `"resource_url"` to retrieve shipment details and creates a shipment record. Optionally, your WMS calls `POST /v2/rates` to query shipping rates across carriers before creating a label. Your WMS then calls `POST /v2/labels/shipment/{shipment_id}` with your preferred carrier, service, and carrier ID to create a label. ShipStation returns label details including the `"label_download"` URL and `"tracking_number"`, which your WMS stores. ShipStation automatically updates the connected store with the label and tracking info.
 

@@ -1,6 +1,6 @@
 # Store Import to Shipment to Fulfillment — Multi-System Sync
 
-## Short answer
+## Overview
 
 Orders are imported from a connected store (e.g. Shopify) into ShipStation. ShipStation sends a `"shipment_created_v2"` webhook to your ERP. Your ERP calls the `"resource_url"` to retrieve shipment details and creates an order record. When a user marks the order as shipped, ShipStation creates a fulfillment and sends a `"fulfillment_shipped_v2"` webhook to your ERP. Your ERP calls the `"resource_url"` to fetch fulfillment details (`"tracking_number"`, `"carrier"`, `"service_code"`) and updates the order.
 

@@ -1,6 +1,6 @@
 # Order Lifecycle Sync to CRM
 
-## Short answer
+## Overview
 
 When orders are imported to ShipStation, a `"shipment_created_v2"` webhook notifies your CRM. Your CRM creates an order record, capturing `"shipment_id"` and `"shipment_number"`. When a label is generated, a `"label_created_v2"` webhook provides carrier, service, and `"tracking_number"` — your CRM joins on `"shipment_id"` to update the order. As the shipment travels, `"track_event_v2"` webhooks arrive with delivery events; your CRM uses `"tracking_number"` to link and update order status. If a return label is needed, your CRM can create one via `POST /v2/labels/return-label` using the `shipment_id`. For cancellations (no webhook exists), periodically poll `GET /v2/shipments/{shipment_id}` to check status.
 

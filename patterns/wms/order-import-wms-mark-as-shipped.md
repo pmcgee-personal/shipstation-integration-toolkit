@@ -1,6 +1,6 @@
 # Store Import to Shipment to WMS Fulfillment — API-Driven
 
-## Short answer
+## Overview
 
 Orders are imported from a connected store (e.g. Shopify) into ShipStation. ShipStation sends a `"shipment_created_v2"` webhook to your WMS. Your WMS calls the `"resource_url"` to retrieve shipment details and creates a shipment record. Your WMS then calls `POST /v2/fulfillments` with the shipment ID, tracking number, carrier and service information to mark the shipment as fulfilled. ShipStation updates the connected store with the shipment status and tracking info.
 

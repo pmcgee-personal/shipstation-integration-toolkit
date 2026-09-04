@@ -1,6 +1,6 @@
 # Order to Shipment to Label — UI-Driven Label Print
 
-## Short answer
+## Overview
 
 Create a shipment in ShipStation via API, parsing your order number as `"shipment_number"`. Store the `"shipment_id"` from the response. When a user prints the label in ShipStation, a `"label_created_v2"` webhook is triggered containing a `"resource_url"`. Call that URL to fetch label details, then match the response using both `"shipment_id"` and `"shipment_number"` to find the order, and sync label data (`"carrier"`, `"service_code"`, `"tracking_number"`, `"shipment_cost"`) back.
 

@@ -7,7 +7,7 @@ Keep the diagram to the happy path / commonly-requested flow — exceptions
 and edge cases go in "Notes" at the bottom, not the diagram itself.
 -->
 
-## Short answer
+## Overview
 
 One or two sentences — the thing you'd say first if someone asked this on
 a call.
@@ -31,8 +31,10 @@ sequenceDiagram
 ```mermaid
 flowchart TD
     A[Start] --> B{Condition?}
+
     B -->|Yes| C[Outcome 1]
     B -->|No| D[Outcome 2]
+
 ```
 -->
 
@@ -45,3 +47,4 @@ flowchart TD
 
 - Edge cases, gotchas, or common follow-up questions that don't belong in
   the main happy-path diagram above.
+```
