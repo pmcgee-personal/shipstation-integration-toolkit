@@ -1,4 +1,4 @@
-# Order to Shipment to Label — UI-Driven Label Print
+# Order to Shipment to Label
 
 ## Overview
 
