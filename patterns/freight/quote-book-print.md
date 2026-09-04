@@ -22,7 +22,7 @@ sequenceDiagram
     WMS->>SS: POST /freight/shipments
     SS-->>WMS: {"bol", carrier, scac,<br/>pickup/delivery dates}
 
-    WMS->>Src: Update order with carrier<br/>BOL and reference info
+    WMS->>Src: Update order with carrier,<br/>BOL and reference info
 ```
 
 ## References
@@ -38,6 +38,7 @@ sequenceDiagram
 - ShipStation does not currently have an endpoint for density calculation (to aid with class calculation).
 - `POST /freight/quotes` returns available LTL carriers with line-haul pricing, accessorial charges, and estimated transit time. Your WMS applies business logic to select the best rate (lowest cost, fastest delivery, preferred carrier, weight class optimization etc.).
 - After selecting a carrier, call `POST /freight/shipments` to confirm the booking. The response includes `"bol"` (Bill of Lading), `"scac"` (Standard Carrier Alpha Code), and pickup/delivery dates. **Pro number may or may not be returned at booking time — availability varies by carrier.**
+- **Pickups**: Can be automatically set through `POST /freight/shipments` or arranged directly with the carrier (you specifiy which in the API)
 - **Retrieving documents**: Use `GET /freight/shipments/{freight_shipment_id}/documents` to retrieve BOL, labels, and other shipment documents after booking. Useful if your system requires downstream document handling or printing.
 - **Cancellation**: If a shipment must be cancelled before pickup, use `DELETE /freight/shipments/{freight_shipment_id}`. Cancellation availability depends on carrier and shipment status.
 - Your WMS is responsible for syncing carrier, BOL, and shipment reference data back to the order source system.
