@@ -13,23 +13,28 @@ integrators have something specific to link to and test against.
 ## Structure
 
 ```
-webhooks/           Real webhook payloads, by resource
-  orders/           On New Order Created (V2)
-  labels/           On Labels Created (V2)
-  fulfillments/     On Fulfillment Shipped (V2)
-  tracking/         On New Track Event (V2)
-    fedex/          FedEx tracking events
-    ups/            UPS tracking events
-    usps/           USPS tracking events
-api/                Real API request/response examples, by resource
-  adjustments/      USPS shipping adjustment reports
+webhooks/               Real webhook payloads, by resource
+  orders/               On New Order Created (V2)
+  labels/               On Labels Created (V2)
+  fulfillments/         On Fulfillment Shipped (V2)
+  tracking/             On New Track Event (V2)
+    fedex/              FedEx tracking events
+    ups/                UPS tracking events
+    usps/               USPS tracking events
+api/                    Real API request/response examples, by resource
+  adjustments/          USPS shipping adjustment reports
   shipments/
-    usps-single-payor/   USPS single payor labels (PCID compliance)
+    usps-single-payor/  USPS single payor labels (PCID compliance)
   tracking/
-    usps/           USPS tracking API responses
-patterns/           Short, diagram-first explanations of common flows
-  erp/              ERP/store sync patterns
-  wms/              WMS integration patterns
+    usps/               USPS tracking API responses
+patterns/               Short, diagram-first explanations of common flows
+  order lifecycle/      Order to shipment/label flows
+  wms/                  WMS integration patterns
+  erp/                  ERP/store sync patterns
+  freight/              Freight patterns (quoting, booking, tracking)
+  webhook setup/        Webhook lifecycle (create, update, delete)
+  exceptions/           Exception handling patterns
+  inventory/            Inventory management patterns
 ```
 
 - **`webhooks/`** — what ShipStation actually sends to a webhook subscriber
