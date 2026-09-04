@@ -25,7 +25,7 @@ sequenceDiagram
     SS-->>WMS: [Carrier rate options]
 
     WMS->>SS: POST /v2/labels/shipment/{shipment_id}<br/>(carrier_code, service_code, carrier_id)
-    SS-->>WMS: {"label_download", "tracking_number",<br/>carrier, service_code}
+    SS-->>WMS: {"label_download", "tracking_number",<br/>carrier_code, service_code}
     WMS->>WMS: Store label & tracking info
 
     SS->>Store: Update order with tracking

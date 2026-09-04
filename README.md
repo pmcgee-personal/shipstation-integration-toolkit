@@ -1,14 +1,12 @@
 # ShipStation Integration Toolkit
 
-**Unofficial.** ShipStation payloads,
-request/response examples and short diagram-first explainers for common
-integration flows — a working companion to the
-[official documentation](https://docs.shipstation.com/).
+**Unofficial.** A working companion to the
+[official documentation](https://docs.shipstation.com/). Short diagram-first explainers for common integration flows. Additionally, there are production examples for webhook/API payloads for certain relevant flows.
 
 ## Why this exists
 
 Some scenarios are easier to understand from a concrete example
-than from a schema and common integration flows get re-explained every time
+than from a schema. Common integration flows get re-explained every time
 they come up. This repo collects real examples and short reference docs so
 integrators have something specific to link to and test against.
 
