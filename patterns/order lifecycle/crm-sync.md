@@ -34,21 +34,20 @@ sequenceDiagram
 
 ## References
 
-- Example webhook payload: [`webhooks/shipments/new-order-created-v2.json`](../webhooks/shipments/new-order-created-v2.json)
-- Example resource_url payload: [`webhooks/shipments/new-order-created-v2-resource-url-response.json`](../webhooks/shipments/new-order-created-v2-resource-url-response.json)
+- Example webhook payload: [`webhooks/orders/new-order-created-v2.json`](../webhooks/orders/new-order-created-v2.json)
+- Example resource_url payload: [`webhooks/orders/new-order-created-v2-resource-url-response.json`](../webhooks/shipments/new-order-created-v2-resource-url-response.json)
 - Example webhook payload: [`webhooks/labels/label-created-v2.json`](../webhooks/labels/label-created-v2.json)
 - Example resource_url payload: [`webhooks/labels/label-created-v2-resource-url.json`](../webhooks/labels/label-created-v2-resource-url.json)
-- Example webhook payload: [`webhooks/tracking/track-event-v2.json`](../webhooks/tracking/track-event-v2.json)
+- Example webhook payload: [`webhooks/tracking/usps/track-event-v2-delivered.json`](../webhooks/tracking/usps/track-event-v2-delivered.json)
 - Example resource_url payload: [`webhooks/tracking/track-event-v2-resource-url.json`](../webhooks/tracking/track-event-v2-resource-url.json)
 - Official docs: [POST /v2/labels/return-label](https://docs.shipstation.com/apis/openapi/labels/create_return_label)
 - Official docs: [GET /v2/shipments/{shipment_id}](https://docs.shipstation.com/apis/openapi/shipments/get_shipment_by_id)
 
 ## Notes
 
-- Store both `"shipment_id"` and `"shipment_number"` when you receive the `"shipment_created_v2"` webhook. Use `"shipment_id"` to join `"label_created_v2"` and track events; use `"shipment_number"` to reference the original order.
-- `"track_event_v2"` webhooks only fire when the label is generated in ShipStation. If an order is marked as shipped via the fulfillment flow (not label-printed), no tracking events will be sent.
-- All three webhooks contain **pointers only** (`"resource_url"`). Always call `GET "resource_url"` to retrieve full details.
+- Store both `"shipment_id"` and `"shipment_number"` when you receive the `"shipment_created_v2"` webhook. Use `"shipment_id"` to join with `"label_created_v2"` payload. To track, key off the `tracking_number`.
+- `"track_event_v2"` webhooks only fire when the label is generated in ShipStation. If an order is marked as shipped via the fulfillment flow, no tracking events will be sent.
 - **No cancellation webhook exists**. If significant time has passed since shipment creation, periodically call `GET /v2/shipments/{shipment_id}` to check for `"shipment_status": "cancelled"` and update your CRM accordingly.
-- Return labels can be created via `POST /v2/labels/return-label` using the `"shipment_id"`. Return labels do **not** generate tracking webhooks.
+- Return labels can be created via `POST /v2/labels/return-label` using the `"shipment_id"`. Return labels do **not** generate `label_created_v2` webhooks
 - Tracking number linking: use `"tracking_number"` from the `"label_created_v2"` webhook to link subsequent `"track_event_v2"` events to the correct order.
 - Useful for maintaining a complete order-to-delivery audit trail in a CRM, including carrier, service, and real-time tracking updates.
