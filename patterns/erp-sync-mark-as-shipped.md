@@ -25,7 +25,7 @@ sequenceDiagram
     SS->>ERP: "fulfillment_shipped_v2" webhook<br/>("resource_url")
 
     ERP->>SS: GET "resource_url"
-    SS-->>ERP: {"tracking_number",<br/>"carrier", "service_code",<br/>, ...}
+    SS-->>ERP: {"tracking_number",<br/>"carrier", "service_code"}
     ERP->>ERP: Update order with fulfillment details
 ```
 
