@@ -66,9 +66,10 @@ the live endpoint or to replay a webhook delivery.
 ## Adding a new fixture
 
 1. Pull the real payload/response from production.
-2. Sanitize it — replace tracking numbers, order IDs, names, addresses, and
-   anything else identifying with clearly fake but correctly-formatted
-   values.
+2. Sanitize it — replace tracking numbers, order IDs, names, addresses, ZIP
+   codes, and other customer-identifying data with clearly fake but
+   correctly-formatted values. Account/org identifiers (`store_id`,
+   `carrier_id`, etc.) are fine to keep.
 3. Save it under the right resource folder with a self-explanatory filename
    (see existing files for the naming pattern).
 4. Add a `_captured_at` key to the fixture with the capture date
@@ -92,4 +93,4 @@ issue.
 
 Unofficial, community-maintained. A practical supplement to
 [ShipStation's own documentation](https://docs.shipstation.com/), not a
-replacement for it — start there, and use this repo when if you're looking for supplemental guidance.
+replacement for it — start there, and use this repo if you're looking for supplemental guidance.

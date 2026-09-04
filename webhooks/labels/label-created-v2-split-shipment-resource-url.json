@@ -53,7 +53,7 @@
           "billing_source": "product"
         }
       ],
-      "tracking_number": "383144914556",
+      "tracking_number": "3831XXXXX556",
       "is_return_label": false,
       "rma_number": null,
       "is_international": false,
@@ -78,10 +78,10 @@
       "confirmation": "none",
       "tracking_status": "in_transit",
       "label_download": {
-        "pdf": "https://api.shipstation.com/v2/downloads/14/ZKTUOjrctUqiUeA00hdt4g/label-184986954.pdf",
-        "png": "https://api.shipstation.com/v2/downloads/14/ZKTUOjrctUqiUeA00hdt4g/label-184986954.png",
-        "zpl": "https://api.shipstation.com/v2/downloads/14/ZKTUOjrctUqiUeA00hdt4g/label-184986954.zpl",
-        "href": "https://api.shipstation.com/v2/downloads/14/ZKTUOjrctUqiUeA00hdt4g/label-184986954.pdf"
+        "pdf": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/label-184986954.pdf",
+        "png": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/label-184986954.png",
+        "zpl": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/label-184986954.zpl",
+        "href": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/label-184986954.pdf"
       },
       "form_download": null,
       "qr_code_download": null,
@@ -105,11 +105,11 @@
             "currency": "usd",
             "amount": 0.0
           },
-          "tracking_number": "383144914556",
+          "tracking_number": "3831XXXXX556",
           "label_download": {
-            "pdf": "https://api.shipstation.com/v2/downloads/14/9SqR99sDLEyD0C29Iwopow/labelpackage-147982585.pdf",
-            "png": "https://api.shipstation.com/v2/downloads/14/9SqR99sDLEyD0C29Iwopow/labelpackage-147982585.png",
-            "zpl": "https://api.shipstation.com/v2/downloads/14/9SqR99sDLEyD0C29Iwopow/labelpackage-147982585.zpl"
+            "pdf": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/labelpackage-147982XXX.pdf",
+            "png": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/labelpackage-147982XXX.png",
+            "zpl": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/labelpackage-147982XXX.zpl"
           },
           "qr_code_download": null,
           "paperless_download": null,
@@ -131,7 +131,7 @@
       "charge_event": "carrier_default",
       "alternative_identifiers": [],
       "shipping_rule_id": null,
-      "tracking_url": "https://www.fedex.com/fedextrack/?action=track&trackingnumber=383144914556",
+      "tracking_url": "https://www.fedex.com/fedextrack/?action=track&trackingnumber=3831XXXXX556",
       "pickup_windows": [],
       "ship_to": {
         "geolocation": [],
@@ -202,7 +202,7 @@
           "billing_source": "product"
         }
       ],
-      "tracking_number": "383144913218",
+      "tracking_number": "3831XXXXX556",
       "is_return_label": false,
       "rma_number": null,
       "is_international": false,
@@ -227,10 +227,10 @@
       "confirmation": "none",
       "tracking_status": "in_transit",
       "label_download": {
-        "pdf": "https://api.shipstation.com/v2/downloads/14/EWKUmJNdZUSH2XbNmGQI2g/label-184986950.pdf",
-        "png": "https://api.shipstation.com/v2/downloads/14/EWKUmJNdZUSH2XbNmGQI2g/label-184986950.png",
-        "zpl": "https://api.shipstation.com/v2/downloads/14/EWKUmJNdZUSH2XbNmGQI2g/label-184986950.zpl",
-        "href": "https://api.shipstation.com/v2/downloads/14/EWKUmJNdZUSH2XbNmGQI2g/label-184986950.pdf"
+        "pdf": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/label-184986950.pdf",
+        "png": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/label-184986950.png",
+        "zpl": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/label-184986950.zpl",
+        "href": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/label-184986950.pdf"
       },
       "form_download": null,
       "qr_code_download": null,
@@ -254,11 +254,11 @@
             "currency": "usd",
             "amount": 0.0
           },
-          "tracking_number": "383144913218",
+          "tracking_number": "3831XXXXX556",
           "label_download": {
-            "pdf": "https://api.shipstation.com/v2/downloads/14/hzgpbOcWpEmmjbvgWXRyGg/labelpackage-147982583.pdf",
-            "png": "https://api.shipstation.com/v2/downloads/14/hzgpbOcWpEmmjbvgWXRyGg/labelpackage-147982583.png",
-            "zpl": "https://api.shipstation.com/v2/downloads/14/hzgpbOcWpEmmjbvgWXRyGg/labelpackage-147982583.zpl"
+            "pdf": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/labelpackage-147982XXX.pdf",
+            "png": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/labelpackage-147982XXX.png",
+            "zpl": "https://api.shipstation.com/v2/downloads/14/XXXXXXXXXXXXXXXXXXXX/labelpackage-147982XXX.zpl"
           },
           "qr_code_download": null,
           "paperless_download": null,
@@ -280,7 +280,7 @@
       "charge_event": "carrier_default",
       "alternative_identifiers": [],
       "shipping_rule_id": null,
-      "tracking_url": "https://www.fedex.com/fedextrack/?action=track&trackingnumber=383144913218",
+      "tracking_url": "https://www.fedex.com/fedextrack/?action=track&trackingnumber=3831XXXXX556",
       "pickup_windows": [],
       "ship_to": {
         "geolocation": [],
