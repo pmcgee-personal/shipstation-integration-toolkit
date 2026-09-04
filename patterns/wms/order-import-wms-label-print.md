@@ -33,8 +33,8 @@ sequenceDiagram
 
 ## References
 
-- Example webhook payload: [`webhooks/shipments/new-order-created-v2.json`](../webhooks/orders/new-order-created-v2.json)
-- Example resource_url payload: [`webhooks/shipments/new-order-created-v2-resource-url-response.json`](../webhooks/orders/new-order-created-v2-resource-url-response.json)
+- Example webhook payload: [`webhooks/shipments/new-order-created-v2.json`](../../webhooks/orders/new-order-created-v2.json)
+- Example resource_url payload: [`webhooks/shipments/new-order-created-v2-resource-url-response.json`](../../webhooks/orders/new-order-created-v2-resource-url-response.json)
 - Official docs: [POST /v2/rates](https://docs.shipstation.com/apis/openapi/rates/calculate_rates)
 - Official docs: [POST /v2/labels/shipment/{shipment_id}](https://docs.shipstation.com/apis/openapi/labels/create_label_from_shipment)
 

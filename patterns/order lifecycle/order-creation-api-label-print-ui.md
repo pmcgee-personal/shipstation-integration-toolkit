@@ -30,8 +30,8 @@ sequenceDiagram
 ## References
 
 - Official docs: [POST /v2/shipments](https://docs.shipstation.com/apis/openapi/shipments/create_shipments)
-- Example webhook payload: [`webhooks/labels/label-created-v2.json`](../webhooks/labels/label-created-v2.json)
-- Example resource_url payload: [`webhooks/labels/label-created-v2-resource-url.json`](../webhooks/labels/label-created-v2-resource-url.json)
+- Example webhook payload: [`webhooks/labels/label-created-v2.json`](../../webhooks/labels/label-created-v2.json)
+- Example resource_url payload: [`webhooks/labels/label-created-v2-resource-url.json`](../../webhooks/labels/label-created-v2-resource-url.json)
 
 ## Notes
 

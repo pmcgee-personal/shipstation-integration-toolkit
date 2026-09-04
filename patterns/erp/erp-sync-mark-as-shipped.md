@@ -31,10 +31,10 @@ sequenceDiagram
 
 ## References
 
-- Example webhook payload: [`webhooks/shipments/new-order-created-v2.json`](../webhooks/orders/new-order-created-v2.json)
-- Example resource_url payload: [`webhooks/shipments/new-order-created-v2-resource-url-response.json`](../webhooks/orders/new-order-created-v2-resource-url-response.json)
-- Example webhook payload: [`webhooks/fulfillments/fulfillment-shipped-v2.json`](../webhooks/fulfillments/fulfillment-shipped-v2.json)
-- Example resource_url payload: [`webhooks/fulfillments/fulfillment-shipped-v2-resource-url.json`](../webhooks/fulfillments/fulfillment-shipped-v2-resource-url.json)
+- Example webhook payload: [`webhooks/shipments/new-order-created-v2.json`](../../webhooks/orders/new-order-created-v2.json)
+- Example resource_url payload: [`webhooks/shipments/new-order-created-v2-resource-url-response.json`](../../webhooks/orders/new-order-created-v2-resource-url-response.json)
+- Example webhook payload: [`webhooks/fulfillments/fulfillment-shipped-v2.json`](../../webhooks/fulfillments/fulfillment-shipped-v2.json)
+- Example resource_url payload: [`webhooks/fulfillments/fulfillment-shipped-v2-resource-url.json`](../../webhooks/fulfillments/fulfillment-shipped-v2-resource-url.json)
 
 ## Notes
 
