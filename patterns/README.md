@@ -26,30 +26,36 @@ the pattern is more about branching/decision logic than a timeline.
      browsable without opening every file. -->
 
 ### Order Lifecycle
-- `order lifecycle/order-creation-label-print-ui.md` — Order to Shipment to Label — UI-Driven Label Print
-- `order lifecycle/store-import-crm-sync.md` — Store Import to CRM Sync
+
+- `order lifecycle/order-creation-label-print-ui.md` — Order Creation (API), Label Print (UI)
+- `order lifecycle/store-import-crm-sync.md` — Store Import CRM Sync
 
 ### WMS
-- `wms/store-import-wms-label-print.md` — Store Import to Shipment to WMS Label Creation — API-Driven
-- `wms/store-import-wms-mark-as-shipped.md` — Store Import to Shipment to Fulfillment — WMS-Driven
-- `wms/wms-rate-label-print.md` — WMS Rate and Label Print
+
+- `wms/store-import-wms-label-print.md` — Store Import to WMS (API Label Creation)
+- `wms/store-import-wms-mark-as-shipped.md` — Store Import to WMS Fulfillment (API Mark As Shipped)
+- `wms/wms-rate-label-print.md` — WMS Rate Shop and Label Creation
 
 ### ERP
-- `erp/store-import-erp-sync-label-print-ui.md` — Store Import to Shipment to Label — Multi-System Sync
-- `erp/store-import-erp-sync-mark-as-shipped.md` — Store Import to Shipment to Fulfillment — Multi-System Sync
+
+- `erp/store-import-erp-sync-label-print-ui.md` — Store Import ERP Sync (label print ShipStation)
+- `erp/store-import-erp-sync-mark-as-shipped.md` — Store Import ERP Sync (mark as shipped ShipStation)
 
 ### Freight
+
 - `freight/quote-book-print.md` — Freight Quote, Book, and Print
 - `freight/pro-number-retrieval-tracking.md` — PRO Number Retrieval and Tracking
 - `freight/track-freight.md` — Freight Tracking
 
 ### Webhook Setup
+
 - `webhook setup/webhook-creation.md` — Creating Webhooks
 - `webhook setup/webhook-update.md` — Updating Webhooks
 - `webhook setup/webhook-delete.md` — Deleting Webhooks
 
 ### Exceptions
-- `exceptions/update-shipment.md` — Shipment Update — Full Payload Required
+
+- `exceptions/update-shipment.md` — Shipment Update
 
 ### Reference
 
