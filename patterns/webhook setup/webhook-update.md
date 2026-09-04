@@ -1,6 +1,6 @@
 # Webhook Update via API
 
-## Short answer
+## Overview
 
 To modify an existing webhook, first retrieve the list of webhooks to find the `webhook_id` of the one you want to change. Then call `PUT /v2/webhooks/{webhook_id}` with the updated configuration (event type, target URL, active status, etc.). ShipStation returns the updated webhook details.
 

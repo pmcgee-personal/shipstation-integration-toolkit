@@ -1,6 +1,6 @@
 # Webhook Deletion via API
 
-## Short answer
+## Overview
 
 To delete a webhook, first retrieve the list of webhooks to find the `webhook_id` of the one you want to remove. Then call `DELETE /v2/webhooks/{webhook_id}`. ShipStation removes the webhook. Optionally, call `GET /v2/webhooks` again to confirm the webhook is no longer in the list.
 

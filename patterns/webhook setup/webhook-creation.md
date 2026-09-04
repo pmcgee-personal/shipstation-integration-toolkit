@@ -1,6 +1,6 @@
 # Webhook Creation via API
 
-## Short answer
+## Overview
 
 Before creating a new webhook, first retrieve the list of existing webhooks to check what's already configured and avoid duplicates. Then call `POST /v2/webhooks` with your target URL and desired event type(s). ShipStation returns the new webhook details including the `webhook_id` for future reference.
 

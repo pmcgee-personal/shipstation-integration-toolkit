@@ -1,7 +1,7 @@
 # ShipStation Integration Toolkit
 
 **Unofficial.** A working companion to the
-[official documentation](https://docs.shipstation.com/). Short diagram-first explainers for common integration flows. Additionally, there are production examples for webhook/API payloads for certain relevant flows.
+[official documentation](https://docs.shipstation.com/). Short diagram-first explainers for common integration flows. Additionally, there are production examples for webhook/API payloads for select flows (tracking, adjustments).
 
 ## Why this exists
 
