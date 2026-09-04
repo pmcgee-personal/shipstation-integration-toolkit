@@ -17,16 +17,16 @@ sequenceDiagram
 
     SS->>ERP: "shipment_created_v2" webhook<br/>("resource_url")
     ERP->>SS: GET "resource_url"
-    SS-->>ERP: {"shipment_number", order details}
-    ERP->>ERP: Create order record
+    SS-->>ERP: {"shipment_number", "shipment_id",<br/>order details}
+    ERP->>ERP: Store shipment_number +<br/>shipment_id, create order record
 
     Note over SS,Store: User prints label in ShipStation UI
     SS->>Store: Update order with label/tracking
     SS->>ERP: "label_created_v2" webhook<br/>("resource_url")
 
     ERP->>SS: GET "resource_url"
-    SS-->>ERP: {"shipment_number",<br/>"carrier", "service_code",<br/>"tracking_number", "shipment_cost", ...}
-    ERP->>ERP: Update order with label details
+    SS-->>ERP: {"shipment_id",<br/>"carrier", "service_code",<br/>"tracking_number", "shipment_cost", ...}
+    ERP->>ERP: Match shipment_id,<br/>update order with label details
 ```
 
 ## References
@@ -34,12 +34,13 @@ sequenceDiagram
 - Example webhook payload: [`webhooks/shipments/new-order-created-v2.json`](../webhooks/orders/new-order-created-v2.json)
 - Example resource_url payload: [`webhooks/shipments/new-order-created-v2-resource-url-response.json`](../webhooks/orders/new-order-created-v2-resource-url-response.json)
 - Example webhook payload: [`webhooks/labels/label-created-v2.json`](../webhooks/labels/label-created-v2.json)
-- Example resource_url payload [`webhooks/labels/label-created-v2-resource-url.json](../webhooks/labels/label-created-v2-resource-url.json)
+- Example resource_url payload: [`webhooks/labels/label-created-v2-resource-url.json`](../webhooks/labels/label-created-v2-resource-url.json)
 
 ## Notes
 
 - Orders originate in the connected store and ShipStation imports them. The integrator does **not** create shipments via API in this pattern.
-- `"shipment_number"` is the order number from the connected store
+- Store both `"shipment_number"` (the order number from the connected store) and `"shipment_id"` (ShipStation's internal identifier). A single order can spawn multiple shipments due to split shipments, backorders, or cancellations.
+- Match incoming label webhooks using `"shipment_id"` from the `GET "resource_url"` response.
 - Both `"shipment_created_v2"` and `"label_created_v2"` webhooks contain **pointers only** (`"resource_url"`). Always call `GET "resource_url"` to retrieve full details.
 - ShipStation automatically syncs label and tracking info back to the connected store — your ERP does not need to handle this.
 - Useful for keeping your ERP in sync with ShipStation's shipment and label state in near-real-time.

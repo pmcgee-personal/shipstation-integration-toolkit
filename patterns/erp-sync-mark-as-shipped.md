@@ -17,16 +17,16 @@ sequenceDiagram
 
     SS->>ERP: "shipment_created_v2" webhook<br/>("resource_url")
     ERP->>SS: GET "resource_url"
-    SS-->>ERP: {"shipment_number", order details}
-    ERP->>ERP: Create order record
+    SS-->>ERP: {"shipment_number", "shipment_id",<br/>order details}
+    ERP->>ERP: Store shipment_number +<br/>shipment_id, create order record
 
     Note over SS,Store: User marks order as shipped in ShipStation UI
     SS->>SS: Create fulfillment
     SS->>ERP: "fulfillment_shipped_v2" webhook<br/>("resource_url")
 
     ERP->>SS: GET "resource_url"
-    SS-->>ERP: {"tracking_number",<br/>"carrier", "service_code"}
-    ERP->>ERP: Update order with fulfillment details
+    SS-->>ERP: {"shipment_id",<br/>"tracking_number",<br/>"carrier", "service_code"}
+    ERP->>ERP: Match shipment_id,<br/>update order with fulfillment details
 ```
 
 ## References
@@ -39,7 +39,8 @@ sequenceDiagram
 ## Notes
 
 - Orders originate in the connected store and ShipStation imports them. The integrator does **not** create shipments via API in this pattern.
-- `"shipment_number"` is the order number from the connected store.
+- Store both `"shipment_number"` (the order number from the connected store) and `"shipment_id"` (ShipStation's internal identifier). A single order can spawn multiple shipments due to split shipments, backorders, or cancellations.
+- Match incoming fulfillment webhooks using `"shipment_id"` from the `GET "resource_url"` response.
 - A fulfillment record is created when an order is marked as shipped in ShipStation. The label has been created outside of ShipStation. It contains tracking and carrier information.
 - Both `"shipment_created_v2"` and `"fulfillment_shipped_v2"` webhooks contain **pointers only** (`"resource_url"`). Always call `GET "resource_url"` to retrieve full details.
 - ShipStation automatically syncs fulfillment and tracking info back to the connected store — your ERP does not need to handle this.
