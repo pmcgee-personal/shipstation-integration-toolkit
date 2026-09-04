@@ -2,7 +2,7 @@
 
 ## Short answer
 
-Create a shipment in ShipStation via API, store the `"shipment_id"` and your order number as `"external_shipment_id"`. When a user prints the label in the ShipStation UI, ShipStation sends a `"label_created_v2"` webhook. Match the webhook back to your order using both `"shipment_id"` and `"external_shipment_id"`, call the `"resource_url"` to fetch label details (`"carrier"`, `"service_code"`, `"tracking_number"`, `"shipment_cost"`), and sync them back.
+Create a shipment in ShipStation via API, parsing your order number as `"external_shipment_id"`. Store the `"shipment_id"` from the response. When a user prints the label in ShipStation, a `"label_created_v2"` webhook is triggered containing a `"resource_url"`. Call that URL to fetch label details, then match the response using both `"shipment_id"` and `"external_shipment_id"` to find the order, and sync label data (`"carrier"`, `"service_code"`, `"tracking_number"`, `"shipment_cost"`) back.
 
 ## Flow
 
@@ -14,16 +14,16 @@ sequenceDiagram
 
     OrderSrc->>Int: New order (order_number)
     Int->>SS: POST /v2/shipments<br/>(external_shipment_id: order_number)
-    SS-->>Int: {"shipment_id": X, "external_shipment_id": order_number, ...}
+    SS-->>Int: {"shipment_id": X, "external_shipment_id": order_number}
     Int->>Int: Store shipment_id + external_shipment_id
 
     Note over Int,SS: User prints label in ShipStation UI
-    SS->>Int: "label_created_v2" webhook<br/>("shipment_id", "external_shipment_id",<br/>"resource_url")
+    SS->>Int: "label_created_v2" webhook<br/>("resource_url")
+
+    Int->>SS: GET "resource_url"<br/>(with API key)
+    SS-->>Int: {"shipment_id": X,<br/>"external_shipment_id": order_number,<br/>"carrier", "service_code",<br/>"tracking_number", "shipment_cost", ...}
 
     Int->>Int: Match via shipment_id +<br/>external_shipment_id
-    Int->>SS: GET "resource_url"<br/>(with API key)
-    SS-->>Int: {"carrier", "service_code",<br/>"tracking_number", "cost", ...}
-
     Int->>OrderSrc: Sync label details to order
 ```
 
@@ -35,9 +35,9 @@ sequenceDiagram
 
 ## Notes
 
-- Always store both `"shipment_id"` (ShipStation's internal ID) and `"external_shipment_id"` (your order number) when you create a shipment.
-- Match incoming webhooks using **both** `"shipment_id"` and `"external_shipment_id"`. A single order can spawn multiple shipments (split shipments, backorders, cancellations).
-- Webhook payload contains a **pointer** (`"resource_url"`), not the full label data. You must call `GET "resource_url"` with your API key to retrieve `"carrier"`, `"tracking_number"`, and `"shipment_cost"`.
+- **This is the core pattern for custom store integrations** where ShipStation does not have a pre-built connector. The majority of integrations follow this same flow: order push → shipment creation → label notification via webhook → label sync back to source.
+- The webhook body is a **pointer only** (`"resource_url"`) — it does not include `"shipment_id"` or `"external_shipment_id"`. Always call `GET "resource_url"` to retrieve the full label details.
+- Match incoming labels to orders using **both** `"shipment_id"` and `"external_shipment_id"` from the `GET "resource_url"` response. A single order can spawn multiple shipments (split shipments, backorders, cancellations).
 - UI event name is "On Labels Created (V2)" but the webhook `"resource_type"` field will say `"LABEL_CREATED_V2"` — branch your code on `"resource_type"`.
 - The label print is **user-initiated in the UI**, not API-driven. Integrator has no control over _when_ it's printed.
 - Useful for syncing tracking numbers and label costs back to the order source in near-real-time.
