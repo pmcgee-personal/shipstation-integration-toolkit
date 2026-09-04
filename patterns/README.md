@@ -25,11 +25,31 @@ the pattern is more about branching/decision logic than a timeline.
 <!-- Add a line here each time you add a pattern doc, so this folder is
      browsable without opening every file. -->
 
-- `order-creation-api-label-print-ui.md` — Order to Shipment to Label — UI-Driven Label Print
-- `order-import-wms-label-print.md` — Store Import to Shipment to WMS Label Creation — API-Driven
-- `erp-sync-label-print-ui.md` — Store Import to Shipment to Label — Multi-System Sync
-- `erp-sync-mark-as-shipped.md` — Store Import to Shipment to Fulfillment — Multi-System Sync
-- `update-shipment.md` — Shipment Update — Full Payload Required
+### Order Lifecycle
+- `order lifecycle/order-creation-label-print-ui.md` — Order to Shipment to Label — UI-Driven Label Print
+- `order lifecycle/store-import-crm-sync.md` — Store Import to CRM Sync
+
+### WMS
+- `wms/store-import-wms-label-print.md` — Store Import to Shipment to WMS Label Creation — API-Driven
+- `wms/store-import-wms-mark-as-shipped.md` — Store Import to Shipment to Fulfillment — WMS-Driven
+- `wms/wms-rate-label-print.md` — WMS Rate and Label Print
+
+### ERP
+- `erp/store-import-erp-sync-label-print-ui.md` — Store Import to Shipment to Label — Multi-System Sync
+- `erp/store-import-erp-sync-mark-as-shipped.md` — Store Import to Shipment to Fulfillment — Multi-System Sync
+
+### Freight
+- `freight/quote-book-print.md` — Freight Quote, Book, and Print
+- `freight/pro-number-retrieval-tracking.md` — PRO Number Retrieval and Tracking
+- `freight/track-freight.md` — Freight Tracking
+
+### Webhook Setup
+- `webhook setup/webhook-creation.md` — Creating Webhooks
+- `webhook setup/webhook-update.md` — Updating Webhooks
+- `webhook setup/webhook-delete.md` — Deleting Webhooks
+
+### Exceptions
+- `exceptions/update-shipment.md` — Shipment Update — Full Payload Required
 
 ### Reference
 
