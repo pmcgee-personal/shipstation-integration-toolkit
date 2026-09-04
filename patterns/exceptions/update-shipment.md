@@ -1,4 +1,4 @@
-# Shipment Update — Full Payload Required
+# Shipment Update
 
 ## Overview
 

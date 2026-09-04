@@ -1,4 +1,4 @@
-# Store Import to Shipment to WMS Label Creation — API-Driven
+# Store Import to WMS (API Label Creation)
 
 ## Overview
 

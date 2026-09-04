@@ -1,4 +1,4 @@
-# Store Import to Shipment to WMS Fulfillment — API-Driven
+# Store Import to WMS Fulfillment (API Mark As Shipped)
 
 ## Overview
 

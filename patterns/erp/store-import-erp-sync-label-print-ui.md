@@ -1,4 +1,4 @@
-# Store Import to Shipment to Label — Multi-System Sync
+# Store Import ERP Sync (label print ShipStation)
 
 ## Overview
 

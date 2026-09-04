@@ -1,4 +1,4 @@
-# Store Import to Shipment to Fulfillment — Multi-System Sync
+# Store Import ERP Sync (mark as shipped ShipStation)
 
 ## Overview
 

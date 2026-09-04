@@ -1,4 +1,4 @@
-# WMS-Driven Rate Shop and Label Creation
+# WMS Rate Shop and Label Creation
 
 ## Overview
 
