@@ -12,10 +12,11 @@ Browse the pattern that matches your integration:
 - **[ERP/Store Sync](./patterns/erp/)** — Multi-system sync between store, ShipStation, and fulfillment
 - **[Freight Handling](./patterns/freight/)** — LTL quote, booking, printing, and tracking (via carrier PRO numbers)
 - **[Webhook Setup](./patterns/webhook%20setup/)** — Creating, updating, and managing webhooks
-- **[Exception Handling](./patterns/exceptions/)** — Handling special cases (shipment updates with full payloads)
+- **[Exception Handling](./patterns/exceptions/)** — Handling special cases (shipment updates)
 - **[Inventory Management](./patterns/inventory/)** — Inventory sync patterns
 
 Each pattern includes:
+
 - A Mermaid sequence or flow diagram of the happy path
 - Step-by-step walkthrough with relevant API calls
 - Links to the official docs for deep dives
@@ -57,9 +58,12 @@ Webhooks and API responses for the same resource are _similar but not identical_
 ## How to Use Fixtures
 
 **Import into tests** — Copy a fixture JSON into your test suite as mock/expected data:
+
 ```javascript
-const orderPayload = require('./fixtures/webhooks/orders/new-order-created-v2-resource-url-response.json');
-expect(myIntegration.parseOrder(orderPayload)).toEqual({ /* ... */ });
+const orderPayload = require("./fixtures/webhooks/orders/new-order-created-v2-resource-url-response.json");
+expect(myIntegration.parseOrder(orderPayload)).toEqual({
+  /* ... */
+});
 ```
 
 **Serve from a mock endpoint** — Point a local mock server (json-server, WireMock, Express/Flask) at a fixture folder to replay webhook deliveries or mock API responses without touching production.
