@@ -36,7 +36,7 @@ sequenceDiagram
 - Example resource_url payload: [`webhooks/orders/new-order-created-v2-resource-url-response.json`](../webhooks/orders/new-order-created-v2-resource-url-response.json)
 - Example webhook payload: [`webhooks/labels/label-created-v2.json`](../webhooks/labels/label-created-v2.json)
 - Example resource_url payload: [`webhooks/labels/label-created-v2-resource-url.json`](../webhooks/labels/label-created-v2-resource-url.json)
-- Example webhook payload: [`webhooks/tracking/usps/track-event-v2-delivered.json`](../webhooks/tracking/usps/track-event-v2-delivered.json)
+- Example webhook payload: [`webhooks/tracking/usps/track-event-v2-delivered.json`](../../webhooks/tracking/usps/track-event-v2-delivered.json)
 - Official docs: [POST /v2/labels/return-label](https://docs.shipstation.com/apis/openapi/labels/create_return_label)
 - Official docs: [GET /v2/shipments/{shipment_id}](https://docs.shipstation.com/apis/openapi/shipments/get_shipment_by_id)
 
