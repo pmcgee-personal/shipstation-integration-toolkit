@@ -2,7 +2,7 @@
 
 ## Short answer
 
-Orders are imported from a connected store (e.g. Shopify) into ShipStation. ShipStation sends a `"shipment_created_v2"` webhook to your WMS. The WMS calls the `"resource_url"` to retrieve shipment details and creates a shipment record. Optionally, the WMS calls `POST /v2/rates` to query shipping rates across carriers before creating a label. The WMS then calls `POST /v2/labels/shipment/{shipment_id}` with your preferred `carrier_id`, `service_code` and `carrier_code` to create a label. ShipStation returns the label (`"label_download"`) and `"tracking_number"`, which the WMS stores. ShipStation automatically updates the connected store with the label and tracking info.
+Orders are imported from a connected store (e.g. Shopify) into ShipStation. ShipStation sends a `"shipment_created_v2"` webhook to your WMS. Your WMS calls the `"resource_url"` to retrieve shipment details and creates a shipment record. Optionally, your WMS calls `POST /v2/rates` to query shipping rates across carriers before creating a label. Your WMS then calls `POST /v2/labels/shipment/{shipment_id}` with your preferred carrier, service, and carrier ID to create a label. ShipStation returns label details including the `"label_download"` URL and `"tracking_number"`, which your WMS stores. ShipStation automatically updates the connected store with the label and tracking info.
 
 ## Flow
 
@@ -28,13 +28,15 @@ sequenceDiagram
     SS-->>WMS: {"label_download", "tracking_number",<br/>carrier, service_code}
     WMS->>WMS: Store label & tracking info
 
-    SS->>Store: Update order with label/tracking
+    SS->>Store: Update order with tracking
 ```
 
 ## References
 
 - Example webhook payload: [`webhooks/shipments/new-order-created-v2.json`](../webhooks/orders/new-order-created-v2.json)
 - Example resource_url payload: [`webhooks/shipments/new-order-created-v2-resource-url-response.json`](../webhooks/orders/new-order-created-v2-resource-url-response.json)
+- Official docs: [POST /v2/rates](https://docs.shipstation.com/apis/openapi/rates/calculate_rates)
+- Official docs: [POST /v2/labels/shipment/{shipment_id}](https://docs.shipstation.com/apis/openapi/labels/create_label_from_shipment)
 
 ## Notes
 
@@ -43,6 +45,6 @@ sequenceDiagram
 - The `shipment_created_v2` webhook contains a **pointer only** (`"resource_url"`). Always call `GET "resource_url"` to retrieve full shipment details before creating a label.
 - Calling `POST /v2/rates` before label creation is optional. Your WMS can query rates to evaluate carrier options, or skip rates and go straight to label creation with a pre-selected carrier.
 - Label creation via `POST /v2/labels/shipment/{shipment_id}` is **API-driven**, not UI-driven. Your WMS has full control over when and which carrier is selected.
-- The response includes `"label_download"` (URL to retrieve the label) and `"tracking_number"`.
-- ShipStation automatically syncs tracking info back to the connected store — your WMS does not need to handle this.
+- The response includes `"label_download"` (URL to retrieve the label) and `"tracking_number"` for tracking purposes.
+- ShipStation automatically syncs label and tracking info back to the connected store — your WMS does not need to handle this.
 - Useful for automating label creation within a warehouse management system and maintaining real-time sync across all systems.
