@@ -1,11 +1,10 @@
 # patterns/
 
-Short, diagram-first explanations of common integration flows — the kind of
-thing you'd otherwise re-explain by email each time it comes up.
+Short, diagram-first explanations of common integration flows with ShipStation.
 
 ## When to add one
 
-If you've explained the same flow by email more than once, it's a
+If you've explained the same flow more than once, it's a
 candidate. This folder is for recurring, commonly-requested explanations —
 not a place to document every possible flow or edge case.
 
