@@ -1,113 +1,79 @@
 # ShipStation Integration Toolkit
 
-**Unofficial.** A working companion to the
-[official documentation](https://docs.shipstation.com/). Short diagram-first explainers for common integration flows. Additionally, there are production examples for webhook/API payloads for select flows (tracking, adjustments).
+**Unofficial.** A practical companion to the
+[official ShipStation documentation](https://docs.shipstation.com/). Diagram-first explanations of common integration flows, with production-captured fixture examples and technical references.
 
-## Why this exists
+## Start Here: Common Integration Workflows
 
-Some scenarios are easier to understand from a concrete example
-than from a schema. Common integration flows get re-explained every time
-they come up. This repo collects real examples and short reference docs so
-integrators have something specific to link to and test against.
+Browse the pattern that matches your integration:
 
-## Structure
+- **[Order Lifecycle](./patterns/order%20lifecycle/)** — Order creation, label printing via UI or API
+- **[WMS Integration](./patterns/wms/)** — Store import to WMS, label creation, fulfillment marking
+- **[ERP/Store Sync](./patterns/erp/)** — Multi-system sync between store, ShipStation, and fulfillment
+- **[Freight Handling](./patterns/freight/)** — LTL quote, booking, printing, and tracking (via carrier PRO numbers)
+- **[Webhook Setup](./patterns/webhook%20setup/)** — Creating, updating, and managing webhooks
+- **[Exception Handling](./patterns/exceptions/)** — Handling special cases (shipment updates with full payloads)
+- **[Inventory Management](./patterns/inventory/)** — Inventory sync patterns
+
+Each pattern includes:
+- A Mermaid sequence or flow diagram of the happy path
+- Step-by-step walkthrough with relevant API calls
+- Links to the official docs for deep dives
+- References to fixture examples in this repo
+
+See [`patterns/README.md`](./patterns/README.md) for the full index and contributor guidelines.
+
+## Reference: Fixture Examples
+
+Real webhook payloads and API responses, captured from production and sanitized for sharing. Use these to:
+
+- **Test webhook receivers** — import fixtures to test without triggering real events
+- **Mock ShipStation responses** — seed your test suite with realistic data
+- **Understand carrier nuances** — see how different carriers structure tracking, exceptions, etc.
 
 ```
-webhooks/               Real webhook payloads, by resource
+patterns/               Diagram-driven integration flow guides (start here)
+  [7 subdirectories with pattern docs by workflow type]
+webhooks/               Real webhook payloads and resource_url responses
   orders/               On New Order Created (V2)
   labels/               On Labels Created (V2)
   fulfillments/         On Fulfillment Shipped (V2)
   tracking/             On New Track Event (V2)
-    fedex/              FedEx tracking events
-    ups/                UPS tracking events
-    usps/               USPS tracking events
-api/                    Real API request/response examples, by resource
+    fedex/, ups/, usps/ [carrier-specific tracking events]
+api/                    Real API request/response examples
   adjustments/          USPS shipping adjustment reports
-  shipments/
-    usps-single-payor/  USPS single payor labels (PCID compliance)
-  tracking/
-    usps/               USPS tracking API responses
-patterns/               Short, diagram-first explanations of common flows
-  order lifecycle/      Order to shipment/label flows
-  wms/                  WMS integration patterns
-  erp/                  ERP/store sync patterns
-  freight/              Freight patterns (quoting, booking, tracking)
-  webhook setup/        Webhook lifecycle (create, update, delete)
-  exceptions/           Exception handling patterns
-  inventory/            Inventory management patterns
+  shipments/            Shipment data (including USPS PCID single payor)
+  tracking/             USPS tracking API responses
 ```
 
-- **`webhooks/`** — what ShipStation actually sends to a webhook subscriber
-  for a given event. Useful for building/testing your webhook receiver
-  without needing to trigger the real event. Most webhook bodies
-  are pointers, not data: you get a `resource_url` and a `resource_type`,
-  and you call that URL with your API key to retrieve the actual record —
-  so those folders hold the webhook body _and_ the `resource_url` response.
-  **Tracking is the exception**: its body carries the tracking data inline,
-  with no follow-up call. See
-  [`webhooks/README.md`](./webhooks/README.md).
-- **`api/`** — what ShipStation actually returns when you call an endpoint
-  directly.
-- **`patterns/`** — a diagram (Mermaid) for a
-  commonly-requested flow, plus links to the official docs and any relevant
-  fixture in this repo. No duplicated payloads or long prose — see
-  [`patterns/README.md`](./patterns/README.md).
+### Technical Notes: Webhooks vs API Responses
 
-Webhooks and API responses for the same resource are _similar but not
-identical_ — don't assume a webhook payload and an API response for the same
-object share an exact schema. They're kept in separate trees on purpose.
+Webhooks and API responses for the same resource are _similar but not identical_ — don't assume they share an exact schema. They're kept in separate trees on purpose.
 
-Webhook folders are named after the **ShipStation event name**, which
-does not always match the `resource_type` in the payload. `webhooks/orders/`
-holds the event the UI calls "On New Order Created (V2)" even though the
-payload says `SHIPMENT_CREATED_V2`. Branch your code on `resource_type`.
+- **Webhook bodies** are mostly pointers: you receive a `resource_url` and `resource_type`, then call that URL with your API key to fetch the actual record. Our webhook folders hold both the pointer _and_ the resource_url response.
+- **Tracking is the exception**: the webhook body carries tracking data inline, with no follow-up call required. See [`webhooks/README.md`](./webhooks/README.md) for details.
+- **Event names vs. resource_type**: Webhook folders are named after the ShipStation UI event name, which may differ from the `resource_type` in the payload. For example, `webhooks/orders/` holds the "On New Order Created (V2)" event, but the payload says `SHIPMENT_CREATED_V2`. Always branch your code on `resource_type`.
 
-## How to use
+## How to Use Fixtures
 
-**Reference directly** — import a fixture JSON into your test suite as
-expected/mock data for a given scenario.
+**Import into tests** — Copy a fixture JSON into your test suite as mock/expected data:
+```javascript
+const orderPayload = require('./fixtures/webhooks/orders/new-order-created-v2-resource-url-response.json');
+expect(myIntegration.parseOrder(orderPayload)).toEqual({ /* ... */ });
+```
 
-**Serve from a mock endpoint** — point a local mock server (json-server,
-WireMock, a small Express/Flask stub) at the relevant folder to stand in for
-the live endpoint or to replay a webhook delivery.
+**Serve from a mock endpoint** — Point a local mock server (json-server, WireMock, Express/Flask) at a fixture folder to replay webhook deliveries or mock API responses without touching production.
 
-## Adding a new fixture
+## Contributing Fixtures
 
-1. Pull the real payload/response from production.
-2. Sanitize it — replace tracking numbers, order IDs, names, addresses, ZIP
-   codes, and other customer-identifying data with clearly fake but
-   correctly-formatted values. Account/org identifiers (`store_id`,
-   `carrier_id`, etc.) are fine to keep.
-3. Save it under the right resource folder with a self-explanatory filename
-   (see existing files for the naming pattern).
-4. Add a `_captured_at` key to the fixture with the capture date
-   (`YYYY-MM-DD`), and remove the `_fixture_notes` key if one is present.
-   `_fixture_notes` means "still a placeholder, real data needed" — a
-   description of what the endpoint does belongs in the folder's
-   `README.md` instead.
+Found a stale fixture or missing carrier/event? Pull requests welcome. See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the submission process and sanitization guidelines. Check [`TODO.md`](./TODO.md) first to see what's on the roadmap.
 
-See [`TODO.md`](./TODO.md) for the current list of placeholders that still
-need real data.
+**Found real customer data in a fixture?** Report it privately at [`SECURITY.md`](./SECURITY.md).
 
-## Freshness
+## Fixture Freshness
 
-Fixtures are snapshots, not a guaranteed-current contract. ShipStation and
-carrier schemas both change over time. Each filled-in fixture carries a
-`_captured_at` date; fixtures still showing `_fixture_notes` are
-placeholders awaiting real data. If something looks stale or wrong, open an
-issue.
-
-## Contributions
-
-Found a fixture that's stale or a carrier/event type we're missing? See
-[`CONTRIBUTING.md`](./CONTRIBUTING.md) for how to submit new or updated
-fixtures. Check [`TODO.md`](./TODO.md) first to see what's on the roadmap.
-
-**Report real data in a fixture?** See [`SECURITY.md`](./SECURITY.md) for how
-to report it privately.
+Fixtures are point-in-time snapshots. ShipStation and carrier schemas evolve; each fixture carries a `_captured_at` date. If something looks outdated, [open an issue](https://github.com/pmcgee-personal/shipstation-integration-toolkit/issues).
 
 ## Status
 
-Unofficial, community-maintained. A practical supplement to
-[ShipStation's own documentation](https://docs.shipstation.com/), not a
-replacement for it — start there, and use this repo if you're looking for supplemental guidance.
+Unofficial, community-maintained. A practical supplement to [ShipStation's official docs](https://docs.shipstation.com/) — not a replacement. Start with the official docs for authoritative specs; use this repo for practical flow guidance and real-world fixture examples.
