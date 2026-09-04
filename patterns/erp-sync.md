@@ -2,15 +2,15 @@
 
 ## Short answer
 
-Orders are imported from a connected store (e.g., Shopify) into ShipStation. ShipStation sends a `"shipment_created_v2"` webhook to your ERP. Your ERP calls the `"resource_url"` to retrieve shipment details and creates an order record. When a user prints the label, ShipStation updates the connected store and sends a `"label_created_v2"` webhook to your ERP. Your ERP calls the `"resource_url"` to fetch label details (`"carrier"`, `"service_code"`, `"tracking_number"`, `"shipment_cost"`) and updates the order.
+Orders are imported from a connected store (e.g. Shopify) into ShipStation. ShipStation sends a `"shipment_created_v2"` webhook to your ERP. Your ERP calls the `"resource_url"` to retrieve shipment details and creates an order record. When a user prints the label, ShipStation updates the connected store and sends a `"label_created_v2"` webhook to your ERP. Your ERP calls the `"resource_url"` to fetch label details (`"carrier"`, `"service_code"`, `"tracking_number"`, `"shipment_cost"`) and updates the order.
 
 ## Flow
 
 ```mermaid
 sequenceDiagram
-    participant Store as Connected Store<br/>(e.g., Shopify)
+    participant Store as Connected Store<br/>(e.g. Shopify)
     participant SS as ShipStation
-    participant ERP as ERP System
+    participant ERP as ERP
 
     Store->>SS: New order
     SS->>SS: Import & create shipment
