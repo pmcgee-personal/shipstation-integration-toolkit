@@ -10,7 +10,7 @@ Browse the pattern that matches your integration:
 - **[Order Lifecycle](./patterns/order%20lifecycle/)** — Order creation, label printing via UI
 - **[WMS Integration](./patterns/wms/)** — Store import to WMS, label creation, fulfillment marking
 - **[ERP/Store Sync](./patterns/erp/)** — Multi-system sync between store, ShipStation and ERP
-- **[CRM Sync](./patterns/crm/)** - Order sync between ShipStation and CRM
+- **[CRM Sync](./patterns/crm/)** - Multi-system sync between ShipStation and CRM
 - **[Freight Handling](./patterns/freight/)** — LTL quote, booking, printing, and tracking
 - **[Webhook Setup](./patterns/webhook%20setup/)** — Creating, updating, and managing webhooks
 - **[Exception Handling](./patterns/exceptions/)** — Handling special cases (shipment updates)
