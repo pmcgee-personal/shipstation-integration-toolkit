@@ -21,7 +21,7 @@ sequenceDiagram
 
     Note over Integrator: Repeat warehouse creation for each ship-from location
 
-    Shipper->>Integrator: Enter carrier credentials in integrator UI<br/>(account number, API keys, OAuth, etc)
+    Shipper->>Integrator: Enter carrier credentials in integrator UI<br/>(account number, API keys etc)
 
     Integrator->>ShipStation: POST /carriers/connect<br/>(carrier_name, credentials)<br/>On-Behalf-Of: accountId
     ShipStation->>Carrier: Authenticate / authorize connection<br/>(may trigger OAuth flow)

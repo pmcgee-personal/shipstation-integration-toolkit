@@ -7,6 +7,8 @@
 
 Browse the pattern that matches your integration:
 
+- **[Partner API](./patterns/partner%20api/)** — Account creation, warehouse setup, carrier connection flows
+
 - **[Order Lifecycle](./patterns/order%20lifecycle/)** — Order creation, label printing via UI
 - **[WMS Integration](./patterns/wms/)** — Store import to WMS, label creation, fulfillment marking
 - **[ERP/Store Sync](./patterns/erp/)** — Multi-system sync between store, ShipStation and ERP

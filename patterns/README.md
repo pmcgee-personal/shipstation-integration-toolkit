@@ -25,6 +25,11 @@ the pattern is more about branching/decision logic than a timeline.
 <!-- Add a line here each time you add a pattern doc, so this folder is
      browsable without opening every file. -->
 
+### Partner API
+
+- `partner api/byoa-carrier-onboarding.md` — BYOA Carrier Onboarding
+- `partner api/carrier-portal-onboarding.md` — Onboarding via Carrier Portal
+
 ### Order Lifecycle
 
 - `order lifecycle/order-creation-label-print-ui.md` — Order Creation (API), Label Print (UI)

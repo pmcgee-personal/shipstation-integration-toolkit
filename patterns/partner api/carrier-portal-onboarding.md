@@ -1,4 +1,4 @@
-# Partner API Account Onboarding via Carrier Portal
+# Partner API Onboarding via Carrier Portal
 
 ## Overview
 
