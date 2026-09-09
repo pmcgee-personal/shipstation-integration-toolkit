@@ -39,7 +39,7 @@ sequenceDiagram
 
 ## Notes
 
-- **This flow connects existing carrier accounts only.** BYOA onboarding does not enable ShipStation API Carriers (wallet funding, insurance, etc.). To offer ShipStation-funded carriers, use the [Direct Login / Carrier Portal](../partner-api/carrier-portal-onboarding.md) flow or [ShipStation Elements](https://docs.shipstation.com/docs/elements).
+- **This flow connects existing carrier accounts only.** BYOA onboarding does not enable ShipStation API Carriers (wallet funding, insurance, etc.). To offer ShipStation-funded carriers, use the [Carrier Portal](../partner%20api/carrier-portal-onboarding.md) flow or [ShipStation Elements](https://docs.shipstation.com/apis/shipengine/docs/elements/elements-guide).
 - **Authentication varies by carrier.** Some carriers use OAuth (UPS), others use API keys or account credentials. The integrator UI must accommodate the authentication method required by each carrier. Refer to the [carrier connect guide](https://docs.shipstation.com/apis/shipengine/docs/carriers/connect) for carrier-specific details.
 - **On-Behalf-Of header is required** when calling the carrier connection endpoint. This tells ShipStation which account the carrier is being connected to.
 - **Post-connection configuration may be needed.** Some carriers require additional setup after initial connection (e.g., UPS negotiated rates, FedEx signature image). Check carrier-specific documentation and expose these configuration options in your integrator UI if applicable.
