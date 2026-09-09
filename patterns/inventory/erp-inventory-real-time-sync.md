@@ -13,26 +13,26 @@ sequenceDiagram
     participant Worker as Batch Worker
     participant SS as ShipStation
 
-    ERP->>ERP: Item sold (qty: 5)
-    ERP->>ERP: Deduct locally; inventory now 95
-    ERP->>Queue: Add change: {sku: "ABC-001", delta: -5, warehouse_id: "w-12345"}
+    ERP->>ERP: Item sold (qty 5)
+    ERP->>ERP: Update local inventory to 95
+    ERP->>Queue: Add change: SKU ABC-001, delta -5
 
-    Note over Queue: Collect for 5 min or until batch threshold
+    Note over Queue: Collect for 5 min or batch threshold
 
-    ERP->>Queue: Item received (qty: 10)
-    ERP->>Queue: Add change: {sku: "ABC-002", delta: +10, warehouse_id: "w-12345"}
+    ERP->>Queue: Item received (qty 10)
+    ERP->>Queue: Add change: SKU ABC-002, delta +10
 
-    ERP->>Queue: Item adjusted (qty: -2)
-    ERP->>Queue: Add change: {sku: "ABC-001", delta: -2, warehouse_id: "w-12345"}
+    ERP->>Queue: Item adjusted (qty -2)
+    ERP->>Queue: Add change: SKU ABC-001, delta -2
 
-    Note over Queue: 5 minutes elapsed (or 50 SKUs queued)
+    Note over Queue: 5 minutes elapsed or 50 SKUs queued
 
     Worker->>Queue: Batch timer fires
-    Queue-->>Worker: All pending changes
-    Worker->>Worker: Group by warehouse<br/>Merge duplicates (ABC-001: -5 + -2 = -7)
-    Worker->>SS: POST /v2/inventory<br/>(warehouse: w-12345, updates: [ABC-001: -7, ABC-002: +10])
+    Queue-->>Worker: Return all pending changes
+    Worker->>Worker: Group by warehouse + merge
+    Worker->>SS: POST /v2/inventory with batch
     SS-->>Worker: Success
-    Worker->>ERP: Log batch: 2 SKUs, 1 warehouse, timestamp
+    Worker->>ERP: Log batch result
     Worker->>Queue: Clear processed changes
     Queue->>Queue: Reset timer
 ```
