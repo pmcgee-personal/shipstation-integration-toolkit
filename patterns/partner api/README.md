@@ -1,6 +1,6 @@
 # Partner API
 
-Onboard ShipStation accounts at scale via the Partner API: create accounts, define warehouses, connect carriers, and provision multi-tenant shipping integrations.
+Onboard ShipStation accounts at scale via the Partner API: create accounts, define warehouses, connect carriers and provision multi-tenant shipping integrations.
 
 This folder covers **programmatic account provisioning and carrier connection flows** for ShipStation partners. Use these patterns when building shipping integrations for multiple end-customers.
 
@@ -10,8 +10,8 @@ This folder covers **programmatic account provisioning and carrier connection fl
 
 - Create and manage customer accounts on behalf of shippers
 - Set up warehouses (ship-from locations) for each account
-- Connect carriers (BYOA or via dashboard wallet)
-- Fetch carrier metadata for downstream rate, label, and tracking operations
+- Connect carriers (BYOA, Carrier Portal or Elements)
+- Fetch carrier metadata for downstream rate, label and tracking operations
 
 ## Types of Integrations
 
@@ -19,13 +19,13 @@ This folder covers **programmatic account provisioning and carrier connection fl
 
 Sellers sign up on your platform. You create a ShipStation sub-account for each seller, manage their warehouse locations and let them use ShipStation API carriers. You consume the Partner API to provision accounts, retrieve carrier metadata, then use the standard Shipments/Tracking/Rates APIs downstream.
 
-**Key pattern:** Carrier Portal (seller set up ShipStation API wallet)
+**Key pattern:** Carrier Portal (seller sets up ShipStation API wallet)
 
 ### SaaS/Commerce Platforms
 
 **Examples:** Inventory management, OMS, fulfillment software, print-on-demand integrators
 
-Your customers use your platform for order management, fulfillment, or production. Shipping is embedded as one workflow. You provision a ShipStation account per customer, own the carrier setup UX, and surface rate shopping, label printing, and tracking within your product. Customers never leave your interface.
+Your customers use your platform for order management, fulfillment, or production. Shipping is embedded as one workflow. You provision a ShipStation account per customer, own the carrier setup UX and surface rate shopping, label printing, and tracking within your product.
 
 **Key pattern:** Either BYOA (customers provide carrier creds) or Carrier Portal (customers set up wallets + carriers via ephemeral token redirect).
 
@@ -41,7 +41,7 @@ You're embedding ShipStation shipping without exposing the ShipStation brand or 
 
 ### Custom API Integration
 
-Full programmatic control over account provisioning, warehouse setup, and carrier connection.
+Full programmatic control over account provisioning, warehouse setup and carrier connection.
 
 **Covered in this folder:**
 
