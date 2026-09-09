@@ -13,6 +13,9 @@ sequenceDiagram
     participant ShipStation
     participant Carrier as Carrier<br/>(UPS, FedEx, etc)
 
+    Integrator->>ShipStation: POST /accounts (create account)
+    ShipStation-->>Integrator: Account created + accountId
+
     Shipper->>Integrator: Enter carrier credentials in integrator UI<br/>(account number, API keys, OAuth, etc)
 
     Integrator->>ShipStation: POST /carriers/connect<br/>(carrier_name, credentials)<br/>On-Behalf-Of: accountId
@@ -36,9 +39,9 @@ sequenceDiagram
 
 ## Notes
 
-- **This flow connects existing carrier accounts only.** BYOA onboarding does not enable ShipStation API Carriers (wallet funding, insurance, etc.). To offer ShipStation-funded carriers, use the [Direct Login / Carrier Portal](../partner%20api/carrier-portal-onboarding) flow or [ShipStation Elements](https://docs.shipstation.com/docs/elements).
+- **This flow connects existing carrier accounts only.** BYOA onboarding does not enable ShipStation API Carriers (wallet funding, insurance, etc.). To offer ShipStation-funded carriers, use the [Direct Login / Carrier Portal](../partner-api/carrier-portal-onboarding.md) flow or [ShipStation Elements](https://docs.shipstation.com/docs/elements).
 - **Authentication varies by carrier.** Some carriers use OAuth (UPS), others use API keys or account credentials. The integrator UI must accommodate the authentication method required by each carrier. Refer to the [carrier connect guide](https://docs.shipstation.com/apis/shipengine/docs/carriers/connect) for carrier-specific details.
 - **On-Behalf-Of header is required** when calling the carrier connection endpoint. This tells ShipStation which account the carrier is being connected to.
-- **Post-connection configuration may be needed.** Some carriers require additional setup after initial connection (e.g. UPS negotiated rates, FedEx signature image). Check carrier-specific documentation and expose these configuration options in your integrator UI if applicable.
+- **Post-connection configuration may be needed.** Some carriers require additional setup after initial connection (e.g., UPS negotiated rates, FedEx signature image). Check carrier-specific documentation and expose these configuration options in your integrator UI if applicable.
 - The integrator owns the UX for collecting carrier credentials. This may include form fields, OAuth redirects, or API key inputs depending on the carrier and authentication method.
 - Once a carrier is connected, it's available immediately for rates, labels, and tracking queries.
