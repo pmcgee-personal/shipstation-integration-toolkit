@@ -8,8 +8,8 @@ Onboard a partner account to ShipStation via the Partner API: create the account
 
 ```mermaid
 sequenceDiagram
+    participant Shipper
     participant Integrator
-    participant Partner/User as Partner/User<br/>(Your Platform)
     participant ShipStation
     participant SSAPIDashboard as ShipStation Dashboard
 
@@ -19,12 +19,12 @@ sequenceDiagram
     Integrator->>ShipStation: POST /warehouses (create warehouse)<br/>On-Behalf-Of: accountId
     ShipStation-->>Integrator: Warehouse created + warehouseId
 
-    Note over Integrator,Partner/User: Repeat warehouse creation for each ship-from location
+    Note over Integrator: Repeat warehouse creation for each ship-from location
 
-    Integrator->>Partner/User: Provide ephemeral token link
-    Partner/User->>SSAPIDashboard: Redirect to dashboard (ephemeral token)
-    Note over Partner/User,SSAPIDashboard: Enable wallet, add BYOA carriers (UPS, etc)
-    SSAPIDashboard-->>Partner/User: Redirect back to integrator platform
+    Integrator->>Shipper: Provide ephemeral token link
+    Shipper->>SSAPIDashboard: Redirect to dashboard (ephemeral token)
+    Note over Shipper,SSAPIDashboard: Enable wallet, add BYOA carriers (UPS, etc)
+    SSAPIDashboard-->>Shipper: Redirect back to integrator platform
 
     Integrator->>ShipStation: GET /carriers<br/>On-Behalf-Of: accountId
     ShipStation-->>Integrator: Carrier list (carrier_id, carrier_code,<br/>service_code, package_code)
@@ -44,6 +44,6 @@ sequenceDiagram
 
 - **On-Behalf-Of header is required** for warehouse creation, ephemeral token generation, and carrier list queries. This header tells ShipStation which account the request is for. Always include `On-Behalf-Of: <accountId>` in the request headers for these operations.
 - Warehouses represent ship-from locations; you'll typically create one per fulfillment center or distribution hub the partner operates.
-- The integrator platform receives the ephemeral token URL and redirects the partner user to the ShipStation Dashboard. The token is single-use and short-lived.
-- After the user enables the wallet and adds carriers in the Dashboard, they're redirected back to your platform. At that point, call GET /carriers to fetch the newly available carrier metadata.
+- The integrator platform receives the ephemeral token URL and redirects the shipper to the ShipStation Dashboard. The token is single-use and short-lived.
+- After the shipper enables the wallet and adds carriers in the Dashboard, they're redirected back to your platform. At that point, call GET /carriers to fetch the newly available carrier metadata.
 - Carrier metadata (carrier_code, service_code, package_code) must be stored by the integrator and used in downstream rate and label requests.
