@@ -41,7 +41,7 @@ webhooks/               Real webhook payloads and resource_url responses
   labels/               On Labels Created (V2)
   fulfillments/         On Fulfillment Shipped (V2)
   tracking/             On New Track Event (V2)
-    fedex/, ups/, usps/ [carrier-specific tracking events]
+    fedex/ ups/ usps/ [carrier-specific tracking events]
 api/                    Real API request/response examples
   adjustments/          USPS shipping adjustment reports
   shipments/            Shipment data (including USPS PCID single payor)
