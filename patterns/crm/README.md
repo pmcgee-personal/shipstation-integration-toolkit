@@ -13,15 +13,18 @@ A CRM receives real-time events about orders flowing through ShipStation: when s
 ## Key Concepts
 
 **Webhook pointers vs. inline data:**
+
 - `shipment_created_v2` and `label_created_v2` webhooks contain only a `resource_url` pointer. Always fetch the full payload via `GET resource_url`.
 - `track_event_v2` webhooks carry tracking data inline; no fetch needed.
 
 **Key IDs for joining:**
+
 - Store `shipment_id` when shipments are created.
 - Use `shipment_id` to join label creation webhooks.
 - Use `tracking_number` to link tracking events to the correct order.
 
 **No cancellation webhook:**
+
 - ShipStation does not fire a webhook when a shipment is cancelled.
 - Poll `GET /v2/shipments/{shipment_id}` periodically to detect cancellations.
 
@@ -36,15 +39,6 @@ A CRM receives real-time events about orders flowing through ShipStation: when s
 7. As the shipment travels, `track_event_v2` webhooks arrive with delivery events
 8. CRM updates order status with each tracking update
 9. For returns, CRM can create a return label via `POST /v2/labels/return-label` using the `shipment_id`
-
-## Rate Limit Impact
-
-- Shipment creation webhook: 1 fetch per shipment
-- Label creation webhook: 1 fetch per label
-- Tracking updates: inline, no fetch needed
-- Cancellation polling: 1 call per shipment periodically
-
-At typical e-commerce volume (50 orders/hour with 80% fulfillment rate and carrier tracking ~4 updates/shipment), this is moderate overhead (~100-150 API calls/hour including polling).
 
 ## Related Patterns
 

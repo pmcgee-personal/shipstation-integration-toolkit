@@ -14,16 +14,19 @@ An ERP system is typically the source of truth for orders, inventory, and financ
 ## Key Concepts
 
 **Shipment vs. Order:**
+
 - ShipStation models shipments, not orders. A single order may spawn multiple shipments (split shipments, backorders, returns).
 - Always store both `shipment_number` (the order number from your source system) and `shipment_id` (ShipStation's internal identifier).
 - Join webhooks using `shipment_id`.
 
 **Label as trigger:**
+
 - `label_created_v2` fires when a label is printed in the ShipStation UI or created via API.
 - This is the point at which a tracking number is generated and shipping cost is calculated.
 - The ERP receives the label details and can update the order with carrier, service, and cost information.
 
 **Webhook pointers:**
+
 - `shipment_created_v2` and `label_created_v2` webhooks contain only a `resource_url`.
 - Always fetch the full payload via `GET resource_url` before processing.
 
@@ -37,14 +40,6 @@ An ERP system is typically the source of truth for orders, inventory, and financ
 6. ERP fetches the resource and updates the order with label details (carrier, tracking, cost)
 7. Optionally, ERP marks the order as fulfilled when `fulfillment_shipped_v2` webhook fires
 8. ERP syncs fulfillment state back to the order source system if needed
-
-## Rate Limit Impact
-
-- Shipment creation: 1 API call per shipment (webhook fetch)
-- Label creation: 1 API call per label (webhook fetch)
-- Fulfillment updates: optional; 0-1 API calls depending on pattern
-
-At typical volume (50 orders/hour with 80% fulfillment rate), overhead is ~40-60 API calls/hour, leaving ample room for inventory sync, order updates, and other operations.
 
 ## Related Patterns
 
