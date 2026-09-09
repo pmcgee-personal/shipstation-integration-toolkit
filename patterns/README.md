@@ -28,7 +28,10 @@ the pattern is more about branching/decision logic than a timeline.
 ### Order Lifecycle
 
 - `order lifecycle/order-creation-label-print-ui.md` — Order Creation (API), Label Print (UI)
-- `order lifecycle/store-import-crm-sync.md` — Store Import CRM Sync
+
+### CRM
+
+- `crm/store-import-crm-sync.md` — Store Import CRM Sync
 
 ### WMS
 
