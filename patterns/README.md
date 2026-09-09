@@ -60,6 +60,14 @@ the pattern is more about branching/decision logic than a timeline.
 
 - `exceptions/update-shipment.md` — Shipment Update
 
+### Inventory
+
+- `inventory/erp-inventory-warehouse-setup.md` — Warehouse/Location Setup (prerequisite)
+- `inventory/erp-inventory-initial-upload.md` — Initial Bulk Upload
+- `inventory/erp-inventory-real-time-sync.md` — Real-time Sync (queue + batch)
+- `inventory/erp-inventory-periodic-reconciliation.md` — Periodic Reconciliation (daily)
+- `inventory/erp-inventory-pending-shipment-visibility.md` — Pending Shipment Visibility (optional)
+
 ### Reference
 
 - `TEMPLATE.md` — starting point for new pattern docs
