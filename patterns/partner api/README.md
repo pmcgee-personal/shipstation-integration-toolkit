@@ -6,11 +6,11 @@ This folder covers **programmatic account provisioning and carrier connection fl
 
 ## Who This Is For
 
-**ShipStation technology partners** embedding shipping capabilities into platforms, marketplaces or OEM solutions. You use the Partner API to:
+**ShipStation technology partners** embedding shipping capabilities into platforms or marketplaces. You use the Partner API to:
 
 - Create and manage customer accounts on behalf of shippers
 - Set up warehouses (ship-from locations) for each account
-- Connect carriers (BYOA, Carrier Portal or Elements)
+- Connect carriers (ShipStation Carriers or BYOA)
 - Fetch carrier metadata for downstream rate, label and tracking operations
 
 ## Types of Integrations
@@ -29,7 +29,7 @@ Your customers use your platform for order management, fulfillment, or productio
 
 **Key pattern:** Either BYOA (customers provide carrier creds) or Carrier Portal (customers set up wallets + carriers via ephemeral token redirect).
 
-### Technology Partners / OEM
+### Technology Partners
 
 **Examples:** Proprietary logistics software, warehouse automation, custom fulfillment platforms
 
