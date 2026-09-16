@@ -30,6 +30,7 @@ sequenceDiagram
 - Official docs: [POST /v2/rates](https://docs.shipstation.com/apis/openapi/rates/calculate_rates)
 - Official docs: [POST /v2/labels/rates/{rate_id}](https://docs.shipstation.com/apis/openapi/labels/create_label_from_rate)
 - Official docs: [POST /v2/labels/rate_shopper_id/:rate_shopper_id](https://docs.shipstation.com/apis/openapi/labels/create_label_from_rate_shopper) (alternative: combine rating and labeling in one call)
+- Official docs: [POST /v2/labels/shipping_rules/:shipping_rule_id](https://docs.shipstation.com/apis/openapi/labels/create_label_from_shipping_rule) (alternative: carrier selection, based on rule criteria, and labeling in one call)
 
 ## Notes
 
