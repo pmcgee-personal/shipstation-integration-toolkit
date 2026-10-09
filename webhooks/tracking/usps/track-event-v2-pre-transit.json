@@ -1,10 +1,11 @@
 {
-  "_captured_at": "2026-09-03",
-  "resource_url": "https://api.shipstation.com/v2/labels/se-97410XXXX/track",
+  "_derived_from": "track-event-v2-multi-scan.json: same parcel, cumulative events truncated to the first scan. Top-level carrier_status_description, ship_date and estimated_delivery_date are carried from the September pre-transit capture, not observed on this parcel.",
+  "_captured_at": "2026-10-09",
+  "resource_url": "https://api.shipstation.com/v2/labels/se-207416XXX/track",
   "resource_type": "TRACK_EVENT_V2",
   "data": {
-    "tracking_number": "94346362083XXXXX009034",
-    "tracking_url": "https://tools.usps.com/go/TrackConfirmAction.action?tLabels=94346362083XXXXX009034",
+    "tracking_number": "940015020621XXXXX26585",
+    "tracking_url": "https://tools.usps.com/go/TrackConfirmAction.action?tLabels=940015020621XXXXX26585",
     "status_code": "AC",
     "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
     "status_detail_description": "Your shipment is now in the carrier's system.",
@@ -20,12 +21,12 @@
     "exception_description": null,
     "events": [
       {
-        "occurred_at": "2026-08-19T22:44:46Z",
-        "carrier_occurred_at": "2026-08-19T15:44:46-07:00",
+        "occurred_at": "2026-10-03T23:30:39Z",
+        "carrier_occurred_at": "2026-10-03T23:30:39Z",
         "description": "Shipping Label Created",
-        "city_locality": "PINE GROVE",
-        "state_province": "PA",
-        "postal_code": "17963",
+        "city_locality": "SHERIDAN",
+        "state_province": "WY",
+        "postal_code": "82801",
         "country_code": "US",
         "company_name": null,
         "signer": null,
@@ -34,12 +35,12 @@
         "status_code": "AC",
         "status_description": "Accepted",
         "carrier_status_code": "GX",
-        "carrier_status_description": "Shipping Label Created, USPS Awaiting Item",
+        "carrier_status_description": "Shipping Label Created",
         "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
         "status_detail_description": "Your shipment is now in the carrier's system.",
         "proof_of_delivery_url": null,
-        "latitude": 40.56,
-        "longitude": -76.38
+        "latitude": 44.84,
+        "longitude": -106.84
       }
     ]
   }

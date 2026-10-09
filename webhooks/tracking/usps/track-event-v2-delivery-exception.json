@@ -1,5 +1,5 @@
 {
-  "_fixture_notes": "PLACEHOLDER — replace with a sanitized real TRACK_EVENT_V2 webhook body for a USPS delivery exception. Mask the tracking number and the se- label ID, keep tracking_url in step with tracking_number, delete this _fixture_notes key, and add _captured_at (YYYY-MM-DD). Field names and key order below match the captured USPS fixtures in this folder; carrier_code, carrier_id and the tracking_url template are already correct. api/tracking/usps/delivery-exception.json shows the equivalent shape from the polled API and is a good reference for which fields USPS populates — but capture the webhook body rather than copying it, since the two are not guaranteed identical.",
+  "_fixture_notes": "PLACEHOLDER — replace with a sanitized real TRACK_EVENT_V2 webhook body for a USPS delivery exception. Mask the tracking number (keep the first 12 and last 5 digits, XXXXX between) and the se- label ID (last 3 digits), keep tracking_url in step with tracking_number, normalize latitude/longitude to 2 decimals, delete this _fixture_notes key, and add _captured_at (YYYY-MM-DD). Field names and key order match the captured USPS fixtures in this folder. As of the 2026-10-09 capture expect country_code US on every scan, carrier_occurred_at equal to occurred_at, and city/state/postal_code/latitude/longitude null on any 'In Transit to Next Facility' scan; status_detail_code can be null on some scans, so confirm what an exception actually carries. api/tracking/usps/delivery-exception.json shows the equivalent shape from the polled API — but capture the webhook body rather than copying it, since the two are not guaranteed identical.",
   "resource_url": "https://api.shipstation.com/v2/labels/se-REPLACEXXX/track",
   "resource_type": "TRACK_EVENT_V2",
   "data": {
@@ -20,8 +20,8 @@
     "exception_description": "REPLACE_WITH_EXCEPTION_DESCRIPTION_OR_NULL",
     "events": [
       {
-        "occurred_at": "REPLACE_WITH_ISO_TIMESTAMP",
-        "carrier_occurred_at": "REPLACE_WITH_CARRIER_TIMESTAMP",
+        "occurred_at": "REPLACE_WITH_ISO_TIMESTAMP_Z",
+        "carrier_occurred_at": "REPLACE_WITH_ISO_TIMESTAMP_Z",
         "description": "REPLACE_WITH_EVENT_DESCRIPTION",
         "city_locality": "REPLACE_WITH_CITY_OR_NULL",
         "state_province": "REPLACE_WITH_STATE_OR_NULL",
