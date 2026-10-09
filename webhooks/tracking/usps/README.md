@@ -21,30 +21,26 @@ USPS payloads changed between the September 2026 captures and the
 
 | Fixture                                                                              | Shape     | `status_code` | `status_detail_code`          | Events | What it shows                                                                                                                |
 | ------------------------------------------------------------------------------------ | --------- | ------------- | ----------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| [`track-event-v2-pre-transit.json`](./track-event-v2-pre-transit.json)               | October   | `AC`          | `ELEC_ADVICE_RECD_BY_CARRIER` | 1      | Label created, USPS awaiting the item. **Derived** from the multi-scan capture. `ship_date` and ETA are `null`.              |
+| [`track-event-v2-pre-transit.json`](./track-event-v2-pre-transit.json)               | September | `AC`          | `ELEC_ADVICE_RECD_BY_CARRIER` | 1      | Label created, USPS awaiting the item. Every date field is `null`.                                                           |
 | [`track-event-v2-multi-scan.json`](./track-event-v2-multi-scan.json)                 | October   | `IT`          | `HUB_SCAN_OUT`                | 12     | Mid-transit across four facilities. Has an `estimated_delivery_date`, three location-less scans and a duplicated acceptance. |
 | [`track-event-v2-out-for-delivery.json`](./track-event-v2-out-for-delivery.json)     | September | `IT`          | `OUT_FOR_DELIVERY`            | 25     | Out for delivery. The richest fixture, and the one with the two-format quirks described below.                               |
 | [`track-event-v2-delivered.json`](./track-event-v2-delivered.json)                   | September | `DE`          | `DELIVERED`                   | 17     | Full lifecycle to delivery (`DELIVERED IN/AT MAILBOX`). Carries a **duplicate** delivery scan.                               |
 | [`track-event-v2-delivery-exception.json`](./track-event-v2-delivery-exception.json) | —         | —             | —                             | —      | **Placeholder** — awaiting a real capture.                                                                                   |
 
-Each fixture is a different parcel, except that the pre-transit file is the
-first scan of the multi-scan parcel. The `events` array is **cumulative** —
+Each fixture is a different parcel. The `events` array is **cumulative** —
 every delivery re-sends the full accumulated history, newest first.
 
-The September fixtures are real captures. In the October shape only
-`track-event-v2-multi-scan.json` is a real, as-received capture; the
-pre-transit file is cut from it and carries a `_derived_from` key. Its
-top-level `carrier_status_description`, `ship_date` and
-`estimated_delivery_date` are carried from the September pre-transit capture
-rather than observed on this parcel. Strip `_derived_from` if you copy a file
-into a test suite that checks exact shape. The September pre-transit capture
-is in git history.
+All five files except the placeholder are real, as-received captures.
+`track-event-v2-multi-scan.json` is the only one in the October shape; the
+other three are September captures from before the webhook and mapping
+changes.
 
 The change follows deliberate changes to the webhook and its field mapping,
-so the October shape is the current one. Until `out-for-delivery` and
-`delivered` are recaptured, treat those two as the older shape — a receiver
-should be tested against the October files, and tolerate the older shape only
-if it still has September-era bodies to replay.
+so the October shape is the current one. Until `pre-transit`,
+`out-for-delivery` and `delivered` are recaptured, treat those three as the
+older shape — a receiver should be tested against the October file, and
+tolerate the older shape only if it still has September-era bodies to
+replay.
 
 ## What changed: null before, populated now
 
@@ -217,8 +213,9 @@ time. See [`../README.md`](../README.md#carrier_occurred_at-is-not-utc).
 the out-for-delivery and delivered fixtures — it is USPS local scan time with
 a UTC marker glued on, and the implied offset varies per event within a
 single file (5, 6 and 7 hours in out-for-delivery; 4, 5 and 7 in delivered).
-The September pre-transit capture used a genuine
-offset (`"2026-08-19T15:44:46-07:00"`); it now lives only in git history.
+[`track-event-v2-pre-transit.json`](./track-event-v2-pre-transit.json)
+carries a genuine offset (`"2026-08-19T15:44:46-07:00"`), the only fixture
+here with a real UTC offset in this field.
 
 Parse `occurred_at` in every case, and use `carrier_occurred_at` for display
 only.
@@ -235,7 +232,7 @@ leaves them naive. In the October multi-scan `ship_date` equals the
 Tracking numbers are masked mid-string with `XXXXX`, preserving the 22-digit
 USPS length (`940015020621XXXXX26585`), and `tracking_url` is kept in step.
 The `se-` label ID in `resource_url` is masked the same way
-(`se-207416XXX`) — though `se-97410XXXX` in the September fixtures uses a
+(`se-207416XXX`) — though `se-97410XXXX` in the pre-transit fixture uses a
 5-character mask where the rest of the tree uses 3, so its original length is
 not recoverable.
 

@@ -12,18 +12,38 @@ belong in the folder's `README.md`, not in the fixture.
 ## Coverage summary
 
 **Fully covered:**
-- ✅ `webhooks/orders/` — 3 fixtures (single shipment, split shipment, + resource_url response)
-- ✅ `webhooks/labels/` — 3 fixtures (single, split shipment, + resource_url response)
-- ✅ `webhooks/fulfillments/` — 2 fixtures (shipped + resource_url response)
-- ✅ `webhooks/tracking/` — 15 fixtures (FedEx/UPS/USPS × 5 scenarios each)
-- ✅ `api/tracking/usps/` — 8 fixtures (full lifecycle)
+
+- ✅ `webhooks/orders/` — 3 fixtures (single shipment, split shipment, + resource_url response). Checked 2026-10-09: unchanged by the October webhook/mapping changes
+- ✅ `webhooks/labels/` — 3 fixtures (single, split shipment, + resource_url response). Checked 2026-10-09: unchanged
+- ✅ `webhooks/fulfillments/` — 2 fixtures (shipped + resource_url response). Checked 2026-10-09: unchanged
 - ✅ `patterns/` — 5 patterns (root + erp/ + wms/ organization)
 
+**Partly covered — older-shape fixtures awaiting recapture:**
+
+- ⚠️ `webhooks/tracking/` — 15 fixtures (FedEx/UPS/USPS × 5 scenarios each): 12 real, 3 placeholders. FedEx was checked 2026-10-09 and is unchanged. UPS and USPS changed in October; only `ups/track-event-v2-delivered.json` and `usps/track-event-v2-multi-scan.json` are recaptured in the current shape (see below)
+- ⚠️ `api/tracking/usps/` — 8 fixtures (full lifecycle). Not yet checked against the October changes
+
 **Gaps:**
+
 - ⚠️ Carrier exception scenarios (3 placeholder fixtures)
 - ⚠️ Webhook events not yet captured (fulfillment cancelled, batch completed)
 
 ## webhooks/tracking/
+
+Recapture in the current (October 2026) shape. These are real September
+captures, still accurate for that shape and labelled as such in the carrier
+READMEs. Replace each when a fresh capture is available:
+
+- [ ] `ups/track-event-v2-pre-transit.json`
+- [ ] `ups/track-event-v2-multi-scan.json`
+- [ ] `ups/track-event-v2-out-for-delivery.json`
+- [ ] `usps/track-event-v2-pre-transit.json`
+- [ ] `usps/track-event-v2-out-for-delivery.json`
+- [ ] `usps/track-event-v2-delivered.json`
+
+Already in the current shape (captured 2026-10-09):
+`ups/track-event-v2-delivered.json`, `usps/track-event-v2-multi-scan.json`.
+FedEx fixtures were checked against a current payload and need no change.
 
 Missing fixtures:
 
@@ -40,24 +60,39 @@ Missing fixtures:
 They are documented in the carrier READMEs. Listed here so a future capture
 that reproduces them isn't mistaken for a bad sanitize:
 
-- `carrier_occurred_at` is encoded four different ways across the tree and
-  is **not** UTC on UPS/USPS despite the `Z` suffix
-- USPS `In Transit to Next Facility` scans (`TL`/`NT`) convert with a fixed
-  7-hour offset regardless of the parcel's location, leaving
-  `usps/track-event-v2-out-for-delivery.json` (events 14/15) and
+- `carrier_occurred_at` is encoded four different ways across the tree. It
+  equals `occurred_at` on FedEx and on the current USPS shape; it is naive
+  carrier-local time (no suffix) on the current UPS shape; and it is carrier-
+  local time with a `Z` glued on in the September UPS and USPS fixtures
+- September USPS shape: `In Transit to Next Facility` scans (`TL`/`NT`)
+  convert with a fixed 7-hour offset regardless of the parcel's location,
+  leaving `usps/track-event-v2-out-for-delivery.json` (events 14/15) and
   `usps/track-event-v2-delivered.json` (events 7/8) out of `occurred_at`
-  order — the arrays sort by `carrier_occurred_at`
-- USPS mixes two event formats within one `events` array — ALL-CAPS
-  descriptions with the facility in `city_locality` and a populated
+  order — those arrays sort by `carrier_occurred_at`. The current USPS shape
+  is sorted by `occurred_at`
+- September USPS shape: two event formats within one `events` array —
+  ALL-CAPS descriptions with the facility in `city_locality` and a populated
   `postal_code`, versus Title-Case ones with the facility in `company_name`
-  and `postal_code` `null`
-- `usps/track-event-v2-delivered.json` carries two identical
-  `DELIVERED IN/AT MAILBOX` scans a minute apart
+  and `postal_code` `null`. The current shape does not show this
+- USPS duplicate scans: `usps/track-event-v2-delivered.json` carries two
+  identical `DELIVERED IN/AT MAILBOX` scans a minute apart, and
+  `usps/track-event-v2-multi-scan.json` carries two identical
+  `Accepted at USPS Facility` scans 13 minutes apart
+- Current USPS shape: `In Transit to Next Facility` scans have
+  `city_locality`, `state_province`, `postal_code`, `latitude` and
+  `longitude` all `null`, and `Accepted at USPS Facility` scans have a `null`
+  `status_detail_code`
 - FedEx `actual_delivery_date` and the `Delivered` scan's `occurred_at`
   disagree by 14 hours in `fedex/track-event-v2-delivered.json`
-- UPS reports detail in `carrier_detail_code` and leaves `status_detail_code`
-  `null` (except pre-transit); FedEx and USPS do the opposite
-- UPS uses `""` rather than `null` for absent `postal_code`
+- Current UPS shape: `status_detail_code` is populated on every scan,
+  alongside `carrier_detail_code`. The September UPS fixtures leave
+  `status_detail_code` `null` (except pre-transit)
+- Current UPS shape: `OUT_FOR_DELIVERY` appears on two scans (`Loaded on
+Delivery Vehicle`, then `Out For Delivery Today`), `status_code` goes `IT`
+  → `AC` → `IT` across the first scans, and `ship_date` is the label date at
+  midnight rather than the first scan's timestamp
+- UPS uses `""` rather than `null` for absent `postal_code`, and in the
+  current shape for `signer`
 
 ## Sanitization completeness
 
@@ -68,7 +103,7 @@ All fixtures have been reviewed and sanitized:
 - [x] Names and addresses — replaced with fake values
 - [x] ZIP codes on delivery scans — masked or normalized
 - [x] Download token URLs — masked (`XXXXXXXXXXXXXXXXXXXX`)
-- [x] Coordinates — normalized to 2 decimal places (privacy)
+- [x] Coordinates — normalized to 2 decimal places (privacy); raw UPS and USPS bodies now arrive at 4 decimals, so normalize on every new capture
 - [x] Account identifiers — intentionally kept (`store_id`, `carrier_id`, etc. are non-personal)
 
 ## Coverage gaps

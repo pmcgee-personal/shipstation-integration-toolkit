@@ -4,15 +4,16 @@ Thanks for helping improve this toolkit! The most useful contributions are new o
 
 ## Adding or updating fixtures
 
-1. **Pull real data from production.** Capture the full webhook body or API response as-is, with no modifications.
+1. **Pull real data from production.** Capture the full webhook body or API response as-is, with no modifications. Fixtures are real captures: don't build one by trimming, editing or combining another capture. If a scenario hasn't been captured yet, leave its placeholder in place and list it in `TODO.md`.
 
 2. **Sanitize carefully.** Replace:
-   - Tracking numbers (use `9434650105497XXXXX0495` format)
-   - Order/shipment/label IDs (use `se-184976XXX` format)
+   - Tracking numbers: mask the middle and preserve the original length. For example `940015020621XXXXX26585` (USPS, 22 digits), `1ZXXXH4303XXXXX632` (UPS, 18 characters) and `383369XXX473` (FedEx, 12 digits). Keep any `tracking_url` in step with the masked number
+   - Order/shipment/label IDs (use `se-184976XXX` format), including the `se-` ID inside a tracking `resource_url`
    - Names and addresses
-   - ZIP codes
+   - ZIP codes in address fields. ZIP codes on tracking scans (carrier facilities and the delivery locality) are kept as received
    - Phone numbers
    - Any customer-identifying data
+   - Latitude and longitude: round to 2 decimal places. Raw UPS and USPS tracking bodies arrive at 4 decimals, and a `Delivered` scan can be at delivery-address precision
 
    Keep (they're non-sensitive):
    - `store_id`, `warehouse_id`, `carrier_id`, `user_id`
@@ -23,17 +24,17 @@ Thanks for helping improve this toolkit! The most useful contributions are new o
 
 4. **Add metadata:**
    - Remove any `_fixture_notes` key
-   - Add `_captured_at` with the capture date (format: `YYYY-MM-DD`)
+   - Add `_captured_at` with the date the payload was captured (format: `YYYY-MM-DD`)
 
 5. **For webhook pointer events,** capture both halves: the webhook body AND the response from calling its `resource_url`. Tracking webhooks are inline, so just the one capture.
 
-6. **Update the README.** Add your new scenario to the Scenarios table in the relevant folder's `README.md`.
+6. **Update the README.** Add your new scenario to the Scenarios table in the relevant folder's `README.md`. If the payload's shape differs from other fixtures in the folder (fields that were `null` and are now populated, or the reverse), record the differences in the README and mark which fixtures are the older shape.
 
 7. **Check the TODO.** See if there are known placeholders you're filling in or sanitization gaps you're addressing — update `TODO.md` if so.
 
 ## Reporting issues
 
-- **Fixtures look stale or wrong?** Open an issue with the file path and what's incorrect.
+- **Fixtures look stale or wrong?** Open an issue with the file path and what's incorrect. Payload shapes change over time, so include the `_captured_at` date and which fields differ.
 - **Found real data (names, addresses, tracking)?** See `SECURITY.md`.
 - **Carrier behavior difference?** Document it in the relevant folder's `README.md` (not the fixture).
 

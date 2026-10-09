@@ -1,4 +1,5 @@
 {
+  "_fixture_notes": "PLACEHOLDER — replace with a sanitized real TRACK_EVENT_V2 webhook body for a UPS delivery exception. Mask the tracking number (1Z + mask first 3 of the shipper ID + last 3 kept, 18 chars total) and the se- label ID (last 3 digits), keep tracking_url in step with tracking_number, normalize latitude/longitude to 2 decimals, delete this _fixture_notes key, and add _captured_at (YYYY-MM-DD). Field names and key order match the 2026-10-09 UPS capture in this folder. As of that capture UPS populates status_detail_code / status_detail_description on every event alongside carrier_detail_code, so expect a real status_detail_code on an exception rather than null — confirm the value instead of assuming one. Expect carrier_occurred_at to be naive carrier-local time (no suffix), ship_date / estimated_delivery_date to be naive, actual_delivery_date to be null, and signer to be an empty string.",
   "resource_url": "https://api.shipstation.com/v2/labels/se-REPLACEXXX/track",
   "resource_type": "TRACK_EVENT_V2",
   "data": {

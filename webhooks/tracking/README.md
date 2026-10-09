@@ -63,11 +63,11 @@ rather than on the arrival of an event row.
 
 ## Carriers
 
-| Folder               | Carrier | `carrier_code`   | `carrier_id` | Fixtures                                                    |
-| -------------------- | ------- | ---------------- | ------------ | ----------------------------------------------------------- |
-| [`fedex/`](./fedex/) | FedEx   | `fedex_walleted` | `194`        | 4 real, 1 placeholder                                       |
-| [`ups/`](./ups/)     | UPS     | `ups`            | `3`          | 1 real, 3 derived from it, 1 placeholder                    |
-| [`usps/`](./usps/)   | USPS    | `stamps_com`     | `1`          | 3 real (1 current shape, 2 older), 1 derived, 1 placeholder |
+| Folder               | Carrier | `carrier_code`   | `carrier_id` | Fixtures                                         |
+| -------------------- | ------- | ---------------- | ------------ | ------------------------------------------------ |
+| [`fedex/`](./fedex/) | FedEx   | `fedex_walleted` | `194`        | 4 real, 1 placeholder                            |
+| [`ups/`](./ups/)     | UPS     | `ups`            | `3`          | 4 real (1 current shape, 3 older), 1 placeholder |
+| [`usps/`](./usps/)   | USPS    | `stamps_com`     | `1`          | 4 real (1 current shape, 3 older), 1 placeholder |
 
 Each folder has its own README covering that carrier's quirks.
 
@@ -77,49 +77,47 @@ Following changes to the webhook and its field mapping, UPS and USPS bodies
 changed after the September captures. FedEx was checked by hand against a
 current payload and did not change, so its fixtures stand.
 
-- **UPS** — all four non-placeholder fixtures were rebuilt from one parcel
-  captured 2026-10-09. Only the delivered fixture is as received; the other
-  three are earlier snapshots cut from its cumulative `events` array and carry
-  a `_derived_from` key.
-- **USPS** — `track-event-v2-multi-scan.json` is a new real capture and
-  `track-event-v2-pre-transit.json` is cut from it. `out-for-delivery` and
-  `delivered` are still the **September shape** and are labelled as such in
-  [`usps/README.md`](./usps/README.md) until they are recaptured.
+- **UPS** — `track-event-v2-delivered.json` is a new real capture
+  (2026-10-09) in the current shape. `pre-transit`, `multi-scan` and
+  `out-for-delivery` are still the **September shape**.
+- **USPS** — `track-event-v2-multi-scan.json` is a new real capture
+  (2026-10-09) in the current shape. `pre-transit`, `out-for-delivery` and
+  `delivered` are still the **September shape**.
 
-The September UPS fixtures and the September USPS pre-transit are in git
-history. Wherever this file says "September shape" it refers to payloads that
-the current webhook no longer produces.
+Each carrier README labels which fixtures are which, and these remain real
+captures until they are recaptured. Wherever this file says "September shape"
+it refers to payloads that the current webhook no longer produces.
 
 ## Coverage
 
-| Scenario           | FedEx          | UPS            | USPS             |
-| ------------------ | -------------- | -------------- | ---------------- |
-| Pre-transit        | —              | 🧪 derived     | 🧪 derived       |
-| In transit         | ✅             | 🧪 derived     | ✅               |
-| Out for delivery   | ✅             | 🧪 derived     | ✅ (older shape) |
-| Delivered          | ✅             | ✅             | ✅ (older shape) |
-| Delivery exception | 🚧 placeholder | 🚧 placeholder | 🚧 placeholder   |
+| Scenario           | FedEx          | UPS              | USPS             |
+| ------------------ | -------------- | ---------------- | ---------------- |
+| Pre-transit        | —              | ✅ (older shape) | ✅ (older shape) |
+| In transit         | ✅             | ✅ (older shape) | ✅               |
+| Out for delivery   | ✅             | ✅ (older shape) | ✅ (older shape) |
+| Delivered          | ✅             | ✅               | ✅ (older shape) |
+| Delivery exception | 🚧 placeholder | 🚧 placeholder   | 🚧 placeholder   |
 
-🧪 means a snapshot cut from a real capture of the same parcel, not an
-independent capture. Its top-level fields are inferred from the newest scan;
-see the carrier README for exactly what was assumed.
+"Older shape" means captured before the October 2026 webhook and mapping
+changes; recapture is pending.
 
 ## Carrier differences that will break shared code
 
 The envelope is identical across carriers — same 16 `data` keys in the same
 order, same 20 event keys in the same order, in every one of the 12
-non-placeholder fixtures. The **values** are not consistent:
+non-placeholder fixtures. The **values** are not consistent. The table
+describes the current shape; the September fixtures differ where noted:
 
-| Behaviour                      | FedEx               | UPS                                   | USPS                                         |
-| ------------------------------ | ------------------- | ------------------------------------- | -------------------------------------------- |
-| `status_detail_code`           | Populated           | Populated on every scan               | Populated, except `null` on `OB` scans       |
-| `carrier_detail_code`          | `null`              | Populated (`FS`, `OF`, `OT`, …)       | `null`                                       |
-| `postal_code` when absent      | `null`              | `""` empty string                     | `null` (only on scans with no location)      |
-| `country_code`                 | Always `US`         | Always `US`                           | Always `US` (often `null` in older fixtures) |
-| `signer`                       | `null`              | `""` on every scan                    | `null`                                       |
-| `ship_date` / delivery dates   | Naive, no suffix    | `ship_date` and ETA naive; actual `Z` | `Z`-suffixed                                 |
-| `actual_delivery_date` vs scan | **Disagree by 14h** | Match exactly                         | Match exactly                                |
-| Events sorted by `occurred_at` | Yes                 | Yes                                   | Yes (older fixtures: **No** — see below)     |
+| Behaviour                      | FedEx               | UPS                                                            | USPS                                         |
+| ------------------------------ | ------------------- | -------------------------------------------------------------- | -------------------------------------------- |
+| `status_detail_code`           | Populated           | Populated on every scan (September: `null` except pre-transit) | Populated, except `null` on `OB` scans       |
+| `carrier_detail_code`          | `null`              | Populated (`FS`, `OF`, `OT`, …)                                | `null`                                       |
+| `postal_code` when absent      | `null`              | `""` empty string                                              | `null` (only on scans with no location)      |
+| `country_code`                 | Always `US`         | Always `US`                                                    | Always `US` (often `null` in older fixtures) |
+| `signer`                       | `null`              | `""` on every scan                                             | `null`                                       |
+| `ship_date` / delivery dates   | Naive, no suffix    | `ship_date` and ETA naive; actual `Z`                          | `Z`-suffixed                                 |
+| `actual_delivery_date` vs scan | **Disagree by 14h** | Match exactly                                                  | Match exactly                                |
+| Events sorted by `occurred_at` | Yes                 | Yes                                                            | Yes (older fixtures: **No** — see below)     |
 
 `status_detail_code` now works as the single field for telling _out for
 delivery_ from _in transit_ on all three carriers, which it did not for UPS in
@@ -129,8 +127,8 @@ September. It does not map one event to one state:
   (`Loaded on Delivery Vehicle`, then `Out For Delivery Today`), and
   `DELIVERY_SCHEDULED` just before them is still in transit.
 - **USPS** leaves it `null` on `Accepted at USPS Facility` scans.
-- **Both** can move `status_code` backwards or sideways (UPS `IT` → `AC` →
-  `IT`), so don't build a forward-only state machine on it.
+- **UPS** can move `status_code` backwards or sideways (`IT` → `AC` → `IT`),
+  so don't build a forward-only state machine on it.
 
 Location fields are not uniformly present either. A USPS
 `In Transit to Next Facility` scan has `city_locality`, `state_province`,
@@ -142,21 +140,23 @@ and `null` coordinates. Test each field for absence, and treat `""` and
 ## `carrier_occurred_at` is not UTC
 
 Every event carries two timestamps. `occurred_at` is trustworthy UTC.
-`carrier_occurred_at` is not reliably so, and is encoded three different ways
+`carrier_occurred_at` is not reliably so, and is encoded four different ways
 across this tree:
 
-| Encoding               | Where                                                 | Actually UTC?                                            |
-| ---------------------- | ----------------------------------------------------- | -------------------------------------------------------- |
-| `2026-08-28T19:24:32Z` | All FedEx fixtures; the current USPS shape            | Yes — identical to `occurred_at`                         |
-| `2026-10-09T18:21:51`  | All UPS fixtures                                      | **No** — naive carrier-local time; offset varies by scan |
-| `2026-09-03T12:18:41Z` | USPS `out-for-delivery` and `delivered` (older shape) | **No** — carrier-local time with a `Z` glued on          |
+| Encoding                    | Where                                                     | Actually UTC?                                            |
+| --------------------------- | --------------------------------------------------------- | -------------------------------------------------------- |
+| `2026-08-28T19:24:32Z`      | All FedEx fixtures; `usps/track-event-v2-multi-scan.json` | Yes — identical to `occurred_at`                         |
+| `2026-10-09T18:21:51`       | `ups/track-event-v2-delivered.json`                       | **No** — naive carrier-local time; offset varies by scan |
+| `2026-09-03T12:18:41Z`      | UPS and USPS September fixtures (in transit / delivered)  | **No** — carrier-local time with a `Z` glued on          |
+| `2026-08-19T15:44:46-07:00` | `usps/track-event-v2-pre-transit.json`                    | Yes — a real offset                                      |
+| `2026-09-03T11:19:14`       | `ups/track-event-v2-pre-transit.json`                     | Unspecified — no suffix at all                           |
 
-The UPS value carries no suffix and is carrier-local time. In the delivered
-fixture the offset from `occurred_at` is 7 hours for scans in Washington and
-Oregon and 4 hours for scans in Massachusetts and Connecticut, so the scan's
-time zone is needed to turn it into an instant. In the older USPS fixtures
-the `Z` suffix is present but the value is also local, and the implied offset
-varies **per event within one file** —
+The current UPS value carries no suffix and is carrier-local time. In the
+delivered fixture the offset from `occurred_at` is 7 hours for scans in
+Washington and Oregon and 4 hours for scans in Massachusetts and Connecticut,
+so the scan's time zone is needed to turn it into an instant. In the
+September UPS and USPS fixtures the `Z` suffix is present but the value is
+also local, and the implied offset varies **per event within one file** —
 `usps/track-event-v2-out-for-delivery.json` mixes 5, 6 and 7 hours as the
 parcel crosses time zones — and a parser that trusts the `Z` will place scans
 hours from where they happened.
@@ -164,8 +164,8 @@ hours from where they happened.
 In the older USPS shape the conversion into `occurred_at` was itself
 inconsistent: `In Transit to Next Facility` scans (`event_code` `TL`/`NT`)
 were converted with a fixed 7-hour offset regardless of where the parcel was,
-which pushed them past the scan that follows and left two USPS fixtures **out
-of chronological order** in array position. The current shape does not show
+which pushed them past the scan that follows and left two September USPS
+fixtures **out of chronological order** in array position. The current shape does not show
 this, but its `TL` scans have no location to check against, so keep sorting.
 See [`usps/README.md`](./usps/README.md).
 

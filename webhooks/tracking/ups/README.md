@@ -2,65 +2,46 @@
 
 ## Objective
 
-To hold `TRACK_EVENT_V2` webhook bodies for UPS parcels at each stage of the
-lifecycle, so a receiver can be built and tested without waiting on a live
-shipment.
+To hold real `TRACK_EVENT_V2` webhook bodies for UPS parcels at each stage of
+the lifecycle, so a receiver can be built and tested without waiting on a
+live shipment.
 
 Unlike every other webhook in this repo, tracking delivers its data **inline
 in the POST body** — there is no follow-up call to make. See
 [`../README.md`](../README.md) for why, and for the fields shared by all
 three carriers.
 
-All fixtures here use `carrier_code` `ups` and `carrier_id` `3`.
+All fixtures here were captured with `carrier_code` `ups` and `carrier_id`
+`3`.
 
 ## Scenarios
 
-| Fixture                                                                              | `status_code` | `status_detail_code`          | `carrier_detail_code` | Events | What it shows                                                                                                    |
-| ------------------------------------------------------------------------------------ | ------------- | ----------------------------- | --------------------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
-| [`track-event-v2-pre-transit.json`](./track-event-v2-pre-transit.json)               | `NY`          | `ELEC_ADVICE_RECD_BY_CARRIER` | `MP`                  | 1      | Label created, UPS has not taken possession. `ship_date` is `null`.                                              |
-| [`track-event-v2-multi-scan.json`](./track-event-v2-multi-scan.json)                 | `IT`          | `DELIVERY_SCHEDULED`          | `YP`                  | 13     | Across the country by hub, now processing at the destination facility. In transit, **not** yet out for delivery. |
-| [`track-event-v2-out-for-delivery.json`](./track-event-v2-out-for-delivery.json)     | `IT`          | `OUT_FOR_DELIVERY`            | `OT`                  | 15     | Out for delivery. Two scans carry `OUT_FOR_DELIVERY`; this is the second.                                        |
-| [`track-event-v2-delivered.json`](./track-event-v2-delivered.json)                   | `DE`          | `DELIVERED`                   | `FS`                  | 16     | Full lifecycle to delivery. `actual_delivery_date` matches the `Delivered` scan exactly.                         |
-| [`track-event-v2-delivery-exception.json`](./track-event-v2-delivery-exception.json) | —             | —                             | —                     | —      | **Placeholder** — awaiting a real capture.                                                                       |
+| Fixture                                                                              | Shape     | `status_code` | `status_detail_code`          | `carrier_detail_code` | Events | What it shows                                                                                               |
+| ------------------------------------------------------------------------------------ | --------- | ------------- | ----------------------------- | --------------------- | ------ | ----------------------------------------------------------------------------------------------------------- |
+| [`track-event-v2-pre-transit.json`](./track-event-v2-pre-transit.json)               | September | `NY`          | `ELEC_ADVICE_RECD_BY_CARRIER` | `MP`                  | 1      | Label created, UPS has not taken possession. `ship_date` is `null` but an `estimated_delivery_date` exists. |
+| [`track-event-v2-multi-scan.json`](./track-event-v2-multi-scan.json)                 | September | `IT`          | `null`                        | `OD`                  | 10     | Mid-transit, loaded on the delivery vehicle. Ten scans accumulated.                                         |
+| [`track-event-v2-out-for-delivery.json`](./track-event-v2-out-for-delivery.json)     | September | `IT`          | `null`                        | `OT`                  | 13     | Out for delivery. Four near-identical `Preparing for Delivery` scans in a row.                              |
+| [`track-event-v2-delivered.json`](./track-event-v2-delivered.json)                   | October   | `DE`          | `DELIVERED`                   | `FS`                  | 16     | Full lifecycle to delivery. `actual_delivery_date` matches the `Delivered` scan exactly.                    |
+| [`track-event-v2-delivery-exception.json`](./track-event-v2-delivery-exception.json) | —         | —             | —                             | —                     | —      | **Placeholder** — awaiting a real capture.                                                                  |
 
-## One parcel, four snapshots
+Each fixture is a different parcel. The `events` array is **cumulative** —
+every delivery re-sends the full accumulated history, newest first.
 
-Unlike the earlier UPS captures (one parcel per file), these four files are
-the **same parcel** (`1ZXXXH4303XXXXX632`, label `se-207301XXX`) at four
-points in its life, like the FedEx folder's paired captures.
+## Two shapes in this folder
 
-Only [`track-event-v2-delivered.json`](./track-event-v2-delivered.json) is a
-real, as-received capture (2026-10-09). The other three are **derived from
-it**: because `events` is cumulative and newest-first, the history at an
-earlier moment is the delivered history with the newest scans cut off. Each
-derived file carries a `_derived_from` key saying so. Strip that key if you
-copy a file into a test suite that checks for exact shape.
+UPS payloads changed between the September 2026 captures and the 2026-10-09
+capture, following changes to the webhook and its field mapping. The October
+shape is the current one. Only `track-event-v2-delivered.json` has been
+recaptured in it; the other three real fixtures are the September shape and
+are due for recapture.
 
-What the derivation assumes, and has not observed:
+The sections below describe the current shape first, then the differences
+from the September fixtures that remain in this folder.
 
-- Top-level `status_code`, `status_detail_*`, `carrier_detail_code`,
-  `status_description` and `carrier_status_*` mirror `events[0]`. This holds
-  on the delivered capture.
-- `estimated_delivery_date` is the same value at every stage.
-- `ship_date` is the label-creation date (`2026-10-02T00:00:00`) on every
-  derived file except pre-transit, where it is `null` — carried from the
-  September pre-transit capture, which showed `ship_date: null` at that stage.
-- Pre-transit top-level `status_description` is `Accepted` although the event
-  says `Not Yet In System`. The September capture showed the same mismatch,
-  so it is kept rather than "fixed".
+## Current shape: `status_detail_code` is populated
 
-If UPS behaves differently at any of these stages, replace the derived file
-with a real capture and delete its `_derived_from` key.
-
-The `events` array is **cumulative** — every delivery re-sends the full
-accumulated history, newest first, sorted by `occurred_at`.
-
-## `status_detail_code` is now populated on UPS
-
-The September 2026 captures left `status_detail_code` and
-`status_detail_description` `null` on every UPS event except pre-transit, and
-told you to branch on `carrier_detail_code`. **The 2026-10-09 capture
-populates both on every event, top-level and per scan**, alongside
+The 2026-10-09 capture populates `status_detail_code` and
+`status_detail_description` on every event, top-level and per scan, alongside
 `carrier_detail_code`:
 
 | `status_detail_code`          | `carrier_detail_code` | Scan description                  | `status_code` |
@@ -76,33 +57,28 @@ populates both on every event, top-level and per scan**, alongside
 | `OUT_FOR_DELIVERY`            | `OT`                  | `Out For Delivery Today`          | `IT`          |
 | `DELIVERED`                   | `FS`                  | `Delivered`                       | `DE`          |
 
-So the FedEx/USPS pattern — branch on `status_detail_code` — now works for
-UPS too. But note what the table shows:
+So the FedEx/USPS pattern — branch on `status_detail_code` — applies to UPS
+too. Note what the table shows:
 
-- **`OUT_FOR_DELIVERY` fires twice, 68 minutes apart.** `Loaded on Delivery
-Vehicle` (`OF`) and `Out For Delivery Today` (`OT`) carry the same
-  `status_detail_code`. A receiver that notifies on the first sighting of
-  `OUT_FOR_DELIVERY` sends at the _loaded_ scan, not the _out_ scan.
-  `DELIVERY_SCHEDULED` (`YP`) comes just before and is still plain in transit.
-- **`description` alone cannot classify a scan.** `Arrived at Facility`
+- **`OUT_FOR_DELIVERY` appears on two scans, 68 minutes apart.**
+  `Loaded on Delivery Vehicle` (`OF`) and `Out For Delivery Today` (`OT`)
+  carry the same `status_detail_code`. A receiver that notifies on the first sighting of
+  `OUT_FOR_DELIVERY` sends at the _loaded_ scan. `DELIVERY_SCHEDULED` (`YP`)
+  comes just before and is still in transit.
+- **`description` alone does not identify a scan.** `Arrived at Facility`
   appears for both `RECEIVED_BY_CARRIER` (`OR`) and `HUB_SCAN_IN` (`AR`).
   Use the codes.
-- **`status_code` is not monotonic.** Oldest to newest the sequence is `NY`,
-  `IT` (`Drop-Off`), `AC` (`RFID Confirmed Pickup`), `IT`, … `DE`. The drop-off
-  scan lands _before_ the pickup scan, so a state machine that only moves
-  forward will reject the `AC` and stall.
+- **`status_code` does not only move forward.** Oldest to newest the
+  sequence is `NY`, `IT` (`Drop-Off`), `AC` (`RFID Confirmed Pickup`), `IT`, …
+  `DE`. The drop-off scan is timestamped before the pickup scan, so a state
+  machine that only moves forward will reject the `AC`.
 
-`carrier_detail_code` is still populated and the two fields move together, but
-the code vocabulary has shifted (see below), so prefer `status_detail_code`
-for new code. Treat both as pass-through values, not a stable contract.
+`carrier_detail_code` is still populated and the two fields move together.
+Treat both as pass-through values, not a stable contract.
 
-### Earlier shape (September 2026 captures)
+### Differences from the September fixtures
 
-Kept here for anyone replaying older bodies. The change follows deliberate
-changes to the webhook and its field mapping, so the 2026-10-09 shape is the
-current one. The original fixtures are in git history before that update.
-
-|                           | September captures                                       | 2026-10-09 capture                                                        |
+|                           | September fixtures                                       | 2026-10-09 capture                                                        |
 | ------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------- |
 | `status_detail_code`      | `null` (except pre-transit)                              | Populated on every scan                                                   |
 | Scan wording              | `On the Way`, `We Have Your Package`, `Out for Delivery` | `Arrived at Facility`, `Departed from Facility`, `Out For Delivery Today` |
@@ -110,21 +86,21 @@ current one. The original fixtures are in git history before that update.
 | First possession scan     | `OR` — `We Have Your Package`                            | `PC` (`RFID Confirmed Pickup`) then `OR`                                  |
 | Drop-off scan             | `Dropped off at The UPS Store by Customer`               | `Drop-Off`                                                                |
 | Repeated scans            | Four `Preparing for Delivery` in a row                   | One `Processing at UPS Facility`                                          |
-| `carrier_occurred_at`     | `Z`-suffixed, but local time                             | No suffix, genuinely local                                                |
+| `carrier_occurred_at`     | `Z`-suffixed, but local time (pre-transit: no suffix)    | No suffix, local time                                                     |
 | `signer`                  | `null` (`""` on pre-transit)                             | `""` on every scan                                                        |
-| `ship_date`               | First scan timestamp, `Z`-suffixed                       | Label date at midnight, no suffix                                         |
-| `estimated_delivery_date` | `Z`-suffixed                                             | No suffix                                                                 |
-| `latitude` / `longitude`  | 2 decimals                                               | Full precision (normalized to 2 here)                                     |
+| `ship_date`               | First scan timestamp, `Z`-suffixed (pre-transit: `null`) | Label date at midnight, no suffix                                         |
+| `estimated_delivery_date` | `Z`-suffixed (pre-transit: no suffix)                    | No suffix                                                                 |
+| `latitude` / `longitude`  | 2 decimals                                               | 4 decimals in the raw body (normalized to 2 here)                         |
 
 A receiver that still has to read older bodies should key on codes and treat
 `description` as display text.
 
 ## Codes seen
 
-`carrier_detail_code` across the 2026-10-09 capture: `AR`, `DP`, `FS`, `MP`,
-`OF`, `OR`, `OT`, `PC`, `XD`, `YP`. The September captures also used `OD`.
-`event_code` is `M` (label), `P` (pickup), `I` (everything in transit), `D`
-(delivered).
+`carrier_detail_code` in the 2026-10-09 capture: `AR`, `DP`, `FS`, `MP`,
+`OF`, `OR`, `OT`, `PC`, `XD`, `YP`. The September fixtures use `AR`, `DP`,
+`FS`, `MP`, `OD`, `OR`, `OT`, `XD`, `YP`. `event_code` is `M` (label), `P`
+(pickup, October only), `I` (everything in transit) and `D` (delivered).
 
 ## Empty strings where you would expect `null`
 
@@ -132,52 +108,60 @@ UPS mixes `null` and `""` for absent values, and they are not
 interchangeable:
 
 - `postal_code` is `""` on every scan **except** `Delivered`, which carries
-  the real ZIP (`06850`).
-- `city_locality` and `state_province` are `""` (not `null`) on the
-  label-created scan, which has no location.
-- `signer` is `""` on every scan, including `Delivered` — delivery here was
-  not signed for. `company_name` and `proof_of_delivery_url` are `null`.
-- `latitude` and `longitude` are `null` on the label-created scan.
+  the real ZIP (`06850` in the October capture, `48067` in September).
+- In the October capture `signer` is `""` on every scan, including
+  `Delivered`. In the September fixtures it is `null` except on pre-transit,
+  where it is `""`.
+- `city_locality` and `state_province` are `""` (not `null`) on the October
+  label-created scan, which has no location, and `latitude` and `longitude`
+  are `null` there.
+- `company_name` and `proof_of_delivery_url` are `null` throughout.
 
 `if (event.postal_code)` and `if (event.postal_code !== null)` disagree on UPS
 data. Treat empty string and `null` as the same "absent" case explicitly.
 
 ## Timestamps
 
-**`carrier_occurred_at` is now genuine carrier-local time, with no suffix.**
-Compared with `occurred_at` across the delivered capture, the offset is
-exactly 7 hours for scans in Washington and Oregon (Pacific daylight time)
-and exactly 4 hours for scans in Massachusetts and Connecticut (Eastern
-daylight time). Nothing is glued on, so a parser will treat it as a naive
-local timestamp rather than silently mistaking it for UTC.
+**October capture:** `carrier_occurred_at` has no suffix and is carrier-local
+time. Compared with `occurred_at`, the offset is 7 hours for scans in
+Washington and Oregon (Pacific daylight time) and 4 hours for scans in
+Massachusetts and Connecticut (Eastern daylight time). The scan's time zone
+is needed to turn it into an instant.
 
-This differs from the September behaviour (`Z` on local time, see
-[`../README.md`](../README.md#carrier_occurred_at-is-not-utc)), but you still
-cannot recover an instant from it without knowing the scan's time zone. Parse
-`occurred_at` and use `carrier_occurred_at` for display only.
+**September fixtures:** `carrier_occurred_at` is `Z`-suffixed but is not UTC.
+It is UPS's local scan time with a UTC marker glued on. Comparing it against
+`occurred_at` yields offsets of 4, 5 **and** 7 hours _within a single file_ —
+the parcel is crossing time zones and each scan carries its own local clock.
+[`track-event-v2-pre-transit.json`](./track-event-v2-pre-transit.json) has
+**no** suffix at all (`"2026-09-03T11:19:14"`), where the other September
+fixtures use `Z`.
 
-`actual_delivery_date` is `Z`-suffixed and equals the `Delivered` scan's
-`occurred_at` exactly (`2026-10-09T22:21:51Z`). `ship_date` and
-`estimated_delivery_date` are naive and date-only (midnight). So one payload
-mixes suffixed and unsuffixed dates; a parser that requires an offset will
-reject two of the three.
+In every case, parse `occurred_at` and use `carrier_occurred_at` for display
+only. See [`../README.md`](../README.md#carrier_occurred_at-is-not-utc).
 
-`ship_date` (`2026-10-02`) is the label date, not the date UPS took the
-parcel. The first physical scan is three days later (`Drop-Off`,
-`2026-10-05`). Don't use it as a pickup time.
+`actual_delivery_date` is `Z`-suffixed in the October capture and equals the
+`Delivered` scan's `occurred_at` exactly (`2026-10-09T22:21:51Z`). Its
+`ship_date` and `estimated_delivery_date` are naive and date-only (midnight),
+so one payload mixes suffixed and unsuffixed dates; a parser that requires an
+offset rejects two of the three. In the September fixtures all three are
+`Z`-suffixed (pre-transit: naive).
+
+The October `ship_date` (`2026-10-02`) is the label date, not the date UPS
+took the parcel; the first physical scan is three days later (`Drop-Off`,
+`2026-10-05`). In the September fixtures `ship_date` equals the first scan's
+timestamp.
 
 ## Sanitization
 
-The tracking number is masked mid-string, preserving the 18-character UPS
-`1Z` length (`1ZXXXH4303XXXXX632`), and the long `wwwapps.ups.com`
-`tracking_url` is kept in step. The `se-` label ID in `resource_url` is
-masked the same way (`se-207301XXX`).
+Tracking numbers are masked mid-string, preserving the 18-character UPS `1Z`
+length (`1ZXXXH4303XXXXX632` in the October capture, `1ZXXXG2702XXXXX791` in
+September), and the long `wwwapps.ups.com` `tracking_url` is kept in step.
+The `se-` label ID in `resource_url` is masked the same way (`se-207301XXX`).
 
-Coordinates are normalized to 2 decimal places. The real `Delivered` scan
-carried delivery-address precision (4 decimals) that differed from the
-facility coordinates, which is the reason for the rule. The delivery ZIP
-(`06850`) is kept, as the Royal Oak ZIP was in the earlier fixture.
+Coordinates are normalized to 2 decimal places. The real October `Delivered`
+scan arrived at delivery-address precision (4 decimals), which differed from
+the facility coordinates. The delivery ZIP is kept in both shapes.
 
-No names, signers, addresses or phone numbers appear (`signer` is `""` and
+No names, addresses or phone numbers appear (`signer` is `null` or `""` and
 `proof_of_delivery_url` is `null` throughout). See
 [`../README.md`](../README.md#pii-in-tracking-payloads).
