@@ -46,4 +46,4 @@ sequenceDiagram
 - Both `"shipment_created_v2"` and `"fulfillment_shipped_v2"` webhooks contain **pointers only** (`"resource_url"`). Always call `GET "resource_url"` to retrieve full details.
 - ShipStation automatically syncs fulfillment and tracking info back to the connected store — your ERP does not need to handle this.
 - Useful for keeping your ERP in sync with ShipStation's fulfillment state in near-real-time.
-- This pattern can be combined with the [`erp-sync-label-print-ui.md`](../patterns/erp-sync-label-print-ui.md). Both `"label_created_v2"` and `"fulfillment_shipped_v2"` webhooks will fire, allowing your ERP to track label creation and fulfillment separately.
+- This pattern can be combined with the [`store-import-erp-sync-label-print-ui.md`](./store-import-erp-sync-label-print-ui.md). Both `"label_created_v2"` and `"fulfillment_shipped_v2"` webhooks will fire, allowing your ERP to track label creation and fulfillment separately.

@@ -50,7 +50,7 @@ sequenceDiagram
 
 ## Notes
 
-- **This flow connects existing carrier accounts only.** BYOA onboarding does not enable ShipStation API Carriers (wallet funding, insurance, etc.). To offer ShipStation API carriers, use the [Carrier Portal](../partner-api/carrier-portal-onboarding.md) flow or [ShipStation Elements](https://docs.shipstation.com/apis/shipengine/docs/elements/elements-guide).
+- **This flow connects existing carrier accounts only.** BYOA onboarding does not enable ShipStation API Carriers (wallet funding, insurance, etc.). To offer ShipStation API carriers, use the [Carrier Portal](./carrier-portal-onboarding.md) flow or [ShipStation Elements](https://docs.shipstation.com/apis/shipengine/docs/elements/elements-guide).
 - **On-Behalf-Of header is required** for warehouse creation, carrier connection, and carrier list queries. This header tells ShipStation which account the requests are for.
 - Warehouses represent ship-from locations; you'll typically create one per fulfillment center or distribution hub the shipper operates.
 - **Authentication varies by carrier.** Some carriers use OAuth (UPS), others use API keys or account credentials. The integrator UI must accommodate the authentication method required by each carrier. Refer to the [carrier connect guide](https://docs.shipstation.com/apis/shipengine/docs/carriers/connect) for carrier-specific details.

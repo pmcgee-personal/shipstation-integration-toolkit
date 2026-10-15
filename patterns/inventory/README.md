@@ -7,6 +7,7 @@ ERP-driven inventory synchronization with ShipStation. The ERP is the source of 
 ShipStation deducts inventory automatically when labels are created (in the UI or via API), but the ERP doesn't learn about this until reconciliation runs. The patterns below balance real-time visibility, rate limit constraints, and eventual consistency.
 
 **Key constraints:**
+
 - **Rate limit:** 200 req/min (shared across all operations: orders, labels, inventory)
 - **Acceptable latency:** 5 minutes on inventory updates
 - **Model:** ERP is source of truth until fulfillment; SS becomes authoritative during label creation; reconciliation corrects the gap
@@ -49,7 +50,7 @@ ShipStation deducts inventory automatically when labels are created (in the UI o
 
 - Official docs: [Inventory Management](https://docs.shipstation.com/manage-inventory-levels)
 - Official docs: [Inventory API](https://docs.shipstation.com/apis/openapi/inventory)
-- Webhook reference: [label_created_v2](../labels/README.md) (pointer-only; no SKU data)
+- Webhook reference: [label_created_v2](../../webhooks/labels/README.md) (pointer-only; no SKU data)
 - API endpoints:
   - `POST /v2/inventory_warehouses` — create warehouse
   - `POST /v2/inventory_locations` — create location

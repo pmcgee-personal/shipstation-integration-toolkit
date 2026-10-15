@@ -17,7 +17,7 @@ belong in the folder's `README.md`, not in the fixture.
 - ✅ `webhooks/labels/` — 3 fixtures (single, split shipment, + resource_url response). Checked 2026-10-09: unchanged
 - ✅ `webhooks/fulfillments/` — 2 fixtures (shipped + resource_url response). Checked 2026-10-09: unchanged
 - ✅ `webhooks/tracking-v1/` — 16 real fixtures (UPS/USPS/FedEx/DHL eCommerce × label-created, in-transit, out-for-delivery, delivered), all captured 2026-10-14 in the current shape. No delivery-exception captures yet (see below)
-- ✅ `patterns/` — 5 patterns (root + erp/ + wms/ organization)
+- ✅ `patterns/` — 21 patterns across 9 workflow folders (crm/, erp/, exceptions/, freight/, inventory/, order lifecycle/, partner api/, webhook setup/, wms/)
 
 **Partly covered — older-shape fixtures awaiting recapture:**
 
