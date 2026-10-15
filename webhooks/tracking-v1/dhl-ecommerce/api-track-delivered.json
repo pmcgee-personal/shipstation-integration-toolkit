@@ -5,18 +5,39 @@
   "data": {
     "label_url": "https://api.shipengine.com/v1/labels/se-#########",
     "tracking_number": "##############################",
-    "status_code": "IT",
+    "status_code": "DE",
     "status_detail_code": null,
     "status_detail_description": null,
     "carrier_detail_code": null,
-    "status_description": "In Transit",
-    "carrier_status_code": "598",
-    "carrier_status_description": "OUT FOR DELIVERY",
+    "status_description": "Delivered",
+    "carrier_status_code": "600",
+    "carrier_status_description": "DELIVERED",
     "ship_date": "2026-10-07T11:52:48",
     "estimated_delivery_date": "2026-10-16T17:00:00",
-    "actual_delivery_date": null,
+    "actual_delivery_date": "2026-10-14T12:28:00",
     "exception_description": null,
     "events": [
+      {
+        "occurred_at": "2026-10-14T19:28:00Z",
+        "carrier_occurred_at": "2026-10-14T19:28:00Z",
+        "description": "DELIVERED",
+        "city_locality": null,
+        "state_province": null,
+        "postal_code": "98105",
+        "country_code": "US",
+        "company_name": null,
+        "signer": null,
+        "event_code": "600",
+        "event_description": "DELIVERED",
+        "carrier_detail_code": null,
+        "status_code": "DE",
+        "status_detail_code": null,
+        "status_description": "Delivered",
+        "status_detail_description": null,
+        "proof_of_delivery_url": null,
+        "latitude": 47.66,
+        "longitude": -122.28
+      },
       {
         "occurred_at": "2026-10-14T15:41:00Z",
         "carrier_occurred_at": "2026-10-14T15:41:00Z",
@@ -35,8 +56,8 @@
         "status_description": "In Transit",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 47.6605,
-        "longitude": -122.2833
+        "latitude": 47.66,
+        "longitude": -122.28
       },
       {
         "occurred_at": "2026-10-14T15:30:00Z",
@@ -56,8 +77,8 @@
         "status_description": "In Transit",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 47.6605,
-        "longitude": -122.2833
+        "latitude": 47.66,
+        "longitude": -122.28
       },
       {
         "occurred_at": "2026-10-13T16:46:00Z",
@@ -77,8 +98,8 @@
         "status_description": "In Transit",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 47.3052,
-        "longitude": -122.3151
+        "latitude": 47.3,
+        "longitude": -122.31
       },
       {
         "occurred_at": "2026-10-13T16:25:00Z",
@@ -98,8 +119,8 @@
         "status_description": "In Transit",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 47.3052,
-        "longitude": -122.3151
+        "latitude": 47.3,
+        "longitude": -122.31
       },
       {
         "occurred_at": "2026-10-09T10:06:16Z",
@@ -119,8 +140,8 @@
         "status_description": "In Transit",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 47.2099,
-        "longitude": -122.228
+        "latitude": 47.2,
+        "longitude": -122.22
       },
       {
         "occurred_at": "2026-10-09T06:34:37Z",
@@ -140,8 +161,8 @@
         "status_description": "In Transit",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 32.8469,
-        "longitude": -96.957
+        "latitude": 32.84,
+        "longitude": -96.95
       },
       {
         "occurred_at": "2026-10-09T06:51:25Z",
@@ -161,8 +182,8 @@
         "status_description": "In Transit",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 47.2099,
-        "longitude": -122.228
+        "latitude": 47.2,
+        "longitude": -122.22
       },
       {
         "occurred_at": "2026-10-08T14:30:19Z",
@@ -182,8 +203,8 @@
         "status_description": "In Transit",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 32.8469,
-        "longitude": -96.957
+        "latitude": 32.84,
+        "longitude": -96.95
       },
       {
         "occurred_at": "2026-10-08T03:35:17Z",
@@ -203,8 +224,8 @@
         "status_description": "In Transit",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 32.8469,
-        "longitude": -96.957
+        "latitude": 32.84,
+        "longitude": -96.95
       },
       {
         "occurred_at": "2026-10-07T18:52:48Z",
@@ -224,8 +245,8 @@
         "status_description": "In Transit",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 32.8469,
-        "longitude": -96.957
+        "latitude": 32.84,
+        "longitude": -96.95
       },
       {
         "occurred_at": "2026-10-07T00:16:27Z",
@@ -245,8 +266,8 @@
         "status_description": "Accepted",
         "status_detail_description": null,
         "proof_of_delivery_url": null,
-        "latitude": 32.8469,
-        "longitude": -96.957
+        "latitude": 32.84,
+        "longitude": -96.95
       }
     ]
   }

@@ -36,13 +36,15 @@ Real webhook payloads and API responses, captured from production and sanitized 
 
 ```
 patterns/               Diagram-driven integration flow guides (start here)
-  [7 subdirectories with pattern docs by workflow type]
+  [9 subdirectories with pattern docs by workflow type]
 webhooks/               Real webhook payloads and resource_url responses
   orders/               On New Order Created (V2)
   labels/               On Labels Created (V2)
   fulfillments/         On Fulfillment Shipped (V2)
-  tracking/             On New Track Event (V2)
+  tracking-v2/          On New Track Event (V2) — TRACK_EVENT_V2
     fedex/ ups/ usps/ [carrier-specific tracking events]
+  tracking-v1/          Tracking event (v1) — API_TRACK
+    dhl-ecommerce/ fedex/ ups/ usps/ [carrier-specific tracking events]
 api/                    Real API request/response examples
   adjustments/          USPS shipping adjustment reports
   shipments/            Shipment data (including USPS PCID single payor)
@@ -54,8 +56,8 @@ api/                    Real API request/response examples
 Webhooks and API responses for the same resource are _similar but not identical_ — don't assume they share an exact schema. They're kept in separate trees on purpose.
 
 - **Webhook bodies** are mostly pointers: you receive a `resource_url` and `resource_type`, then call that URL with your API key to fetch the actual record. Our webhook folders hold both the pointer _and_ the resource_url response.
-- **Tracking is the exception**: the webhook body carries tracking data inline, with no follow-up call required. See [`webhooks/README.md`](./webhooks/README.md) for details.
-- **Event names vs. resource_type**: Webhook folders are named after the ShipStation UI event name, which may differ from the `resource_type` in the payload. For example, `webhooks/orders/` holds the "On New Order Created (V2)" event, but the payload says `SHIPMENT_CREATED_V2`. Always branch your code on `resource_type`.
+- **Tracking is the exception**: the webhook body carries tracking data inline, with no follow-up call required. It comes in two versions with different envelopes — v2 (`TRACK_EVENT_V2`) in [`webhooks/tracking-v2/`](./webhooks/tracking-v2/README.md) and v1 (`API_TRACK`) in [`webhooks/tracking-v1/`](./webhooks/tracking-v1/README.md). See [`webhooks/README.md`](./webhooks/README.md) for details.
+- **Event names vs. resource_type**: Webhook folders are named after the ShipStation UI event name, which may differ from the `resource_type` in the payload. For example, `webhooks/orders/` holds the "On New Order Created (V2)" event, but the payload says `SHIPMENT_CREATED_V2`. Always branch your code on `resource_type`. Tracking has two resource types, `API_TRACK` (v1) and `TRACK_EVENT_V2`, with different field sets, so keep a separate parser for each.
 
 ## How to Use Fixtures
 

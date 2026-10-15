@@ -35,8 +35,8 @@
         "status_description": null,
         "status_detail_description": "Your parcel has been successfully delivered.",
         "proof_of_delivery_url": null,
-        "latitude": 41.1569,
-        "longitude": -73.9944
+        "latitude": 41.15,
+        "longitude": -73.99
       },
       {
         "occurred_at": "2026-10-14T12:01:31Z",
@@ -56,8 +56,8 @@
         "status_description": null,
         "status_detail_description": "Your parcel is on its way and will be delivered today.",
         "proof_of_delivery_url": null,
-        "latitude": 41.0655,
-        "longitude": -73.9606
+        "latitude": 41.06,
+        "longitude": -73.96
       },
       {
         "occurred_at": "2026-10-14T11:19:11Z",
@@ -77,8 +77,8 @@
         "status_description": null,
         "status_detail_description": "Your parcel has arrived at the local delivery depot and is almost ready for delivery.",
         "proof_of_delivery_url": null,
-        "latitude": 41.0655,
-        "longitude": -73.9606
+        "latitude": 41.06,
+        "longitude": -73.96
       },
       {
         "occurred_at": "2026-10-14T09:15:00Z",
@@ -98,8 +98,8 @@
         "status_description": null,
         "status_detail_description": "Your parcel's delivery has been scheduled and will soon be out for delivery.",
         "proof_of_delivery_url": null,
-        "latitude": 41.0655,
-        "longitude": -73.9606
+        "latitude": 41.06,
+        "longitude": -73.96
       },
       {
         "occurred_at": "2026-10-14T08:29:00Z",
@@ -119,8 +119,8 @@
         "status_description": null,
         "status_detail_description": "Your parcel has arrived at the carrier's hub for processing.",
         "proof_of_delivery_url": null,
-        "latitude": 41.0655,
-        "longitude": -73.9606
+        "latitude": 41.06,
+        "longitude": -73.96
       },
       {
         "occurred_at": "2026-10-14T07:40:00Z",
@@ -140,8 +140,8 @@
         "status_description": null,
         "status_detail_description": "Your parcel has left the carrier's hub.",
         "proof_of_delivery_url": null,
-        "latitude": 40.8612,
-        "longitude": -74.4144
+        "latitude": 40.86,
+        "longitude": -74.41
       },
       {
         "occurred_at": "2026-10-14T03:21:00Z",
@@ -161,8 +161,8 @@
         "status_description": null,
         "status_detail_description": "Your parcel has arrived at the carrier's hub for processing.",
         "proof_of_delivery_url": null,
-        "latitude": 40.8612,
-        "longitude": -74.4144
+        "latitude": 40.86,
+        "longitude": -74.41
       },
       {
         "occurred_at": "2026-10-14T01:55:00Z",
@@ -182,8 +182,8 @@
         "status_description": null,
         "status_detail_description": "Your parcel has left the carrier's hub.",
         "proof_of_delivery_url": null,
-        "latitude": 41.0685,
-        "longitude": -73.4382
+        "latitude": 41.06,
+        "longitude": -73.43
       },
       {
         "occurred_at": "2026-10-14T01:18:08Z",
@@ -203,8 +203,8 @@
         "status_description": null,
         "status_detail_description": "Your parcel has been received by the carrier and is beginning its journey.",
         "proof_of_delivery_url": null,
-        "latitude": 41.0685,
-        "longitude": -73.4382
+        "latitude": 41.06,
+        "longitude": -73.43
       },
       {
         "occurred_at": "2026-10-13T12:57:45Z",

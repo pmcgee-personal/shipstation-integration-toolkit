@@ -35,8 +35,8 @@
         "status_description": "Accepted",
         "status_detail_description": "Your shipment is now in the carrier's system.",
         "proof_of_delivery_url": null,
-        "latitude": 29.9238,
-        "longitude": -91.8711
+        "latitude": 29.92,
+        "longitude": -91.87
       }
     ]
   }

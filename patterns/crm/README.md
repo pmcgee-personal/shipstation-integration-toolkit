@@ -53,4 +53,4 @@ A CRM receives real-time events about orders flowing through ShipStation: when s
 - Official docs: [GET /v2/shipments/{shipment_id}](https://docs.shipstation.com/apis/openapi/shipments/get_shipment_by_id)
 - Webhook reference: [Shipment Created (V2)](../../webhooks/orders/README.md)
 - Webhook reference: [Label Created (V2)](../../webhooks/labels/README.md)
-- Webhook reference: [Track Event (V2)](../../webhooks/tracking/README.md)
+- Webhook reference: [Track Event (V2)](../../webhooks/tracking-v2/README.md)

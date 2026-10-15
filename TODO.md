@@ -16,19 +16,20 @@ belong in the folder's `README.md`, not in the fixture.
 - ✅ `webhooks/orders/` — 3 fixtures (single shipment, split shipment, + resource_url response). Checked 2026-10-09: unchanged by the October webhook/mapping changes
 - ✅ `webhooks/labels/` — 3 fixtures (single, split shipment, + resource_url response). Checked 2026-10-09: unchanged
 - ✅ `webhooks/fulfillments/` — 2 fixtures (shipped + resource_url response). Checked 2026-10-09: unchanged
+- ✅ `webhooks/tracking-v1/` — 16 real fixtures (UPS/USPS/FedEx/DHL eCommerce × label-created, in-transit, out-for-delivery, delivered), all captured 2026-10-14 in the current shape. No delivery-exception captures yet (see below)
 - ✅ `patterns/` — 5 patterns (root + erp/ + wms/ organization)
 
 **Partly covered — older-shape fixtures awaiting recapture:**
 
-- ⚠️ `webhooks/tracking/` — 15 fixtures (FedEx/UPS/USPS × 5 scenarios each): 12 real, 3 placeholders. FedEx was checked 2026-10-09 and is unchanged. UPS and USPS changed in October; only `ups/track-event-v2-delivered.json` and `usps/track-event-v2-multi-scan.json` are recaptured in the current shape (see below)
+- ⚠️ `webhooks/tracking-v2/` — 15 fixtures (FedEx/UPS/USPS × 5 scenarios each): 12 real, 3 placeholders. FedEx was checked 2026-10-09 and is unchanged. UPS and USPS changed in October; only `ups/track-event-v2-delivered.json` and `usps/track-event-v2-multi-scan.json` are recaptured in the current shape (see below)
 - ⚠️ `api/tracking/usps/` — 8 fixtures (full lifecycle). Not yet checked against the October changes
 
 **Gaps:**
 
-- ⚠️ Carrier exception scenarios (3 placeholder fixtures)
+- ⚠️ Carrier exception scenarios (3 placeholder fixtures in `webhooks/tracking-v2/`, none yet for `webhooks/tracking-v1/`)
 - ⚠️ Webhook events not yet captured (fulfillment cancelled, batch completed)
 
-## webhooks/tracking/
+## webhooks/tracking-v2/
 
 Recapture in the current (October 2026) shape. These are real September
 captures, still accurate for that shape and labelled as such in the carrier
@@ -94,16 +95,55 @@ Delivery Vehicle`, then `Out For Delivery Today`), `status_code` goes `IT`
 - UPS uses `""` rather than `null` for absent `postal_code`, and in the
   current shape for `signer`
 
+## webhooks/tracking-v1/
+
+All 16 fixtures are real captures from 2026-10-14, after the October webhook
+and mapping changes, so they are in the current shape. Each carrier's four
+fixtures are one parcel at four points in its journey, not four parcels.
+
+Missing fixtures:
+
+- [ ] Delivery exception for each carrier (UPS, USPS, FedEx, DHL eCommerce) —
+      no capture and no placeholder file yet. Name it
+      `api-track-delivery-exception.json` in the carrier folder
+- [ ] No v1 fixture has an `EX` status at the top level or on any scan —
+      capture a genuinely stuck parcel
+
+**Confirmed production behaviour — do not "fix" these in the fixtures.**
+They are documented in the carrier READMEs:
+
+- DHL eCommerce: the scans at `2026-10-09T06:34:37Z` and `06:51:25Z` are out
+  of `occurred_at` order in three fixtures, and are 17 minutes apart between
+  a Texas ZIP and a Washington ZIP, so at least one timestamp is not a true
+  UTC instant
+- DHL eCommerce: `status_detail_code`, `status_detail_description` and
+  `carrier_detail_code` are `null` at the top level and on every event;
+  `city_locality` and `state_province` are `null` on every scan; and
+  `estimated_delivery_date` is still populated (two days after the actual
+  delivery) on the delivered fixture
+- FedEx: the `Picked up` scan (`2026-10-13T00:00:00Z`) is timestamped before
+  the label-created scan, so `status_code` goes `AC` → `NY` → `IT`;
+  `actual_delivery_date` is 14 hours before the `Delivered` scan; and
+  `postal_code` is `null` on every scan
+- USPS: `carrier_occurred_at` is `-07:00` on every scan regardless of
+  location; the `U1` scan reads `Arrived at USPS Facility` but maps to
+  `HUB_SCAN_OUT`; the Baton Rouge scans carry the facility name in
+  `city_locality` with a `null` `state_province`; and the `Out for Delivery`
+  description differs between the out-for-delivery and delivered fixtures
+- UPS: event-level `status_description` is `null` on every event while the
+  top level is populated, the label-created fixture pairs `NY` with
+  `Accepted`, and `carrier_occurred_at` is naive carrier-local time
+
 ## Sanitization completeness
 
 All fixtures have been reviewed and sanitized:
 
-- [x] Tracking numbers — masked (e.g. `3831XXXXX470`)
-- [x] Order/shipment/label IDs — masked (e.g. `se-184976XXX`)
+- [x] Tracking numbers — masked (e.g. `3831XXXXX470`). The `tracking-v1` fixtures mask the whole number with length preserved (e.g. `1Z################`), which is accepted
+- [x] Order/shipment/label IDs — masked (e.g. `se-184976XXX`; `se-#########` in the `tracking-v1` `label_url` values)
 - [x] Names and addresses — replaced with fake values
 - [x] ZIP codes on delivery scans — masked or normalized
 - [x] Download token URLs — masked (`XXXXXXXXXXXXXXXXXXXX`)
-- [x] Coordinates — normalized to 2 decimal places (privacy); raw UPS and USPS bodies now arrive at 4 decimals, so normalize on every new capture
+- [x] Coordinates — normalized to 2 decimal places (privacy); raw tracking bodies from UPS, USPS, FedEx and DHL eCommerce arrive at up to 4 decimals, so normalize on every new capture
 - [x] Account identifiers — intentionally kept (`store_id`, `carrier_id`, etc. are non-personal)
 
 ## Coverage gaps

@@ -1,4 +1,4 @@
-# ShipStation V2 Webhooks
+# ShipStation Webhooks
 
 ## Objective
 
@@ -14,7 +14,8 @@ are therefore a pair: the webhook body, and the response from calling the
 **Tracking is the exception.** The tracking webhook delivers the tracking
 data inline in the POST body, so there is no second request to make. It does
 still carry a `resource_url`, but that URL is not how you read the event —
-everything is already in `data`. See [`tracking/`](./tracking/).
+everything is already in `data`. There are two versions, v2
+([`tracking-v2/`](./tracking-v2/)) and v1 ([`tracking-v1/`](./tracking-v1/)).
 
 | Event                        | Body contains                    | Follow-up call needed |
 | ---------------------------- | -------------------------------- | --------------------- |
@@ -22,9 +23,10 @@ everything is already in `data`. See [`tracking/`](./tracking/).
 | On Labels Created (V2)       | `resource_url` + `resource_type` | Yes                   |
 | On Fulfillment Shipped (V2)  | `resource_url` + `resource_type` | Yes                   |
 | Tracking status updated (V2) | The tracking data itself         | **No**                |
+| Tracking event (v1)          | The tracking data itself         | **No**                |
 
 Everything below describes the pointer pattern — i.e. all of the above
-except tracking.
+except the two tracking rows.
 
 ## The webhook body
 
@@ -85,22 +87,38 @@ Always iterate the array and honour `links.next` rather than reading
 | [`orders/`](./orders/)             | On New Order Created (V2) — `SHIPMENT_CREATED_V2`      | `/v2/shipments`          |
 | [`labels/`](./labels/)             | On Labels Created (V2) — `LABEL_CREATED_V2`            | `/v2/labels`             |
 | [`fulfillments/`](./fulfillments/) | On Fulfillment Shipped (V2) — `FULFILLMENT_SHIPPED_V2` | `/v2/fulfillments`       |
-| [`tracking/`](./tracking/)         | Tracking status updated — `TRACK_EVENT_V2`             | n/a — data is inline     |
+| [`tracking-v2/`](./tracking-v2/)   | Tracking status updated — `TRACK_EVENT_V2`             | n/a — data is inline     |
+| [`tracking-v1/`](./tracking-v1/)   | Tracking event (v1) — `API_TRACK`                      | n/a — data is inline     |
 
-`tracking/` is split by carrier ([`fedex/`](./tracking/fedex/),
-[`ups/`](./tracking/ups/), [`usps/`](./tracking/usps/)) because the envelope
-is identical across the three but the values are not — see
-[`tracking/README.md`](./tracking/README.md).
+Both tracking folders are split by carrier because the envelope is identical
+across carriers within a version but the values are not. `tracking-v2/` has
+[`fedex/`](./tracking-v2/fedex/), [`ups/`](./tracking-v2/ups/) and
+[`usps/`](./tracking-v2/usps/) — see
+[`tracking-v2/README.md`](./tracking-v2/README.md). `tracking-v1/` has the
+same three plus [`dhl-ecommerce/`](./tracking-v1/dhl-ecommerce/) — see
+[`tracking-v1/README.md`](./tracking-v1/README.md), which also lists how the
+two versions differ.
+
+`TRACK_EVENT_V2` is the tracking webhook for ShipStation accounts and
+`API_TRACK` is the one for ShipStation API accounts. An integrator typically
+has one kind of account, not both, so you will normally need only one of the
+two folders. The two are not interchangeable: the field sets differ (14
+`data` keys in v1, 16 in v2) and so do the carrier codes. Branch on
+`resource_type` — `API_TRACK` or `TRACK_EVENT_V2` — and keep a separate parser
+per version.
 
 ## Notes
 
 Don't write a receiver that assumes a `resource_url` always means "go
-fetch". The tracking event carries one
-(`https://api.shipstation.com/v2/labels/se-454868XXX/track`) but has already
-given you the data, so a receiver that pattern-matches on `resource_url` and
-fetches will make a pointless extra call — and, because that endpoint reads
-live, may get a _different_ state back than the event described. Switch on
-`resource_type` first, then decide whether to read the body or go fetch.
+fetch". The v2 tracking event carries one
+(`https://api.shipstation.com/v2/labels/se-454868XXX/track`) and the v1 event
+carries one on a different host
+(`https://api.shipengine.com/v1/tracking?carrier_code=ups&tracking_number=…`).
+Both have already given you the data, so a receiver that pattern-matches on
+`resource_url` and fetches will make a pointless extra call — and, for v2,
+because that endpoint reads live, may get a _different_ state back than the
+event described. Switch on `resource_type` first, then decide whether to read the
+body or go fetch.
 
 The UI name and the `resource_type` are not the same string, and in the
 orders case they don't even use the same noun — see
@@ -112,7 +130,9 @@ no state of its own, so a duplicate delivery just means a duplicate fetch —
 de-duplicate on the IDs in the `resource_url` response (`shipment_id`,
 `label_id`, `fulfillment_id`), not on the webhook body. For tracking, the
 body _is_ the state, so de-duplicate on the tracking number plus the event
-that moved it.
+that moved it (`tracking_number`, `occurred_at` and `event_code`, in both
+versions). The `events` array is cumulative, so every delivery re-sends the
+history.
 
 The `resource_url` reads live data at the time you call it, not a snapshot
 from when the event fired. If you retry a queued fetch much later, the

@@ -15,9 +15,10 @@ If adding/updating fixtures, confirm:
 - [ ] Folder's `README.md` updated with new scenario
 - [ ] Related `TODO.md` item marked as done (if applicable)
 - [ ] No real tracking numbers, names, addresses, or customer data
-- [ ] Tracking numbers and `se-` IDs masked with length preserved, and `tracking_url` / `resource_url` match the masked values
+- [ ] Tracking numbers and `se-` IDs (including the one in a v1 `label_url`) masked with length preserved, and `tracking_url` / `resource_url` match the masked values
 - [ ] `latitude` / `longitude` rounded to 2 decimal places
 - [ ] Fixture is a real capture, not trimmed or edited from another payload
+- [ ] Tracking fixtures are in the folder that matches their `resource_type` (`API_TRACK` in `tracking-v1`, `TRACK_EVENT_V2` in `tracking-v2`)
 - [ ] If the shape differs from other fixtures in the folder, the folder's `README.md` says which are older
 - [ ] For webhook pointer events: both webhook body + `resource_url` response included
 

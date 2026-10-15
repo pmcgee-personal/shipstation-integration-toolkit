@@ -7,20 +7,20 @@ Thanks for helping improve this toolkit! The most useful contributions are new o
 1. **Pull real data from production.** Capture the full webhook body or API response as-is, with no modifications. Fixtures are real captures: don't build one by trimming, editing or combining another capture. If a scenario hasn't been captured yet, leave its placeholder in place and list it in `TODO.md`.
 
 2. **Sanitize carefully.** Replace:
-   - Tracking numbers: mask the middle and preserve the original length. For example `940015020621XXXXX26585` (USPS, 22 digits), `1ZXXXH4303XXXXX632` (UPS, 18 characters) and `383369XXX473` (FedEx, 12 digits). Keep any `tracking_url` in step with the masked number
-   - Order/shipment/label IDs (use `se-184976XXX` format), including the `se-` ID inside a tracking `resource_url`
+   - Tracking numbers: mask the middle and preserve the original length. For example `940015020621XXXXX26585` (USPS, 22 digits), `1ZXXXH4303XXXXX632` (UPS, 18 characters) and `383369XXX473` (FedEx, 12 digits). The `tracking-v1` fixtures mask the whole number instead (for example `1Z################`, 18 characters), which is also accepted as long as the length is preserved. Keep any `tracking_url`, and the tracking number inside a v1 `resource_url`, in step with the masked number
+   - Order/shipment/label IDs (use `se-184976XXX` format), including the `se-` ID inside a tracking `resource_url` or a v1 `label_url` (the `tracking-v1` fixtures mask it as `se-#########`, which is also accepted)
    - Names and addresses
    - ZIP codes in address fields. ZIP codes on tracking scans (carrier facilities and the delivery locality) are kept as received
    - Phone numbers
    - Any customer-identifying data
-   - Latitude and longitude: round to 2 decimal places. Raw UPS and USPS tracking bodies arrive at 4 decimals, and a `Delivered` scan can be at delivery-address precision
+   - Latitude and longitude: round to 2 decimal places. Raw tracking bodies arrive at up to 4 decimals (UPS, USPS, FedEx and DHL eCommerce), and a `Delivered` scan can be at delivery-address precision
 
    Keep (they're non-sensitive):
    - `store_id`, `warehouse_id`, `carrier_id`, `user_id`
    - Carrier/service codes
    - Status codes
 
-3. **Save the fixture.** Use the naming convention from existing files (e.g., `track-event-v2-delivered.json`), under the appropriate folder.
+3. **Save the fixture.** Use the naming convention from existing files (e.g., `track-event-v2-delivered.json`, or `api-track-delivered.json` for v1), under the appropriate folder. Tracking fixtures go by `resource_type`: `TRACK_EVENT_V2` under `webhooks/tracking-v2/<carrier>/` and `API_TRACK` under `webhooks/tracking-v1/<carrier>/`. Carrier folder names are lowercase and hyphenated (for example `dhl-ecommerce`).
 
 4. **Add metadata:**
    - Remove any `_fixture_notes` key

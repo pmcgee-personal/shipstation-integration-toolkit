@@ -56,8 +56,8 @@
         "status_description": "In Transit",
         "status_detail_description": "Your parcel has left the carrier's hub.",
         "proof_of_delivery_url": null,
-        "latitude": 33.4194,
-        "longitude": -112.3261
+        "latitude": 33.41,
+        "longitude": -112.32
       },
       {
         "occurred_at": "2026-09-30T09:41:18Z",
@@ -77,8 +77,8 @@
         "status_description": "In Transit",
         "status_detail_description": "Your parcel has arrived at the carrier's hub for processing.",
         "proof_of_delivery_url": null,
-        "latitude": 33.4194,
-        "longitude": -112.3261
+        "latitude": 33.41,
+        "longitude": -112.32
       },
       {
         "occurred_at": "2026-09-29T02:45:30Z",
@@ -98,8 +98,8 @@
         "status_description": "In Transit",
         "status_detail_description": "Your parcel has left the carrier's hub.",
         "proof_of_delivery_url": null,
-        "latitude": 30.449,
-        "longitude": -91.126
+        "latitude": 30.44,
+        "longitude": -91.12
       },
       {
         "occurred_at": "2026-09-28T08:33:19Z",
@@ -119,8 +119,8 @@
         "status_description": "In Transit",
         "status_detail_description": "Your parcel has left the carrier's hub.",
         "proof_of_delivery_url": null,
-        "latitude": 30.449,
-        "longitude": -91.126
+        "latitude": 30.44,
+        "longitude": -91.12
       },
       {
         "occurred_at": "2026-09-28T07:10:03Z",
@@ -140,8 +140,8 @@
         "status_description": "In Transit",
         "status_detail_description": "Your parcel has left the carrier's hub.",
         "proof_of_delivery_url": null,
-        "latitude": 30.2397,
-        "longitude": -91.9904
+        "latitude": 30.23,
+        "longitude": -91.99
       },
       {
         "occurred_at": "2026-09-27T15:42:27Z",
@@ -161,8 +161,8 @@
         "status_description": "In Transit",
         "status_detail_description": "Your parcel has arrived at the carrier's hub for processing.",
         "proof_of_delivery_url": null,
-        "latitude": 30.2397,
-        "longitude": -91.9904
+        "latitude": 30.23,
+        "longitude": -91.99
       },
       {
         "occurred_at": "2026-09-25T22:10:15Z",
@@ -182,8 +182,8 @@
         "status_description": "In Transit",
         "status_detail_description": "Your parcel has been received by the carrier and is beginning its journey.",
         "proof_of_delivery_url": null,
-        "latitude": 29.9238,
-        "longitude": -91.8711
+        "latitude": 29.92,
+        "longitude": -91.87
       },
       {
         "occurred_at": "2026-09-25T20:27:58Z",
@@ -203,8 +203,8 @@
         "status_description": "Accepted",
         "status_detail_description": "Your parcel has been picked up by the carrier.",
         "proof_of_delivery_url": null,
-        "latitude": 29.9238,
-        "longitude": -91.8711
+        "latitude": 29.92,
+        "longitude": -91.87
       },
       {
         "occurred_at": "2026-09-25T02:32:24Z",
@@ -224,8 +224,8 @@
         "status_description": "Accepted",
         "status_detail_description": "Your shipment is now in the carrier's system.",
         "proof_of_delivery_url": null,
-        "latitude": 29.9238,
-        "longitude": -91.8711
+        "latitude": 29.92,
+        "longitude": -91.87
       }
     ]
   }

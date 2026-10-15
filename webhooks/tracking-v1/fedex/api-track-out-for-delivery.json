@@ -35,8 +35,8 @@
         "status_description": "In Transit",
         "status_detail_description": "Your parcel is on its way and will be delivered today.",
         "proof_of_delivery_url": null,
-        "latitude": 32.7219,
-        "longitude": -96.6171
+        "latitude": 32.72,
+        "longitude": -96.61
       },
       {
         "occurred_at": "2026-10-14T08:12:00Z",
@@ -56,8 +56,8 @@
         "status_description": "In Transit",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 32.7219,
-        "longitude": -96.6171
+        "latitude": 32.72,
+        "longitude": -96.61
       },
       {
         "occurred_at": "2026-10-14T01:10:00Z",
@@ -77,8 +77,8 @@
         "status_description": "In Transit",
         "status_detail_description": "Your shipment is on its way between the carrier hubs.",
         "proof_of_delivery_url": null,
-        "latitude": 32.7219,
-        "longitude": -96.6171
+        "latitude": 32.72,
+        "longitude": -96.61
       },
       {
         "occurred_at": "2026-10-13T11:27:00Z",
@@ -119,8 +119,8 @@
         "status_description": "Accepted",
         "status_detail_description": "Your parcel has been picked up by the carrier.",
         "proof_of_delivery_url": null,
-        "latitude": 32.7219,
-        "longitude": -96.6171
+        "latitude": 32.72,
+        "longitude": -96.61
       }
     ]
   }

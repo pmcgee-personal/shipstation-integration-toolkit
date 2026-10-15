@@ -5,6 +5,11 @@
 To hold real examples of the ShipStation tracking webhook — the event that
 fires as a parcel moves, rather than at order or label time — across USPS, UPS and FedEx.
 
+This folder is the **v2** webhook. The v1 tracking webhook (`API_TRACK`) has
+its own folder, [`../tracking-v1/`](../tracking-v1/README.md), with a section
+on how the two differ. The two are not interchangeable, so don't copy a
+fixture from one folder into the other.
+
 ## Tracking is the exception
 
 Every other webhook in this repo is a **notification**: a `resource_url` and
@@ -43,7 +48,8 @@ the other events use.
 }
 ```
 
-`resource_type` is `TRACK_EVENT_V2` for all carriers. `data` holds the
+`resource_type` is `TRACK_EVENT_V2` for all carriers (v1 bodies are
+`API_TRACK`). `data` holds the
 current status at the top level plus an `events` array of every scan so far.
 `_captured_at` is a repo convention, not something ShipStation sends — see
 the [root README](../../README.md).
@@ -70,6 +76,11 @@ rather than on the arrival of an event row.
 | [`usps/`](./usps/)   | USPS    | `stamps_com`     | `1`          | 4 real (1 current shape, 3 older), 1 placeholder |
 
 Each folder has its own README covering that carrier's quirks.
+
+The `carrier_code` here is the v2 value. A v1 body has no `carrier_code`
+field, and the value in its `resource_url` differs for two carriers: `usps`
+(not `stamps_com`) and `fedex` (not `fedex_walleted`). v1 also covers DHL
+eCommerce, which has no v2 fixtures.
 
 ## October 2026 update
 
@@ -179,9 +190,9 @@ addresses, emails or phone numbers appear in any fixture here.
 
 Raw bodies do carry fine-grained coordinates, though: the 2026-10-09 UPS
 `Delivered` scan arrived at 4-decimal precision at the delivery address, which
-differs from the facility coordinates. All fixtures normalize `latitude` and
-`longitude` to 2 decimals, and tracking numbers and `se-` label IDs are
-masked.
+differs from the facility coordinates. All fixtures, v1 included, normalize
+`latitude` and `longitude` to 2 decimals, and tracking numbers and `se-` label
+IDs are masked.
 
 ## Related
 
@@ -191,3 +202,7 @@ fixture per lifecycle status including the two exception cases (carrier
 delay and return-to-sender) that the webhook folders are still missing.
 Webhook and API shapes for the same resource are similar but not guaranteed
 identical, so don't copy one into the other.
+
+The v1 version of this webhook is documented in
+[`../tracking-v1/`](../tracking-v1/README.md), which has fixtures for UPS,
+USPS, FedEx and DHL eCommerce.
