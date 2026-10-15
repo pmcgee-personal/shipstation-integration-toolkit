@@ -1,0 +1,43 @@
+{
+  "_captured_at": "2026-10-14",
+  "resource_url": "https://api.shipengine.com/v1/tracking?carrier_code=usps&tracking_number=XXXXXXXXXXXXXXXXXXXXXX",
+  "resource_type": "API_TRACK",
+  "data": {
+    "label_url": null,
+    "tracking_number": "XXXXXXXXXXXXXXXXXXXXXX",
+    "status_code": "AC",
+    "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
+    "status_detail_description": "Your shipment is now in the carrier's system.",
+    "carrier_detail_code": null,
+    "status_description": "Accepted",
+    "carrier_status_code": "GX",
+    "carrier_status_description": "A shipping label has been prepared for your item at 7:32 pm on September 24, 2026 in NEW IBERIA, LA 70560. This does not indicate receipt by USPS or the actual mailing date.",
+    "ship_date": null,
+    "estimated_delivery_date": "2026-09-29T00:00:00",
+    "actual_delivery_date": null,
+    "exception_description": null,
+    "events": [
+      {
+        "occurred_at": "2026-09-25T02:32:24Z",
+        "carrier_occurred_at": "2026-09-24T19:32:24-07:00",
+        "description": "Shipping Label Created",
+        "city_locality": "NEW IBERIA",
+        "state_province": "LA",
+        "postal_code": "70560",
+        "country_code": "US",
+        "company_name": null,
+        "signer": null,
+        "event_code": "GX",
+        "event_description": "Shipping Label Created",
+        "carrier_detail_code": null,
+        "status_code": "AC",
+        "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
+        "status_description": "Accepted",
+        "status_detail_description": "Your shipment is now in the carrier's system.",
+        "proof_of_delivery_url": null,
+        "latitude": 29.9238,
+        "longitude": -91.8711
+      }
+    ]
+  }
+}

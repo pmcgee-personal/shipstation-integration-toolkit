@@ -1,0 +1,43 @@
+{
+  "_captured_at": "2026-10-14",
+  "resource_url": "https://api.shipengine.com/v1/tracking?carrier_code=dhl_global_mail&tracking_number=##############################",
+  "resource_type": "API_TRACK",
+  "data": {
+    "label_url": "https://api.shipengine.com/v1/labels/se-#########",
+    "tracking_number": "##############################",
+    "status_code": "AC",
+    "status_detail_code": null,
+    "status_detail_description": null,
+    "carrier_detail_code": null,
+    "status_description": "Accepted",
+    "carrier_status_code": "238",
+    "carrier_status_description": "LABEL CREATED",
+    "ship_date": null,
+    "estimated_delivery_date": null,
+    "actual_delivery_date": null,
+    "exception_description": null,
+    "events": [
+      {
+        "occurred_at": "2026-10-07T00:16:27Z",
+        "carrier_occurred_at": "2026-10-07T00:16:27Z",
+        "description": "LABEL CREATED",
+        "city_locality": null,
+        "state_province": null,
+        "postal_code": "75062",
+        "country_code": "US",
+        "company_name": null,
+        "signer": null,
+        "event_code": "238",
+        "event_description": "LABEL CREATED",
+        "carrier_detail_code": null,
+        "status_code": "AC",
+        "status_detail_code": null,
+        "status_description": "Accepted",
+        "status_detail_description": null,
+        "proof_of_delivery_url": null,
+        "latitude": 32.8469,
+        "longitude": -96.957
+      }
+    ]
+  }
+}

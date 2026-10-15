@@ -1,0 +1,43 @@
+{
+  "_captured_at": "2026-10-14",
+  "resource_url": "https://api.shipengine.com/v1/tracking?carrier_code=ups&tracking_number=1Z################",
+  "resource_type": "API_TRACK",
+  "data": {
+    "label_url": null,
+    "tracking_number": "1Z################",
+    "status_code": "NY",
+    "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
+    "status_detail_description": "Your shipment is now in the carrier's system.",
+    "carrier_detail_code": "MP",
+    "status_description": "Accepted",
+    "carrier_status_code": "M",
+    "carrier_status_description": "Shipper created a label, UPS has not received the package yet.",
+    "ship_date": null,
+    "estimated_delivery_date": "2026-10-14T00:00:00",
+    "actual_delivery_date": null,
+    "exception_description": null,
+    "events": [
+      {
+        "occurred_at": "2026-10-13T12:57:45Z",
+        "carrier_occurred_at": "2026-10-13T08:57:45",
+        "description": "Shipper created a label, UPS has not received the package yet.",
+        "city_locality": "",
+        "state_province": "",
+        "postal_code": "",
+        "country_code": "US",
+        "company_name": null,
+        "signer": "",
+        "event_code": "M",
+        "event_description": "Shipper created a label, UPS has not received the package yet.",
+        "carrier_detail_code": "MP",
+        "status_code": "NY",
+        "status_detail_code": "ELEC_ADVICE_RECD_BY_CARRIER",
+        "status_description": null,
+        "status_detail_description": "Your shipment is now in the carrier's system.",
+        "proof_of_delivery_url": null,
+        "latitude": null,
+        "longitude": null
+      }
+    ]
+  }
+}

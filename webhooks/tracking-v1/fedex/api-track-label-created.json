@@ -1,0 +1,43 @@
+{
+  "_captured_at": "2026-10-14",
+  "resource_url": "https://api.shipengine.com/v1/tracking?carrier_code=fedex&tracking_number=############",
+  "resource_type": "API_TRACK",
+  "data": {
+    "label_url": "https://api.shipengine.com/v1/labels/se-#########",
+    "tracking_number": "############",
+    "status_code": "NY",
+    "status_detail_code": "SHIPMENT_CREATED",
+    "status_detail_description": "Your tracking number is ready. Your parcel is waiting to be registered in the carrier system and scheduled for pickup.",
+    "carrier_detail_code": null,
+    "status_description": "Not Yet In System",
+    "carrier_status_code": "OC",
+    "carrier_status_description": "Shipment information sent to FedEx",
+    "ship_date": null,
+    "estimated_delivery_date": null,
+    "actual_delivery_date": null,
+    "exception_description": null,
+    "events": [
+      {
+        "occurred_at": "2026-10-13T11:27:00Z",
+        "carrier_occurred_at": "2026-10-13T11:27:00Z",
+        "description": "Shipment information sent to FedEx",
+        "city_locality": null,
+        "state_province": null,
+        "postal_code": null,
+        "country_code": "US",
+        "company_name": null,
+        "signer": null,
+        "event_code": "OC",
+        "event_description": "Shipment information sent to FedEx",
+        "carrier_detail_code": null,
+        "status_code": "NY",
+        "status_detail_code": "SHIPMENT_CREATED",
+        "status_description": "Not Yet In System",
+        "status_detail_description": "Your tracking number is ready. Your parcel is waiting to be registered in the carrier system and scheduled for pickup.",
+        "proof_of_delivery_url": null,
+        "latitude": null,
+        "longitude": null
+      }
+    ]
+  }
+}
