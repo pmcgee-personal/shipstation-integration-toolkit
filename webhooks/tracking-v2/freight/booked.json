@@ -1,0 +1,37 @@
+{
+  "_captured_at": "2026-11-10",
+  "resource_url": "https://api.shipengine.com/v2/freight/shipments/se-2XXX",
+  "resource_type": "FREIGHT_TRACK_EVENT_V2",
+  "data": {
+    "event_id": "b470137b-9975-73ea-c0e3-f2d6d01c0a2c",
+    "freight_shipment_id": "se-2XXX",
+    "shipment_id": "se-472253XXX",
+    "shipment_number": "3XXX",
+    "freight_provider_account_id": "se-843",
+    "freight_provider_code": "SPEEDSHIP",
+    "bol_number": "ATF444XXX80",
+    "pro_number": null,
+    "pickup_number": "XAB-XX-32",
+    "carrier_name": "XPO Logistics",
+    "carrier_scac": "CNWY",
+    "status": "booked",
+    "tracking_status": "pending_pickup",
+    "tracking_url": "https://www.speedship.com/public/tracking?key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "estimated_delivery_date": "2026-11-13",
+    "updated_at": "2026-11-10T16:30:27Z",
+    "events": [
+      {
+        "occurred_at": "2026-11-10T15:30:26Z",
+        "status": "pending_pickup",
+        "carrier_code": null,
+        "description": null
+      },
+      {
+        "occurred_at": "2026-11-10T15:30:25Z",
+        "status": "created",
+        "carrier_code": null,
+        "description": null
+      }
+    ]
+  }
+}

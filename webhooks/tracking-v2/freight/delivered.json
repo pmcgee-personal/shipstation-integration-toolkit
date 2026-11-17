@@ -1,0 +1,151 @@
+{
+  "_captured_at": "2026-11-17",
+  "resource_url": "https://api.shipengine.com/v2/freight/shipments/se-2XXX",
+  "resource_type": "FREIGHT_TRACK_EVENT_V2",
+  "data": {
+    "event_id": "f5494e55-30e7-e6f6-17b6-919b96e7290e",
+    "freight_shipment_id": "se-2XXX",
+    "shipment_id": "se-472253XXX",
+    "shipment_number": "3XXX",
+    "freight_provider_account_id": "se-843",
+    "freight_provider_code": "SPEEDSHIP",
+    "bol_number": "ATF444XXX80",
+    "pro_number": "254XXX576",
+    "pickup_number": "XAB-XX-32",
+    "carrier_name": "XPO Logistics",
+    "carrier_scac": "CNWY",
+    "status": "delivered",
+    "tracking_status": "delivered",
+    "tracking_url": "https://ext-web.ltl-xpo.com/public-app/shipments?referenceNumber=254XXX576",
+    "estimated_delivery_date": "2026-11-13",
+    "updated_at": "2026-11-17T16:43:58Z",
+    "events": [
+      {
+        "occurred_at": "2026-11-16T10:40:00Z",
+        "status": "delivered",
+        "carrier_code": "D1",
+        "description": "Completed Unloading at Delivery Location"
+      },
+      {
+        "occurred_at": "2026-11-16T06:29:00Z",
+        "status": "in_transit",
+        "carrier_code": "AJ",
+        "description": "Tendered for Delivery"
+      },
+      {
+        "occurred_at": "2026-11-14T02:03:00Z",
+        "status": "in_transit",
+        "carrier_code": "X4",
+        "description": "Arrived at Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-13T22:23:00Z",
+        "status": "in_transit",
+        "carrier_code": "P1",
+        "description": "Departed Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-13T21:28:00Z",
+        "status": "in_transit",
+        "carrier_code": "X4",
+        "description": "Arrived at Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-13T17:24:00Z",
+        "status": "in_transit",
+        "carrier_code": "P1",
+        "description": "Departed Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-13T03:11:00Z",
+        "status": "in_transit",
+        "carrier_code": "X4",
+        "description": "Arrived at Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-12T22:59:00Z",
+        "status": "in_transit",
+        "carrier_code": "P1",
+        "description": "Departed Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-12T21:10:00Z",
+        "status": "in_transit",
+        "carrier_code": "X4",
+        "description": "Arrived at Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-12T16:26:00Z",
+        "status": "in_transit",
+        "carrier_code": "P1",
+        "description": "Departed Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-12T15:23:00Z",
+        "status": "in_transit",
+        "carrier_code": "X4",
+        "description": "Arrived at Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-12T10:57:00Z",
+        "status": "in_transit",
+        "carrier_code": "P1",
+        "description": "Departed Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-12T10:06:00Z",
+        "status": "in_transit",
+        "carrier_code": "X4",
+        "description": "Arrived at Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-12T05:44:00Z",
+        "status": "in_transit",
+        "carrier_code": "P1",
+        "description": "Departed Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-11T17:05:00Z",
+        "status": "in_transit",
+        "carrier_code": "X4",
+        "description": "Arrived at Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-11T13:11:00Z",
+        "status": "in_transit",
+        "carrier_code": "P1",
+        "description": "Departed Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-11T03:04:00Z",
+        "status": "in_transit",
+        "carrier_code": "X4",
+        "description": "Arrived at Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-11T01:23:00Z",
+        "status": "in_transit",
+        "carrier_code": "P1",
+        "description": "Departed Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-10T12:48:00Z",
+        "status": "in_transit",
+        "carrier_code": "AF",
+        "description": "Carrier Departed Pick-up Location with Shipment"
+      },
+      {
+        "occurred_at": "2026-11-10T15:30:26Z",
+        "status": "pending_pickup",
+        "carrier_code": null,
+        "description": null
+      },
+      {
+        "occurred_at": "2026-11-10T15:30:25Z",
+        "status": "created",
+        "carrier_code": null,
+        "description": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_captured_at": "2026-11-11",
+  "resource_url": "https://api.shipengine.com/v2/freight/shipments/se-2XXX",
+  "resource_type": "FREIGHT_TRACK_EVENT_V2",
+  "data": {
+    "event_id": "629f45c9-424b-ecf0-8d25-2296da98891c",
+    "freight_shipment_id": "se-2XXX",
+    "shipment_id": "se-472253XXX",
+    "shipment_number": "3XXX",
+    "freight_provider_account_id": "se-843",
+    "freight_provider_code": "SPEEDSHIP",
+    "bol_number": "ATF444XXX80",
+    "pro_number": "254XXX576",
+    "pickup_number": "XAB-XX-32",
+    "carrier_name": "XPO Logistics",
+    "carrier_scac": "CNWY",
+    "status": "in_transit",
+    "tracking_status": "in_transit",
+    "tracking_url": "https://ext-web.ltl-xpo.com/public-app/shipments?referenceNumber=254XXX576",
+    "estimated_delivery_date": "2026-11-13",
+    "updated_at": "2026-11-11T11:33:31Z",
+    "events": [
+      {
+        "occurred_at": "2026-11-11T03:04:00Z",
+        "status": "in_transit",
+        "carrier_code": "X4",
+        "description": "Arrived at Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-11T01:23:00Z",
+        "status": "in_transit",
+        "carrier_code": "P1",
+        "description": "Departed Terminal Location"
+      },
+      {
+        "occurred_at": "2026-11-10T12:48:00Z",
+        "status": "in_transit",
+        "carrier_code": "AF",
+        "description": "Carrier Departed Pick-up Location with Shipment"
+      },
+      {
+        "occurred_at": "2026-11-10T15:30:26Z",
+        "status": "pending_pickup",
+        "carrier_code": null,
+        "description": null
+      },
+      {
+        "occurred_at": "2026-11-10T15:30:25Z",
+        "status": "created",
+        "carrier_code": null,
+        "description": null
+      }
+    ]
+  }
+}
